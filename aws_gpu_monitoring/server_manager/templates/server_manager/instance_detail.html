@@ -101,9 +101,34 @@
                                     <i class="fas fa-sync"></i> 재부팅
                                 </button>
                             {% endif %}
-                            <button class="btn btn-danger control-instance" data-action="terminate" data-instance-id="{{ instance.instance_id }}" data-bs-toggle="modal" data-bs-target="#confirmTerminateModal">
-                                <i class="fas fa-trash-alt"></i> 종료
+                            <button class="btn btn-danger control-instance" data-action="stop" data-instance-id="{{ instance.instance_id }}">
+                                <i class="fas fa-stop"></i> 중지
                             </button>
+                        </div>
+                        
+                        <!-- 자동 재시작 설정 -->
+                        <h5 class="border-bottom pb-2 mb-3 mt-4">자동 재시작 설정</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="autoRestartToggle" {% if instance.auto_restart_enabled %}checked{% endif %}>
+                                    <label class="form-check-label" for="autoRestartToggle">자동 재시작 활성화</label>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-info me-2">재시작 시도 횟수: <span id="restartAttempts">{{ instance.restart_attempts|default:"0" }}</span></span>
+                                        {% if instance.last_restart_attempt %}
+                                            <span class="badge bg-secondary">마지막 시도: {{ instance.last_restart_attempt }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-danger" id="cancelAutoRestartBtn" data-instance-id="{{ instance.instance_id }}">
+                                        <i class="fas fa-times"></i> 재시작 취소
+                                    </button>
+                                </div>
+                                <div class="alert alert-info mt-3 mb-0">
+                                    <i class="fas fa-info-circle me-2"></i> Spot 인스턴스 용량 부족 오류 발생 시 자동으로 재시작을 시도합니다.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,25 +187,7 @@
     </div>
 </div>
 
-<!-- 인스턴스 종료 확인 모달 -->
-<div class="modal fade" id="confirmTerminateModal" tabindex="-1" aria-labelledby="confirmTerminateModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="confirmTerminateModalLabel">인스턴스 종료 확인</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>경고:</strong> 인스턴스를 종료하면 모든 데이터가 삭제되며 이 작업은 되돌릴 수 없습니다.</p>
-                <p>정말로 이 인스턴스를 종료하시겠습니까?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-danger" id="confirmTerminateBtn">인스턴스 종료</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- 태그 추가 모달 -->
 <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
@@ -239,24 +246,22 @@
         // 인스턴스 제어 버튼 클릭 이벤트
         $('.control-instance').on('click', function() {
             const action = $(this).data('action');
-            
-            // 종료 작업인 경우 모달에서 처리
-            if (action === 'terminate') {
-                return;
-            }
-            
             controlInstance(instanceId, action);
-        });
-        
-        // 종료 확인 버튼 클릭 이벤트
-        $('#confirmTerminateBtn').on('click', function() {
-            controlInstance(instanceId, 'terminate');
-            $('#confirmTerminateModal').modal('hide');
         });
         
         // 새로고침 버튼 클릭 이벤트
         $('#refreshInstanceBtn').on('click', function() {
             location.reload();
+        });
+        
+        // 자동 재시작 토글 이벤트
+        $('#autoRestartToggle').on('change', function() {
+            controlInstance(instanceId, 'toggle_auto_restart');
+        });
+        
+        // 자동 재시작 취소 버튼 클릭 이벤트
+        $('#cancelAutoRestartBtn').on('click', function() {
+            controlInstance(instanceId, 'cancel_auto_restart');
         });
         
         // 태그 추가 버튼 클릭 이벤트

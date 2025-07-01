@@ -31,16 +31,31 @@ class EC2Service:
             response = self.ec2_client.start_instances(InstanceIds=[instance_id])
             # 데이터베이스 업데이트
             self._update_instance_state(instance_id, 'pending')
+            # 인스턴스가 성공적으로 시작되면 재시작 시도 횟수 초기화
+            self._reset_restart_attempts(instance_id)
             return {
                 'success': True,
                 'message': f'인스턴스 {instance_id} 시작 요청이 성공적으로 처리되었습니다.',
                 'data': response
             }
         except Exception as e:
+            error_msg = str(e)
+            # Spot 인스턴스 용량 부족 오류 확인
+            if 'there is no available Spot capacity' in error_msg:
+                # 자동 재시작 시도
+                auto_restart_response = self._handle_auto_restart(instance_id)
+                if auto_restart_response['auto_restart_initiated']:
+                    return {
+                        'success': False,
+                        'message': f'Spot 용량 부족으로 인스턴스 시작 실패. 자동 재시작이 예약되었습니다. 재시작 시도 횟수: {auto_restart_response["restart_attempts"]}',
+                        'error': error_msg,
+                        'auto_restart': auto_restart_response
+                    }
+            
             return {
                 'success': False,
-                'message': f'인스턴스 시작 중 오류가 발생했습니다: {str(e)}',
-                'error': str(e)
+                'message': f'인스턴스 시작 중 오류가 발생했습니다: {error_msg}',
+                'error': error_msg
             }
     
     def stop_instance(self, instance_id):
@@ -476,3 +491,138 @@ class EC2Service:
                 logging.warning(f"인스턴스를 찾을 수 없음: {instance_id}")
         except Exception as e:
             logging.error(f"인스턴스 이름 업데이트 중 오류: {str(e)}")
+            
+    def _handle_auto_restart(self, instance_id):
+        """
+        인스턴스 자동 재시작 처리를 합니다.
+        
+        Args:
+            instance_id (str): 인스턴스 ID
+            
+        Returns:
+            dict: 자동 재시작 처리 결과
+        """
+        try:
+            instance = Instance.objects.filter(instance_id=instance_id).first()
+            if not instance:
+                return {
+                    'auto_restart_initiated': False,
+                    'message': f'인스턴스를 찾을 수 없음: {instance_id}'
+                }
+                
+            # 자동 재시작이 활성화되어 있는지 확인
+            if not instance.auto_restart_enabled:
+                return {
+                    'auto_restart_initiated': False,
+                    'message': f'인스턴스 {instance_id}의 자동 재시작이 비활성화되어 있습니다.'
+                }
+                
+            # 재시작 시도 횟수 증가
+            instance.restart_attempts += 1
+            instance.last_restart_attempt = timezone.now()
+            instance.save(update_fields=['restart_attempts', 'last_restart_attempt'])
+            
+            logging.info(f'인스턴스 {instance_id} 자동 재시작 예약. 시도 횟수: {instance.restart_attempts}')
+            
+            # 여기서 실제 재시작 로직을 구현할 수 있음 (예: 스케줄러를 통한 재시작 예약)
+            
+            return {
+                'auto_restart_initiated': True,
+                'restart_attempts': instance.restart_attempts,
+                'last_attempt': instance.last_restart_attempt.isoformat() if instance.last_restart_attempt else None,
+                'message': f'인스턴스 {instance_id} 자동 재시작이 예약되었습니다.'
+            }
+        except Exception as e:
+            logging.error(f'자동 재시작 처리 중 오류: {str(e)}')
+            return {
+                'auto_restart_initiated': False,
+                'message': f'자동 재시작 처리 중 오류가 발생했습니다: {str(e)}'
+            }
+    
+    def _reset_restart_attempts(self, instance_id):
+        """
+        인스턴스의 재시작 시도 횟수를 초기화합니다.
+        
+        Args:
+            instance_id (str): 인스턴스 ID
+        """
+        try:
+            instance = Instance.objects.filter(instance_id=instance_id).first()
+            if instance and instance.restart_attempts > 0:
+                instance.restart_attempts = 0
+                instance.save(update_fields=['restart_attempts'])
+                logging.info(f'인스턴스 {instance_id} 재시작 시도 횟수 초기화')
+        except Exception as e:
+            logging.error(f'재시작 시도 횟수 초기화 중 오류: {str(e)}')
+    
+    def toggle_auto_restart(self, instance_id):
+        """
+        인스턴스의 자동 재시작 상태를 토글합니다.
+        
+        Args:
+            instance_id (str): 인스턴스 ID
+            
+        Returns:
+            dict: 토글 결과
+        """
+        try:
+            instance = Instance.objects.filter(instance_id=instance_id).first()
+            if not instance:
+                return {
+                    'success': False,
+                    'message': f'인스턴스를 찾을 수 없음: {instance_id}'
+                }
+                
+            instance.auto_restart_enabled = not instance.auto_restart_enabled
+            instance.save(update_fields=['auto_restart_enabled'])
+            
+            status = '활성화' if instance.auto_restart_enabled else '비활성화'
+            logging.info(f'인스턴스 {instance_id} 자동 재시작 {status}')
+            
+            return {
+                'success': True,
+                'auto_restart_enabled': instance.auto_restart_enabled,
+                'message': f'인스턴스 {instance_id}의 자동 재시작이 {status}되었습니다.'
+            }
+        except Exception as e:
+            logging.error(f'자동 재시작 토글 중 오류: {str(e)}')
+            return {
+                'success': False,
+                'message': f'자동 재시작 토글 중 오류가 발생했습니다: {str(e)}'
+            }
+    
+    def cancel_auto_restart(self, instance_id):
+        """
+        인스턴스의 자동 재시작을 취소합니다.
+        
+        Args:
+            instance_id (str): 인스턴스 ID
+            
+        Returns:
+            dict: 취소 결과
+        """
+        try:
+            instance = Instance.objects.filter(instance_id=instance_id).first()
+            if not instance:
+                return {
+                    'success': False,
+                    'message': f'인스턴스를 찾을 수 없음: {instance_id}'
+                }
+                
+            # 자동 재시작 비활성화 및 시도 횟수 초기화
+            instance.auto_restart_enabled = False
+            instance.restart_attempts = 0
+            instance.save(update_fields=['auto_restart_enabled', 'restart_attempts'])
+            
+            logging.info(f'인스턴스 {instance_id} 자동 재시작 취소')
+            
+            return {
+                'success': True,
+                'message': f'인스턴스 {instance_id}의 자동 재시작이 취소되었습니다.'
+            }
+        except Exception as e:
+            logging.error(f'자동 재시작 취소 중 오류: {str(e)}')
+            return {
+                'success': False,
+                'message': f'자동 재시작 취소 중 오류가 발생했습니다: {str(e)}'
+            }

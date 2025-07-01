@@ -2,16 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext_lazy as _
 import json
 import logging
 
 from .ec2_service import EC2Service
 from .models.instance import Instance
+from .models.reservation import Reservation
 
 # EC2 서비스 인스턴스 생성
 ec2_service = EC2Service()
 
 # 대시보드 - 인스턴스 목록 표시
+@login_required
 def dashboard(request):
     """
     EC2 인스턴스 목록을 보여주는 대시보드 페이지
@@ -45,6 +49,7 @@ def dashboard(request):
         })
 
 # 인스턴스 상세 정보 페이지
+@login_required
 def instance_detail(request, instance_id):
     """
     특정 EC2 인스턴스의 상세 정보를 보여주는 페이지
@@ -61,10 +66,18 @@ def instance_detail(request, instance_id):
             if gpu_response['success']:
                 instance_data['gpu_info'] = gpu_response['data']['gpu_info']
             
+            # 예약 정보 조회
+            active_reservations = Reservation.objects.filter(
+                instance__instance_id=instance_id,
+                status='approved'
+            ).order_by('start_time')
+            
             context = {
                 'instance': instance_data,
                 'title': f'인스턴스 상세 정보 - {instance_id}',
-                'active_menu': 'instances'
+                'active_menu': 'instances',
+                'is_admin': request.user.is_admin,
+                'reservations': active_reservations
             }
             return render(request, 'server_manager/instance_detail.html', context)
         else:
@@ -76,12 +89,20 @@ def instance_detail(request, instance_id):
         return redirect('dashboard')
 
 # 인스턴스 제어 API 엔드포인트
+@login_required
 @require_http_methods(["POST"])
 def control_instance(request):
     """
-    EC2 인스턴스 제어 API (시작, 중지, 재부팅, 종료)
+    EC2 인스턴스 제어 API (시작, 중지, 재부팅, 종료, 자동 재시작 관련 기능)
     """
     try:
+        # 관리자 권한 검사
+        if not request.user.is_admin:
+            return JsonResponse({
+                'success': False,
+                'message': _('관리자만 인스턴스를 제어할 수 있습니다.')
+            }, status=403)
+            
         data = json.loads(request.body)
         instance_id = data.get('instance_id')
         action = data.get('action')
@@ -101,6 +122,11 @@ def control_instance(request):
             response = ec2_service.reboot_instance(instance_id)
         elif action == 'terminate':
             response = ec2_service.terminate_instance(instance_id)
+        # 자동 재시작 관련 기능 추가
+        elif action == 'toggle_auto_restart':
+            response = ec2_service.toggle_auto_restart(instance_id)
+        elif action == 'cancel_auto_restart':
+            response = ec2_service.cancel_auto_restart(instance_id)
         else:
             return JsonResponse({
                 'success': False,
@@ -116,10 +142,15 @@ def control_instance(request):
         }, status=500)
 
 # 인스턴스 생성 페이지
+@login_required
 def create_instance_form(request):
     """
     새 EC2 인스턴스 생성 폼 페이지
     """
+    # 관리자 권한 검사
+    if not request.user.is_admin:
+        messages.error(request, _('관리자만 인스턴스를 생성할 수 있습니다.'))
+        return redirect('dashboard')
     context = {
         'title': '새 인스턴스 생성',
         'active_menu': 'create_instance'
@@ -127,11 +158,18 @@ def create_instance_form(request):
     return render(request, 'server_manager/create_instance.html', context)
 
 # 인스턴스 생성 처리
+@login_required
 @require_http_methods(["POST"])
 def create_instance(request):
     """
     새 EC2 인스턴스 생성 처리
     """
+    # 관리자 권한 검사
+    if not request.user.is_admin:
+        return JsonResponse({
+            'success': False,
+            'message': _('관리자만 인스턴스를 생성할 수 있습니다.')
+        }, status=403)
     try:
         ami_id = request.POST.get('ami_id')
         instance_type = request.POST.get('instance_type')
@@ -173,6 +211,7 @@ def create_instance(request):
         return redirect('create_instance_form')
 
 # 인스턴스 상태 확인 API
+@login_required
 @require_http_methods(["GET"])
 def check_instance_status(request, instance_id):
     """
@@ -189,11 +228,18 @@ def check_instance_status(request, instance_id):
         }, status=500)
 
 # 태그 관리 API
+@login_required
 @require_http_methods(["POST"])
 def manage_tags(request):
     """
     EC2 인스턴스 태그 관리 API
     """
+    # 관리자 권한 검사
+    if not request.user.is_admin:
+        return JsonResponse({
+            'success': False,
+            'message': _('관리자만 태그를 관리할 수 있습니다.')
+        }, status=403)
     try:
         data = json.loads(request.body)
         instance_id = data.get('instance_id')
