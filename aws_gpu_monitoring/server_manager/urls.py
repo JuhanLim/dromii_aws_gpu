@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from . import auth_views
+from . import reservation_views
 
 urlpatterns = [
     # 대시보드 - 메인 페이지
@@ -16,4 +18,16 @@ urlpatterns = [
     path('api/control/', views.control_instance, name='control_instance'),
     path('api/status/<str:instance_id>/', views.check_instance_status, name='check_instance_status'),
     path('api/tags/', views.manage_tags, name='manage_tags'),
+    
+    # 인증 관련 URL
+    path('login/', auth_views.login_view, name='login'),
+    path('logout/', auth_views.logout_view, name='logout'),
+    path('register/', auth_views.register_view, name='register'),
+    path('profile/', auth_views.profile_view, name='profile'),
+    
+    # 예약 관련 URL
+    path('reservations/', reservation_views.reservation_list, name='reservation_list'),
+    path('reservations/create/<str:instance_id>/', reservation_views.create_reservation, name='create_reservation'),
+    path('reservations/<int:reservation_id>/', reservation_views.reservation_detail, name='reservation_detail'),
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
 ]

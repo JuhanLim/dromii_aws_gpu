@@ -140,3 +140,8 @@ CSRF_USE_SESSIONS = False
 
 # 커스텀 사용자 모델 설정
 AUTH_USER_MODEL = 'server_manager.User'
+
+# 로그인 관련 설정
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
