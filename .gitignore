@@ -1,5 +1,4 @@
 venv_awsgpu
-settings.py
 *.jpg
 *.png
 *.tiff
@@ -8,4 +7,3 @@ settings.py
 *.zip
 *.md
 .env
-*.sh
