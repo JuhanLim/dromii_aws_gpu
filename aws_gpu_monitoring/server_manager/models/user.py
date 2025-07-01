@@ -59,6 +59,7 @@ class User(AbstractUser):
     class Meta:
         verbose_name = _('사용자')
         verbose_name_plural = _('사용자')
+        db_table = 'server_manager_user'
         
     def __str__(self):
         return self.email
