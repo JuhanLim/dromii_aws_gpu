@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aws_gpu_monitoring',
+    'server_manager',
 ]
 
 MIDDLEWARE = [

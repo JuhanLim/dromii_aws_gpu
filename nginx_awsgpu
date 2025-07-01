@@ -1,0 +1,21 @@
+server {
+  # 80 port로 서버 오픈
+  listen 8774;
+  server_name 192.168.1.253;
+
+  location ~* (\.(env|git|hg|svn|php)|.*phpinfo.*|.*trace.*|.*vendor.*|.*systembc.*|.*boaform.*)$ {
+      deny all;
+      return 403;
+  }
+
+  autoindex off;
+  server_tokens off;
+
+  location / { 
+    proxy_pass http://unix:/home/dromii/dromii_aws_gpu/aws_gpu_monitoring/gunicorn.sock;
+    add_header Cross-Origin-Opener-Policy same-origin;
+    add_header Cross-Origin-Embedder-Policy require-corp;
+  }
+
+
+}
