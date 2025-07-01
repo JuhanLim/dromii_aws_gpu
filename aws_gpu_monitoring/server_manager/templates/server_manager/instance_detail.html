@@ -1,0 +1,455 @@
+{% extends 'server_manager/base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">인스턴스 상세 정보</h5>
+                <div>
+                    <a href="{% url 'dashboard' %}" class="btn btn-sm btn-light me-2">
+                        <i class="fas fa-arrow-left"></i> 목록으로
+                    </a>
+                    <button id="refreshInstanceBtn" class="btn btn-sm btn-light">
+                        <i class="fas fa-sync-alt"></i> 새로고침
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- 기본 정보 -->
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3">기본 정보</h5>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 30%">인스턴스 ID</th>
+                                <td>{{ instance.instance_id }}</td>
+                            </tr>
+                            <tr>
+                                <th>이름</th>
+                                <td>
+                                    <span id="instanceName">{{ instance.name|default:"(이름 없음)" }}</span>
+                                    <button class="btn btn-sm btn-outline-primary ms-2" id="editNameBtn">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>상태</th>
+                                <td id="instanceState">
+                                    <span class="status-indicator">
+                                        <i class="fas fa-circle me-1 
+                                        {% if instance.state == 'running' %}text-success
+                                        {% elif instance.state == 'stopped' %}text-danger
+                                        {% elif instance.state == 'pending' %}text-warning
+                                        {% else %}text-secondary{% endif %}"></i>
+                                        {{ instance.state }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>인스턴스 유형</th>
+                                <td>{{ instance.instance_type }}</td>
+                            </tr>
+                            <tr>
+                                <th>가용 영역</th>
+                                <td>{{ instance.availability_zone }}</td>
+                            </tr>
+                            <tr>
+                                <th>시작 시간</th>
+                                <td>{{ instance.launch_time }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <!-- GPU 정보 -->
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3">GPU 정보</h5>
+                        {% if instance.gpu_info %}
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th style="width: 30%">GPU 모델</th>
+                                    <td>{{ instance.gpu_info.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>GPU 개수</th>
+                                    <td>{{ instance.gpu_info.count }}</td>
+                                </tr>
+                                <tr>
+                                    <th>메모리</th>
+                                    <td>{{ instance.gpu_info.memory_gb }} GB</td>
+                                </tr>
+                            </table>
+                        {% else %}
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i> GPU 정보가 없습니다.
+                            </div>
+                        {% endif %}
+                        
+                        <!-- 인스턴스 제어 버튼 -->
+                        <h5 class="border-bottom pb-2 mb-3 mt-4">인스턴스 제어</h5>
+                        <div class="d-flex gap-2">
+                            {% if instance.state == 'stopped' %}
+                                <button class="btn btn-success control-instance" data-action="start" data-instance-id="{{ instance.instance_id }}">
+                                    <i class="fas fa-play"></i> 시작
+                                </button>
+                            {% elif instance.state == 'running' %}
+                                <button class="btn btn-warning control-instance" data-action="stop" data-instance-id="{{ instance.instance_id }}">
+                                    <i class="fas fa-stop"></i> 중지
+                                </button>
+                                <button class="btn btn-info control-instance" data-action="reboot" data-instance-id="{{ instance.instance_id }}">
+                                    <i class="fas fa-sync"></i> 재부팅
+                                </button>
+                            {% endif %}
+                            <button class="btn btn-danger control-instance" data-action="terminate" data-instance-id="{{ instance.instance_id }}" data-bs-toggle="modal" data-bs-target="#confirmTerminateModal">
+                                <i class="fas fa-trash-alt"></i> 종료
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 네트워크 정보 -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h5 class="border-bottom pb-2 mb-3">네트워크 정보</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>퍼블릭 IP</th>
+                                    <th>프라이빗 IP</th>
+                                    <th>퍼블릭 DNS</th>
+                                    <th>VPC ID</th>
+                                    <th>서브넷 ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ instance.public_ip|default:"-" }}</td>
+                                    <td>{{ instance.private_ip|default:"-" }}</td>
+                                    <td>{{ instance.public_dns|default:"-" }}</td>
+                                    <td>{{ instance.vpc_id|default:"-" }}</td>
+                                    <td>{{ instance.subnet_id|default:"-" }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 태그 정보 -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h5 class="border-bottom pb-2 mb-3">태그</h5>
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                {% if instance.tags %}
+                                    {% for tag in instance.tags %}
+                                        <span class="badge bg-secondary me-2 mb-2 p-2">
+                                            {{ tag.Key }}: {{ tag.Value }}
+                                        </span>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>태그가 없습니다.</p>
+                                {% endif %}
+                            </div>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
+                                <i class="fas fa-plus"></i> 태그 추가
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 인스턴스 종료 확인 모달 -->
+<div class="modal fade" id="confirmTerminateModal" tabindex="-1" aria-labelledby="confirmTerminateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="confirmTerminateModalLabel">인스턴스 종료 확인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>경고:</strong> 인스턴스를 종료하면 모든 데이터가 삭제되며 이 작업은 되돌릴 수 없습니다.</p>
+                <p>정말로 이 인스턴스를 종료하시겠습니까?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-danger" id="confirmTerminateBtn">인스턴스 종료</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 태그 추가 모달 -->
+<div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addTagModalLabel">태그 추가</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="tagKey" class="form-label">키</label>
+                    <input type="text" class="form-control" id="tagKey" placeholder="태그 키 입력">
+                </div>
+                <div class="mb-3">
+                    <label for="tagValue" class="form-label">값</label>
+                    <input type="text" class="form-control" id="tagValue" placeholder="태그 값 입력">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="addTagBtn">태그 추가</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 이름 편집 모달 -->
+<div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editNameModalLabel">인스턴스 이름 편집</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="instanceNameInput" class="form-label">새 이름</label>
+                    <input type="text" class="form-control" id="instanceNameInput" value="{{ instance.name|default:'' }}">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="saveNameBtn">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        const instanceId = '{{ instance.instance_id }}';
+        
+        // 인스턴스 제어 버튼 클릭 이벤트
+        $('.control-instance').on('click', function() {
+            const action = $(this).data('action');
+            
+            // 종료 작업인 경우 모달에서 처리
+            if (action === 'terminate') {
+                return;
+            }
+            
+            controlInstance(instanceId, action);
+        });
+        
+        // 종료 확인 버튼 클릭 이벤트
+        $('#confirmTerminateBtn').on('click', function() {
+            controlInstance(instanceId, 'terminate');
+            $('#confirmTerminateModal').modal('hide');
+        });
+        
+        // 새로고침 버튼 클릭 이벤트
+        $('#refreshInstanceBtn').on('click', function() {
+            location.reload();
+        });
+        
+        // 태그 추가 버튼 클릭 이벤트
+        $('#addTagBtn').on('click', function() {
+            const key = $('#tagKey').val().trim();
+            const value = $('#tagValue').val().trim();
+            
+            if (!key) {
+                alert('태그 키를 입력해주세요.');
+                return;
+            }
+            
+            addTag(instanceId, key, value);
+        });
+        
+        // 이름 편집 버튼 클릭 이벤트
+        $('#editNameBtn').on('click', function() {
+            $('#editNameModal').modal('show');
+        });
+        
+        // 이름 저장 버튼 클릭 이벤트
+        $('#saveNameBtn').on('click', function() {
+            const newName = $('#instanceNameInput').val().trim();
+            updateInstanceName(instanceId, newName);
+        });
+        
+        // 인스턴스 제어 함수
+        function controlInstance(instanceId, action) {
+            // 버튼 비활성화 및 로딩 표시
+            $('.control-instance').prop('disabled', true);
+            $('#instanceState').html('<i class="fas fa-spinner fa-spin me-1"></i> 처리 중...');
+            
+            // AJAX 요청
+            $.ajax({
+                url: '{% url "control_instance" %}',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    instance_id: instanceId,
+                    action: action
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        // 성공 메시지 표시
+                        const alertHtml = `
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `;
+                        $('.main-content h2').after(alertHtml);
+                        
+                        // 3초 후 페이지 새로고침
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    } else {
+                        // 오류 메시지 표시
+                        const alertHtml = `
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `;
+                        $('.main-content h2').after(alertHtml);
+                        
+                        // 버튼 다시 활성화
+                        $('.control-instance').prop('disabled', false);
+                        updateInstanceStatus(instanceId);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 오류 메시지 표시
+                    const alertHtml = `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            요청 처리 중 오류가 발생했습니다: ${error}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    `;
+                    $('.main-content h2').after(alertHtml);
+                    
+                    // 버튼 다시 활성화
+                    $('.control-instance').prop('disabled', false);
+                    updateInstanceStatus(instanceId);
+                }
+            });
+        }
+        
+        // 인스턴스 상태 업데이트 함수
+        function updateInstanceStatus(instanceId) {
+            $.ajax({
+                url: `/api/status/${instanceId}/`,
+                type: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        const instance = response.data;
+                        
+                        // 상태 표시 업데이트
+                        let statusClass = '';
+                        if (instance.state === 'running') statusClass = 'text-success';
+                        else if (instance.state === 'stopped') statusClass = 'text-danger';
+                        else if (instance.state === 'pending') statusClass = 'text-warning';
+                        else statusClass = 'text-secondary';
+                        
+                        $('#instanceState').html(`
+                            <span class="status-indicator">
+                                <i class="fas fa-circle me-1 ${statusClass}"></i> ${instance.state}
+                            </span>
+                        `);
+                    }
+                }
+            });
+        }
+        
+        // 태그 추가 함수
+        function addTag(instanceId, key, value) {
+            const tags = [{ Key: key, Value: value }];
+            
+            $.ajax({
+                url: '{% url "manage_tags" %}',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    instance_id: instanceId,
+                    tags: tags,
+                    action: 'create'
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        // 성공 메시지 표시
+                        const alertHtml = `
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `;
+                        $('.main-content h2').after(alertHtml);
+                        
+                        // 모달 닫기 및 페이지 새로고침
+                        $('#addTagModal').modal('hide');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        // 오류 메시지 표시
+                        alert(`태그 추가 실패: ${response.message}`);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 오류 메시지 표시
+                    alert(`요청 처리 중 오류가 발생했습니다: ${error}`);
+                }
+            });
+        }
+        
+        // 인스턴스 이름 업데이트 함수
+        function updateInstanceName(instanceId, newName) {
+            const tags = [{ Key: 'Name', Value: newName }];
+            
+            $.ajax({
+                url: '{% url "manage_tags" %}',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    instance_id: instanceId,
+                    tags: tags,
+                    action: 'create'
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        // 성공 메시지 표시
+                        const alertHtml = `
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                인스턴스 이름이 성공적으로 변경되었습니다.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `;
+                        $('.main-content h2').after(alertHtml);
+                        
+                        // 이름 업데이트 및 모달 닫기
+                        $('#instanceName').text(newName || '(이름 없음)');
+                        $('#editNameModal').modal('hide');
+                    } else {
+                        // 오류 메시지 표시
+                        alert(`이름 변경 실패: ${response.message}`);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 오류 메시지 표시
+                    alert(`요청 처리 중 오류가 발생했습니다: ${error}`);
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

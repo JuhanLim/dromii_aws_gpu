@@ -1,0 +1,157 @@
+{% extends 'server_manager/base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">새 EC2 인스턴스 생성</h5>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'create_instance' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <!-- 기본 정보 -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <h5 class="border-bottom pb-2 mb-3">기본 정보</h5>
+                        </div>
+                        
+                        <!-- 이름 -->
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">인스턴스 이름</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="인스턴스 이름">
+                            <div class="form-text">인스턴스를 식별하기 위한 이름입니다.</div>
+                        </div>
+                        
+                        <!-- AMI ID -->
+                        <div class="col-md-6 mb-3">
+                            <label for="ami_id" class="form-label">AMI ID <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="ami_id" name="ami_id" placeholder="ami-xxxxxxxxxx" required>
+                            <div class="form-text">Amazon Machine Image ID (예: ami-0c55b159cbfafe1f0)</div>
+                        </div>
+                        
+                        <!-- 인스턴스 유형 -->
+                        <div class="col-md-6 mb-3">
+                            <label for="instance_type" class="form-label">인스턴스 유형 <span class="text-danger">*</span></label>
+                            <select class="form-select" id="instance_type" name="instance_type" required>
+                                <option value="" selected disabled>인스턴스 유형 선택</option>
+                                <optgroup label="GPU 인스턴스">
+                                    <option value="g4dn.xlarge">g4dn.xlarge (1 GPU, 4 vCPU, 16 GiB)</option>
+                                    <option value="g4dn.2xlarge">g4dn.2xlarge (1 GPU, 8 vCPU, 32 GiB)</option>
+                                    <option value="g4dn.4xlarge">g4dn.4xlarge (1 GPU, 16 vCPU, 64 GiB)</option>
+                                    <option value="g4dn.8xlarge">g4dn.8xlarge (1 GPU, 32 vCPU, 128 GiB)</option>
+                                    <option value="g5.xlarge">g5.xlarge (1 GPU, 4 vCPU, 16 GiB)</option>
+                                    <option value="g5.2xlarge">g5.2xlarge (1 GPU, 8 vCPU, 32 GiB)</option>
+                                    <option value="p3.2xlarge">p3.2xlarge (1 GPU, 8 vCPU, 61 GiB)</option>
+                                    <option value="p3.8xlarge">p3.8xlarge (4 GPU, 32 vCPU, 244 GiB)</option>
+                                </optgroup>
+                                <optgroup label="범용 인스턴스">
+                                    <option value="t2.micro">t2.micro (1 vCPU, 1 GiB)</option>
+                                    <option value="t2.small">t2.small (1 vCPU, 2 GiB)</option>
+                                    <option value="t2.medium">t2.medium (2 vCPU, 4 GiB)</option>
+                                    <option value="t2.large">t2.large (2 vCPU, 8 GiB)</option>
+                                    <option value="t3.micro">t3.micro (2 vCPU, 1 GiB)</option>
+                                    <option value="t3.small">t3.small (2 vCPU, 2 GiB)</option>
+                                    <option value="t3.medium">t3.medium (2 vCPU, 4 GiB)</option>
+                                </optgroup>
+                            </select>
+                            <div class="form-text">인스턴스의 CPU, 메모리, GPU 구성을 결정합니다.</div>
+                        </div>
+                        
+                        <!-- 키 페어 -->
+                        <div class="col-md-6 mb-3">
+                            <label for="key_name" class="form-label">키 페어 <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="key_name" name="key_name" placeholder="키 페어 이름" required>
+                            <div class="form-text">인스턴스 접속에 사용할 키 페어 이름</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 네트워크 설정 -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <h5 class="border-bottom pb-2 mb-3">네트워크 설정</h5>
+                        </div>
+                        
+                        <!-- 보안 그룹 -->
+                        <div class="col-md-6 mb-3">
+                            <label for="security_group_ids" class="form-label">보안 그룹 ID</label>
+                            <input type="text" class="form-control" id="security_group_ids" name="security_group_ids" placeholder="sg-xxxxxxxxxx, sg-yyyyyyyyyy">
+                            <div class="form-text">쉼표로 구분된 보안 그룹 ID 목록 (예: sg-0123456789, sg-9876543210)</div>
+                        </div>
+                        
+                        <!-- 서브넷 -->
+                        <div class="col-md-6 mb-3">
+                            <label for="subnet_id" class="form-label">서브넷 ID</label>
+                            <input type="text" class="form-control" id="subnet_id" name="subnet_id" placeholder="subnet-xxxxxxxxxx">
+                            <div class="form-text">인스턴스를 시작할 서브넷 ID (예: subnet-0123456789)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 버튼 -->
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">취소</a>
+                        <button type="submit" class="btn btn-primary">인스턴스 생성</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // 폼 제출 전 유효성 검사
+        $('form').on('submit', function(e) {
+            const amiId = $('#ami_id').val().trim();
+            const instanceType = $('#instance_type').val();
+            const keyName = $('#key_name').val().trim();
+            
+            if (!amiId || !instanceType || !keyName) {
+                e.preventDefault();
+                
+                const alertHtml = `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        필수 항목을 모두 입력해주세요.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                $('.card-body').prepend(alertHtml);
+                
+                // 누락된 필드 강조
+                if (!amiId) $('#ami_id').addClass('is-invalid');
+                if (!instanceType) $('#instance_type').addClass('is-invalid');
+                if (!keyName) $('#key_name').addClass('is-invalid');
+                
+                return false;
+            }
+            
+            // AMI ID 형식 검증
+            if (!amiId.match(/^ami-[a-f0-9]{8,17}$/)) {
+                e.preventDefault();
+                $('#ami_id').addClass('is-invalid');
+                
+                const alertHtml = `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        유효한 AMI ID 형식이 아닙니다. (예: ami-0c55b159cbfafe1f0)
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                $('.card-body').prepend(alertHtml);
+                
+                return false;
+            }
+            
+            // 제출 버튼 비활성화 및 로딩 표시
+            $(this).find('button[type="submit"]').prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> 처리 중...');
+        });
+        
+        // 입력 필드 변경 시 유효성 검사 클래스 제거
+        $('input, select').on('input change', function() {
+            $(this).removeClass('is-invalid');
+        });
+    });
+</script>
+{% endblock %}

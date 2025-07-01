@@ -1,0 +1,231 @@
+{% extends 'server_manager/base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">EC2 인스턴스 목록</h5>
+                <button id="refreshInstancesBtn" class="btn btn-sm btn-light">
+                    <i class="fas fa-sync-alt"></i> 새로고침
+                </button>
+            </div>
+            <div class="card-body">
+                {% if instances %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>인스턴스 ID</th>
+                                    <th>인스턴스 유형</th>
+                                    <th>상태</th>
+                                    <th>GPU</th>
+                                    <th>작업</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for instance in instances %}
+                                <tr id="instance-{{ instance.instance_id }}" data-instance-id="{{ instance.instance_id }}">
+                                    <td>{{ instance.name|default:"(이름 없음)" }}</td>
+                                    <td>
+                                        <a href="{% url 'instance_detail' instance_id=instance.instance_id %}">
+                                            {{ instance.instance_id }}
+                                        </a>
+                                    </td>
+                                    <td>{{ instance.instance_type }}</td>
+                                    <td>
+                                        <span class="status-indicator {{ instance.state|lower }}">
+                                            <i class="fas fa-circle me-1 
+                                            {% if instance.state == 'running' %}text-success
+                                            {% elif instance.state == 'stopped' %}text-danger
+                                            {% elif instance.state == 'pending' %}text-warning
+                                            {% else %}text-secondary{% endif %}"></i>
+                                            {{ instance.state }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if instance.gpu_info %}
+                                            {{ instance.gpu_info.name }} ({{ instance.gpu_info.count }}개)
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            {% if instance.state == 'stopped' %}
+                                                <button class="btn btn-sm btn-success control-instance" data-action="start" data-instance-id="{{ instance.instance_id }}">
+                                                    <i class="fas fa-play"></i> 시작
+                                                </button>
+                                            {% elif instance.state == 'running' %}
+                                                <button class="btn btn-sm btn-warning control-instance" data-action="stop" data-instance-id="{{ instance.instance_id }}">
+                                                    <i class="fas fa-stop"></i> 중지
+                                                </button>
+                                                <button class="btn btn-sm btn-info control-instance" data-action="reboot" data-instance-id="{{ instance.instance_id }}">
+                                                    <i class="fas fa-sync"></i> 재부팅
+                                                </button>
+                                            {% endif %}
+                                            <button class="btn btn-sm btn-danger control-instance" data-action="terminate" data-instance-id="{{ instance.instance_id }}" data-bs-toggle="modal" data-bs-target="#confirmTerminateModal">
+                                                <i class="fas fa-trash-alt"></i> 종료
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> 현재 실행 중인 EC2 인스턴스가 없습니다.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 인스턴스 종료 확인 모달 -->
+<div class="modal fade" id="confirmTerminateModal" tabindex="-1" aria-labelledby="confirmTerminateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="confirmTerminateModalLabel">인스턴스 종료 확인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>경고:</strong> 인스턴스를 종료하면 모든 데이터가 삭제되며 이 작업은 되돌릴 수 없습니다.</p>
+                <p>정말로 이 인스턴스를 종료하시겠습니까?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-danger" id="confirmTerminateBtn">인스턴스 종료</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        let instanceToTerminate = null;
+        
+        // 인스턴스 제어 버튼 클릭 이벤트
+        $('.control-instance').on('click', function() {
+            const action = $(this).data('action');
+            const instanceId = $(this).data('instance-id');
+            
+            // 종료 작업인 경우 모달에서 처리
+            if (action === 'terminate') {
+                instanceToTerminate = instanceId;
+                return;
+            }
+            
+            controlInstance(instanceId, action);
+        });
+        
+        // 종료 확인 버튼 클릭 이벤트
+        $('#confirmTerminateBtn').on('click', function() {
+            if (instanceToTerminate) {
+                controlInstance(instanceToTerminate, 'terminate');
+                $('#confirmTerminateModal').modal('hide');
+                instanceToTerminate = null;
+            }
+        });
+        
+        // 새로고침 버튼 클릭 이벤트
+        $('#refreshInstancesBtn').on('click', function() {
+            location.reload();
+        });
+        
+        // 인스턴스 제어 함수
+        function controlInstance(instanceId, action) {
+            // 버튼 비활성화 및 로딩 표시
+            const $row = $(`#instance-${instanceId}`);
+            $row.find('.control-instance').prop('disabled', true);
+            $row.find('.status-indicator').html('<i class="fas fa-spinner fa-spin me-1"></i> 처리 중...');
+            
+            // AJAX 요청
+            $.ajax({
+                url: '{% url "control_instance" %}',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    instance_id: instanceId,
+                    action: action
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        // 성공 메시지 표시
+                        const alertHtml = `
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `;
+                        $('.main-content h2').after(alertHtml);
+                        
+                        // 3초 후 페이지 새로고침
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    } else {
+                        // 오류 메시지 표시
+                        const alertHtml = `
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `;
+                        $('.main-content h2').after(alertHtml);
+                        
+                        // 버튼 다시 활성화
+                        $row.find('.control-instance').prop('disabled', false);
+                        updateInstanceStatus(instanceId);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 오류 메시지 표시
+                    const alertHtml = `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            요청 처리 중 오류가 발생했습니다: ${error}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    `;
+                    $('.main-content h2').after(alertHtml);
+                    
+                    // 버튼 다시 활성화
+                    $row.find('.control-instance').prop('disabled', false);
+                    updateInstanceStatus(instanceId);
+                }
+            });
+        }
+        
+        // 인스턴스 상태 업데이트 함수
+        function updateInstanceStatus(instanceId) {
+            $.ajax({
+                url: `/api/status/${instanceId}/`,
+                type: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        const instance = response.data;
+                        const $row = $(`#instance-${instanceId}`);
+                        
+                        // 상태 표시 업데이트
+                        let statusClass = '';
+                        if (instance.state === 'running') statusClass = 'text-success';
+                        else if (instance.state === 'stopped') statusClass = 'text-danger';
+                        else if (instance.state === 'pending') statusClass = 'text-warning';
+                        else statusClass = 'text-secondary';
+                        
+                        $row.find('.status-indicator').html(`
+                            <i class="fas fa-circle me-1 ${statusClass}"></i> ${instance.state}
+                        `);
+                    }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
