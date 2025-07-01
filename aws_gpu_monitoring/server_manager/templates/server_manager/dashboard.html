@@ -205,7 +205,7 @@
         // 인스턴스 상태 업데이트 함수
         function updateInstanceStatus(instanceId) {
             $.ajax({
-                url: `/api/status/${instanceId}/`,
+                url: '{% url "check_instance_status" instance_id="INSTANCE_ID" %}'.replace('INSTANCE_ID', instanceId),
                 type: 'GET',
                 success: function(response) {
                     if (response.success) {
