@@ -1,0 +1,28 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans '로그아웃' %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{% trans '로그아웃' %}</h4>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h5 class="mb-3">{% trans '성공적으로 로그아웃되었습니다.' %}</h5>
+                    <p class="mb-4">{% trans '다시 로그인하시려면 아래 버튼을 클릭하세요.' %}</p>
+                    <a href="{% url 'login' %}" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i>{% trans '로그인 페이지로 이동' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

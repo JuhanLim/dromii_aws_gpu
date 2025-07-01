@@ -1,0 +1,123 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans '내 프로필' %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{% trans '내 프로필' %}</h4>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center mb-4">
+                                <div class="avatar-placeholder bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 120px; height: 120px; font-size: 3rem;">
+                                    {{ user.username|first|upper }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>{% trans '계정 정보' %}</h5>
+                            <hr>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">{% trans '사용자 이름' %}</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.username }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">{% trans '이메일' %}</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.email }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">{% trans '가입일' %}</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">{{ user.date_joined|date:"Y년 m월 d일" }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label">{% trans '계정 유형' %}</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-plaintext">
+                                        {% if user.is_admin %}
+                                            <span class="badge bg-danger">{% trans '관리자' %}</span>
+                                        {% else %}
+                                            <span class="badge bg-info">{% trans '일반 사용자' %}</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>{% trans '내 예약 현황' %}</h5>
+                        <hr>
+                        {% if user.reservations.all %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>{% trans '인스턴스' %}</th>
+                                            <th>{% trans '시작 시간' %}</th>
+                                            <th>{% trans '종료 시간' %}</th>
+                                            <th>{% trans '상태' %}</th>
+                                            <th>{% trans '액션' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for reservation in user.reservations.all|slice:":5" %}
+                                            <tr>
+                                                <td>{{ reservation.instance.name }}</td>
+                                                <td>{{ reservation.start_time|date:"Y-m-d H:i" }}</td>
+                                                <td>{{ reservation.end_time|date:"Y-m-d H:i" }}</td>
+                                                <td>
+                                                    {% if reservation.status == 'pending' %}
+                                                        <span class="badge bg-warning">{% trans '대기중' %}</span>
+                                                    {% elif reservation.status == 'approved' %}
+                                                        <span class="badge bg-success">{% trans '승인됨' %}</span>
+                                                    {% elif reservation.status == 'rejected' %}
+                                                        <span class="badge bg-danger">{% trans '거부됨' %}</span>
+                                                    {% elif reservation.status == 'canceled' %}
+                                                        <span class="badge bg-secondary">{% trans '취소됨' %}</span>
+                                                    {% elif reservation.status == 'completed' %}
+                                                        <span class="badge bg-info">{% trans '완료됨' %}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <a href="{% url 'reservation_detail' reservation.id %}" class="btn btn-sm btn-outline-primary">{% trans '상세' %}</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% if user.reservations.all.count > 5 %}
+                                <div class="text-center">
+                                    <a href="{% url 'reservation_list' %}" class="btn btn-outline-primary">{% trans '모든 예약 보기' %}</a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="alert alert-info">
+                                {% trans '아직 예약 내역이 없습니다.' %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
