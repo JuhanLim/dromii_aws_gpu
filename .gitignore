@@ -1,0 +1,9 @@
+venv_awsgpu
+settings.py
+*.jpg
+*.png
+*.tiff
+*.tif
+*.pth
+*.zip
+*.md
