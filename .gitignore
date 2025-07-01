@@ -7,3 +7,5 @@ settings.py
 *.pth
 *.zip
 *.md
+.env
+*.sh
