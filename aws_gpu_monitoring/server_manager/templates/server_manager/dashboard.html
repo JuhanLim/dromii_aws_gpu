@@ -53,21 +53,26 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            {% if instance.state == 'stopped' %}
-                                                <button class="btn btn-sm btn-success control-instance" data-action="start" data-instance-id="{{ instance.instance_id }}">
-                                                    <i class="fas fa-play"></i> 시작
-                                                </button>
-                                            {% elif instance.state == 'running' %}
-                                                <button class="btn btn-sm btn-warning control-instance" data-action="stop" data-instance-id="{{ instance.instance_id }}">
-                                                    <i class="fas fa-stop"></i> 중지
-                                                </button>
-                                                <button class="btn btn-sm btn-info control-instance" data-action="reboot" data-instance-id="{{ instance.instance_id }}">
-                                                    <i class="fas fa-sync"></i> 재부팅
+                                            {% if user.is_admin %}
+                                                {% if instance.state == 'stopped' %}
+                                                    <button class="btn btn-sm btn-success control-instance" data-action="start" data-instance-id="{{ instance.instance_id }}">
+                                                        <i class="fas fa-play"></i> 시작
+                                                    </button>
+                                                {% elif instance.state == 'running' %}
+                                                    <button class="btn btn-sm btn-warning control-instance" data-action="stop" data-instance-id="{{ instance.instance_id }}">
+                                                        <i class="fas fa-stop"></i> 중지
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info control-instance" data-action="reboot" data-instance-id="{{ instance.instance_id }}">
+                                                        <i class="fas fa-sync"></i> 재부팅
+                                                    </button>
+                                                {% endif %}
+                                                <button class="btn btn-sm btn-danger control-instance" data-action="terminate" data-instance-id="{{ instance.instance_id }}" data-bs-toggle="modal" data-bs-target="#confirmTerminateModal">
+                                                    <i class="fas fa-trash-alt"></i> 종료
                                                 </button>
                                             {% endif %}
-                                            <button class="btn btn-sm btn-danger control-instance" data-action="terminate" data-instance-id="{{ instance.instance_id }}" data-bs-toggle="modal" data-bs-target="#confirmTerminateModal">
-                                                <i class="fas fa-trash-alt"></i> 종료
-                                            </button>
+                                            <a href="{% url 'create_reservation' instance_id=instance.instance_id %}" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-calendar-plus"></i> 예약 요청
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
