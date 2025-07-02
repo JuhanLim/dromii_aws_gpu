@@ -1,0 +1,63 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans '예약 취소' %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">{% trans '예약 취소' %}</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="mb-4">{% trans '다음 예약을 취소하시겠습니까?' %}</h5>
+                    
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="bg-light" width="30%">{% trans '인스턴스' %}</th>
+                            <td>{{ reservation.instance.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">{% trans '시작 시간' %}</th>
+                            <td>{{ reservation.start_time|date:"Y년 m월 d일 H:i" }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">{% trans '종료 시간' %}</th>
+                            <td>{{ reservation.end_time|date:"Y년 m월 d일 H:i" }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">{% trans '상태' %}</th>
+                            <td>
+                                {% if reservation.status == 'pending' %}
+                                    <span class="badge bg-warning">{% trans '대기중' %}</span>
+                                {% elif reservation.status == 'approved' %}
+                                    <span class="badge bg-success">{% trans '승인됨' %}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {% trans '예약을 취소하면 되돌릴 수 없습니다. 정말로 취소하시겠습니까?' %}
+                    </div>
+                    
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'reservation_detail' reservation.id %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i> {% trans '돌아가기' %}
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-times me-1"></i> {% trans '예약 취소' %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

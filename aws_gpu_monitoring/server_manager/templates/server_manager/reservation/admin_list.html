@@ -1,0 +1,333 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans '예약 관리' %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{% trans '예약 관리' %}</h5>
+                    <div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-light filter-btn active" data-filter="all">
+                                {% trans '전체' %}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light filter-btn" data-filter="pending">
+                                {% trans '대기중' %}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light filter-btn" data-filter="approved">
+                                {% trans '승인됨' %}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light filter-btn" data-filter="rejected">
+                                {% trans '거부됨' %}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light filter-btn" data-filter="canceled">
+                                {% trans '취소됨' %}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light filter-btn" data-filter="completed">
+                                {% trans '완료됨' %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if reservations %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans '예약 ID' %}</th>
+                                        <th>{% trans '사용자' %}</th>
+                                        <th>{% trans '인스턴스' %}</th>
+                                        <th>{% trans '시작 시간' %}</th>
+                                        <th>{% trans '종료 시간' %}</th>
+                                        <th>{% trans '신청일' %}</th>
+                                        <th>{% trans '상태' %}</th>
+                                        <th>{% trans '액션' %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for reservation in reservations %}
+                                        <tr class="reservation-row" data-status="{{ reservation.status }}">
+                                            <td>{{ reservation.id }}</td>
+                                            <td>{{ reservation.user.username }} ({{ reservation.user.email }})</td>
+                                            <td>{{ reservation.instance.name }}</td>
+                                            <td>{{ reservation.start_time|date:"Y-m-d H:i" }}</td>
+                                            <td>{{ reservation.end_time|date:"Y-m-d H:i" }}</td>
+                                            <td>{{ reservation.created_at|date:"Y-m-d" }}</td>
+                                            <td>
+                                                {% if reservation.status == 'pending' %}
+                                                    <span class="badge bg-warning">{% trans '대기중' %}</span>
+                                                {% elif reservation.status == 'approved' %}
+                                                    <span class="badge bg-success">{% trans '승인됨' %}</span>
+                                                {% elif reservation.status == 'rejected' %}
+                                                    <span class="badge bg-danger">{% trans '거부됨' %}</span>
+                                                {% elif reservation.status == 'canceled' %}
+                                                    <span class="badge bg-secondary">{% trans '취소됨' %}</span>
+                                                {% elif reservation.status == 'completed' %}
+                                                    <span class="badge bg-info">{% trans '완료됨' %}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a href="#" class="btn btn-sm btn-outline-primary view-reservation" data-bs-toggle="modal" data-bs-target="#reservationDetailModal" data-id="{{ reservation.id }}">
+                                                        <i class="fas fa-eye"></i> {% trans '상세' %}
+                                                    </a>
+                                                    {% if reservation.status == 'pending' %}
+                                                        <a href="#" class="btn btn-sm btn-outline-success update-status" data-id="{{ reservation.id }}" data-status="approved">
+                                                            <i class="fas fa-check"></i> {% trans '승인' %}
+                                                        </a>
+                                                        <a href="#" class="btn btn-sm btn-outline-danger update-status" data-id="{{ reservation.id }}" data-status="rejected">
+                                                            <i class="fas fa-times"></i> {% trans '거부' %}
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i> {% trans '예약 내역이 없습니다.' %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 예약 상세 모달 -->
+<div class="modal fade" id="reservationDetailModal" tabindex="-1" aria-labelledby="reservationDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="reservationDetailModalLabel">{% trans '예약 상세 정보' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center py-4" id="reservationDetailLoading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">{% trans '로딩중...' %}</span>
+                    </div>
+                </div>
+                <div id="reservationDetailContent" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">{% trans '예약 정보' %}</h6>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="bg-light" width="30%">{% trans '예약 ID' %}</th>
+                                    <td id="detail-id"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '사용자' %}</th>
+                                    <td id="detail-user"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '상태' %}</th>
+                                    <td id="detail-status"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '신청일' %}</th>
+                                    <td id="detail-created"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '시작 시간' %}</th>
+                                    <td id="detail-start"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '종료 시간' %}</th>
+                                    <td id="detail-end"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '사용 목적' %}</th>
+                                    <td id="detail-purpose"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">{% trans '인스턴스 정보' %}</h6>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="bg-light" width="30%">{% trans '인스턴스 이름' %}</th>
+                                    <td id="detail-instance-name"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '인스턴스 ID' %}</th>
+                                    <td id="detail-instance-id"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '인스턴스 유형' %}</th>
+                                    <td id="detail-instance-type"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans 'GPU 정보' %}</th>
+                                    <td id="detail-gpu"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div id="statusUpdateForm" class="mt-4">
+                        <h6 class="mb-3">{% trans '상태 업데이트' %}</h6>
+                        <form id="updateReservationForm">
+                            <div class="mb-3">
+                                <label for="status" class="form-label">{% trans '상태' %}</label>
+                                <select id="status" class="form-select">
+                                    <option value="pending">{% trans '대기중' %}</option>
+                                    <option value="approved">{% trans '승인됨' %}</option>
+                                    <option value="rejected">{% trans '거부됨' %}</option>
+                                    <option value="canceled">{% trans '취소됨' %}</option>
+                                    <option value="completed">{% trans '완료됨' %}</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="admin_comment" class="form-label">{% trans '관리자 코멘트' %}</label>
+                                <textarea id="admin_comment" class="form-control" rows="3"></textarea>
+                            </div>
+                            <input type="hidden" id="reservation_id">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans '닫기' %}</button>
+                <button type="button" class="btn btn-primary" id="saveStatusBtn">{% trans '저장' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // 필터링 기능
+        $('.filter-btn').on('click', function() {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            
+            const filter = $(this).data('filter');
+            
+            if (filter === 'all') {
+                $('.reservation-row').show();
+            } else {
+                $('.reservation-row').hide();
+                $(`.reservation-row[data-status="${filter}"]`).show();
+            }
+        });
+        
+        // 예약 상세 정보 조회
+        $('.view-reservation').on('click', function() {
+            const reservationId = $(this).data('id');
+            
+            $('#reservationDetailLoading').show();
+            $('#reservationDetailContent').hide();
+            
+            // AJAX로 예약 상세 정보 가져오기
+            $.ajax({
+                url: `/reservations/${reservationId}/`,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#detail-id').text(data.id);
+                    $('#detail-user').text(`${data.user.username} (${data.user.email})`);
+                    
+                    let statusBadge = '';
+                    if (data.status === 'pending') {
+                        statusBadge = '<span class="badge bg-warning">대기중</span>';
+                    } else if (data.status === 'approved') {
+                        statusBadge = '<span class="badge bg-success">승인됨</span>';
+                    } else if (data.status === 'rejected') {
+                        statusBadge = '<span class="badge bg-danger">거부됨</span>';
+                    } else if (data.status === 'canceled') {
+                        statusBadge = '<span class="badge bg-secondary">취소됨</span>';
+                    } else if (data.status === 'completed') {
+                        statusBadge = '<span class="badge bg-info">완료됨</span>';
+                    }
+                    $('#detail-status').html(statusBadge);
+                    
+                    $('#detail-created').text(new Date(data.created_at).toLocaleString());
+                    $('#detail-start').text(new Date(data.start_time).toLocaleString());
+                    $('#detail-end').text(new Date(data.end_time).toLocaleString());
+                    $('#detail-purpose').text(data.purpose);
+                    
+                    $('#detail-instance-name').text(data.instance.name);
+                    $('#detail-instance-id').text(data.instance.instance_id);
+                    $('#detail-instance-type').text(data.instance.instance_type);
+                    
+                    if (data.instance.gpu_info) {
+                        $('#detail-gpu').text(`${data.instance.gpu_info.name} (${data.instance.gpu_info.count}개)`);
+                    } else {
+                        $('#detail-gpu').text('-');
+                    }
+                    
+                    // 상태 업데이트 폼 설정
+                    $('#status').val(data.status);
+                    $('#admin_comment').val(data.admin_comment || '');
+                    $('#reservation_id').val(data.id);
+                    
+                    $('#reservationDetailLoading').hide();
+                    $('#reservationDetailContent').show();
+                },
+                error: function(xhr, status, error) {
+                    alert('예약 정보를 가져오는 중 오류가 발생했습니다.');
+                    $('#reservationDetailModal').modal('hide');
+                }
+            });
+        });
+        
+        // 상태 업데이트 버튼 클릭
+        $('.update-status').on('click', function(e) {
+            e.preventDefault();
+            
+            const reservationId = $(this).data('id');
+            const newStatus = $(this).data('status');
+            
+            if (confirm('예약 상태를 변경하시겠습니까?')) {
+                updateReservationStatus(reservationId, newStatus, '');
+            }
+        });
+        
+        // 모달에서 저장 버튼 클릭
+        $('#saveStatusBtn').on('click', function() {
+            const reservationId = $('#reservation_id').val();
+            const newStatus = $('#status').val();
+            const adminComment = $('#admin_comment').val();
+            
+            updateReservationStatus(reservationId, newStatus, adminComment);
+        });
+        
+        // 예약 상태 업데이트 함수
+        function updateReservationStatus(reservationId, status, adminComment) {
+            $.ajax({
+                url: `/reservations/admin/${reservationId}/update/`,
+                type: 'POST',
+                data: JSON.stringify({
+                    status: status,
+                    admin_comment: adminComment
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    if (response.success) {
+                        alert('예약 상태가 업데이트되었습니다.');
+                        $('#reservationDetailModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('오류: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('예약 상태 업데이트 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

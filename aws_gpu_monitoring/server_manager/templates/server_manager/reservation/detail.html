@@ -1,0 +1,120 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans '예약 상세 정보' %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{% trans '예약 상세 정보' %}</h5>
+                    <a href="{% url 'reservation_list' %}" class="btn btn-sm btn-light">
+                        <i class="fas fa-arrow-left me-1"></i> {% trans '목록으로 돌아가기' %}
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">{% trans '예약 정보' %}</h6>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="bg-light" width="30%">{% trans '예약 ID' %}</th>
+                                    <td>{{ reservation.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '상태' %}</th>
+                                    <td>
+                                        {% if reservation.status == 'pending' %}
+                                            <span class="badge bg-warning">{% trans '대기중' %}</span>
+                                        {% elif reservation.status == 'approved' %}
+                                            <span class="badge bg-success">{% trans '승인됨' %}</span>
+                                        {% elif reservation.status == 'rejected' %}
+                                            <span class="badge bg-danger">{% trans '거부됨' %}</span>
+                                        {% elif reservation.status == 'canceled' %}
+                                            <span class="badge bg-secondary">{% trans '취소됨' %}</span>
+                                        {% elif reservation.status == 'completed' %}
+                                            <span class="badge bg-info">{% trans '완료됨' %}</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '신청일' %}</th>
+                                    <td>{{ reservation.created_at|date:"Y년 m월 d일 H:i" }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '시작 시간' %}</th>
+                                    <td>{{ reservation.start_time|date:"Y년 m월 d일 H:i" }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '종료 시간' %}</th>
+                                    <td>{{ reservation.end_time|date:"Y년 m월 d일 H:i" }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '사용 목적' %}</th>
+                                    <td>{{ reservation.purpose|linebreaks }}</td>
+                                </tr>
+                                {% if reservation.admin_comment %}
+                                <tr>
+                                    <th class="bg-light">{% trans '관리자 코멘트' %}</th>
+                                    <td>{{ reservation.admin_comment|linebreaks }}</td>
+                                </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">{% trans '인스턴스 정보' %}</h6>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="bg-light" width="30%">{% trans '인스턴스 이름' %}</th>
+                                    <td>{{ reservation.instance.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '인스턴스 ID' %}</th>
+                                    <td>{{ reservation.instance.instance_id }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '인스턴스 유형' %}</th>
+                                    <td>{{ reservation.instance.instance_type }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans 'GPU 정보' %}</th>
+                                    <td>
+                                        {% if reservation.instance.gpu_info %}
+                                            {{ reservation.instance.gpu_info.name }} ({{ reservation.instance.gpu_info.count }}개)
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">{% trans '현재 상태' %}</th>
+                                    <td>
+                                        <span class="status-indicator {{ reservation.instance.state|lower }}">
+                                            <i class="fas fa-circle me-1 
+                                            {% if reservation.instance.state == 'running' %}text-success
+                                            {% elif reservation.instance.state == 'stopped' %}text-danger
+                                            {% elif reservation.instance.state == 'pending' %}text-warning
+                                            {% else %}text-secondary{% endif %}"></i>
+                                            {{ reservation.instance.state }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        {% if reservation.status == 'pending' or reservation.status == 'approved' %}
+                            <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-danger" onclick="return confirm('{% trans '정말로 이 예약을 취소하시겠습니까?' %}')">
+                                <i class="fas fa-times me-1"></i> {% trans '예약 취소' %}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
