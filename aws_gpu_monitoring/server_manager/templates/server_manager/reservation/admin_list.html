@@ -232,7 +232,7 @@
             
             // AJAX로 예약 상세 정보 가져오기
             $.ajax({
-                url: `/reservations/${reservationId}/`,
+                url: `/api/reservations/${reservationId}/`,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -307,7 +307,7 @@
         // 예약 상태 업데이트 함수
         function updateReservationStatus(reservationId, status, adminComment) {
             $.ajax({
-                url: `/reservations/admin/${reservationId}/update/`,
+                url: `/api/reservations/admin/${reservationId}/update/`,
                 type: 'POST',
                 data: JSON.stringify({
                     status: status,

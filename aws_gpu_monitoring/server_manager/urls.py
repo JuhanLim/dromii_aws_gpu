@@ -33,4 +33,8 @@ urlpatterns = [
     path('reservations/admin/', reservation_views.admin_reservation_list, name='admin_reservation_list'),
     path('reservations/admin/<int:reservation_id>/update/', reservation_views.admin_reservation_update, name='admin_reservation_update'),
     path('reservations/availability/<str:instance_id>/', reservation_views.instance_availability, name='instance_availability'),
+    
+    # 예약 관련 API URL
+    path('api/reservations/<int:reservation_id>/', reservation_views.reservation_detail_api, name='reservation_detail_api'),
+    path('api/reservations/admin/<int:reservation_id>/update/', reservation_views.admin_reservation_update_api, name='admin_reservation_update_api'),
 ]

@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.http import JsonResponse
 from django.db.models import Q
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Instance, Reservation
 from .forms import ReservationForm, ReservationAdminForm
@@ -158,3 +160,85 @@ def instance_availability(request, instance_id):
     ).values('start_time', 'end_time', 'user__username')
     
     return JsonResponse(list(reservations), safe=False)
+
+
+@login_required
+def reservation_detail_api(request, reservation_id):
+    """
+    예약 상세 정보를 JSON으로 반환하는 API
+    """
+    if not request.user.is_admin:
+        return JsonResponse({'error': '관리자만 접근할 수 있습니다.'}, status=403)
+    
+    try:
+        reservation = Reservation.objects.get(id=reservation_id)
+        
+        # JSON으로 반환할 데이터 구성
+        data = {
+            'id': reservation.id,
+            'user': {
+                'username': reservation.user.username,
+                'email': reservation.user.email
+            },
+            'instance': {
+                'name': reservation.instance.name,
+                'instance_id': reservation.instance.instance_id,
+                'instance_type': reservation.instance.instance_type,
+                'gpu_info': None
+            },
+            'start_time': reservation.start_time.isoformat(),
+            'end_time': reservation.end_time.isoformat(),
+            'created_at': reservation.created_at.isoformat(),
+            'status': reservation.status,
+            'purpose': reservation.purpose,
+            'admin_comment': reservation.admin_comment
+        }
+        
+        # GPU 정보가 있는 경우 추가
+        if hasattr(reservation.instance, 'gpu_info') and reservation.instance.gpu_info:
+            data['instance']['gpu_info'] = {
+                'name': reservation.instance.gpu_info.name,
+                'count': reservation.instance.gpu_info.count
+            }
+        
+        return JsonResponse(data)
+    except Reservation.DoesNotExist:
+        return JsonResponse({'error': '예약을 찾을 수 없습니다.'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+
+@csrf_exempt
+@login_required
+def admin_reservation_update_api(request, reservation_id):
+    """
+    관리자용 예약 상태 업데이트 API (AJAX 요청 처리)
+    """
+    if not request.user.is_admin:
+        return JsonResponse({'success': False, 'message': '관리자만 접근할 수 있습니다.'}, status=403)
+    
+    try:
+        reservation = get_object_or_404(Reservation, id=reservation_id)
+        
+        if request.method == 'POST':
+            try:
+                data = json.loads(request.body)
+                status = data.get('status')
+                admin_comment = data.get('admin_comment', '')
+                
+                if status in ['pending', 'approved', 'rejected', 'canceled', 'completed']:
+                    reservation.status = status
+                    reservation.admin_comment = admin_comment
+                    reservation.save()
+                    
+                    return JsonResponse({'success': True, 'message': '예약 상태가 업데이트되었습니다.'})
+                else:
+                    return JsonResponse({'success': False, 'message': '유효하지 않은 상태입니다.'}, status=400)
+                    
+            except json.JSONDecodeError:
+                return JsonResponse({'success': False, 'message': '잘못된 JSON 형식입니다.'}, status=400)
+        else:
+            return JsonResponse({'success': False, 'message': '허용되지 않은 메서드입니다.'}, status=405)
+    
+    except Exception as e:
+        return JsonResponse({'success': False, 'message': str(e)}, status=500)
