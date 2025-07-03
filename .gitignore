@@ -7,3 +7,4 @@ venv_awsgpu
 *.zip
 *.md
 .env
+*.log
