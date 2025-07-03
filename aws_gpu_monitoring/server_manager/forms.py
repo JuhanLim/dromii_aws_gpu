@@ -88,9 +88,9 @@ class ReservationForm(forms.ModelForm):
             if start_time >= end_time:
                 raise forms.ValidationError(_('종료 시간은 시작 시간보다 이후여야 합니다.'))
             
-            # 최대 예약 시간 제한 (예: 24시간)
-            if (end_time - start_time).total_seconds() > 24 * 60 * 60:
-                raise forms.ValidationError(_('최대 예약 시간은 24시간입니다.'))
+            # # 최대 예약 시간 제한 (예: 24시간)
+            # if (end_time - start_time).total_seconds() > 24 * 60 * 60:
+            #     raise forms.ValidationError(_('최대 예약 시간은 24시간입니다.'))
         
         return cleaned_data
 
