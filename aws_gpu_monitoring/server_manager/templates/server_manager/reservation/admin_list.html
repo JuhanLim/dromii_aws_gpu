@@ -83,6 +83,10 @@
                                                         <a href="#" class="btn btn-sm btn-outline-danger update-status" data-id="{{ reservation.id }}" data-status="rejected">
                                                             <i class="fas fa-times"></i> {% trans '거부' %}
                                                         </a>
+                                                    {% elif reservation.status == 'approved' %}
+                                                        <a href="#" class="btn btn-sm btn-outline-secondary update-status" data-id="{{ reservation.id }}" data-status="canceled">
+                                                            <i class="fas fa-ban"></i> {% trans '취소' %}
+                                                        </a>
                                                     {% endif %}
                                                 </div>
                                             </td>
