@@ -1,0 +1,45 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans '예약 승인 업데이트' %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{% trans '예약 승인 업데이트' %}</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="status" class="form-label">{% trans '상태' %}</label>
+                            <select id="status" name="status" class="form-select">
+                                <option value="pending" {% if reservation.status == 'pending' %}selected{% endif %}>{% trans '대기중' %}</option>
+                                <option value="approved" {% if reservation.status == 'approved' %}selected{% endif %}>{% trans '승인됨' %}</option>
+                                <option value="rejected" {% if reservation.status == 'rejected' %}selected{% endif %}>{% trans '거부됨' %}</option>
+                                <option value="canceled" {% if reservation.status == 'canceled' %}selected{% endif %}>{% trans '취소됨' %}</option>
+                                <option value="completed" {% if reservation.status == 'completed' %}selected{% endif %}>{% trans '완료됨' %}</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="admin_comment" class="form-label">{% trans '관리자 코멘트' %}</label>
+                            <textarea id="admin_comment" name="admin_comment" class="form-control" rows="4">{{ reservation.admin_comment }}</textarea>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'admin_reservation_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i> {% trans '목록으로 돌아가기' %}
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> {% trans '저장' %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
