@@ -166,13 +166,13 @@ LOGGING = {
         'error_file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'aws_gpu_monitoring' / 'logs' / 'django_error.log',
+            'filename': BASE_DIR / 'logs' / 'django_error.log',
             'formatter': 'verbose',
         },
         'debug_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'aws_gpu_monitoring' / 'logs' / 'server_manager.log',
+            'filename': BASE_DIR / 'logs' / 'server_manager.log',
             'formatter': 'verbose',
         },
         'console': {

@@ -69,15 +69,42 @@ class EC2Service:
             dict: AWS API 응답
         """
         try:
+            # 먼저 인스턴스 상태 확인
+            logging.info(f"인스턴스 {instance_id} 중지 요청 전 상태 확인")
+            try:
+                status_response = self.ec2_client.describe_instances(InstanceIds=[instance_id])
+                current_state = status_response['Reservations'][0]['Instances'][0]['State']['Name']
+                logging.info(f"인스턴스 {instance_id}의 현재 상태: {current_state}")
+                
+                # 이미 중지된 상태인지 확인
+                if current_state in ['stopped', 'stopping']:
+                    logging.info(f"인스턴스 {instance_id}는 이미 {current_state} 상태입니다.")
+                    self._update_instance_state(instance_id, current_state)
+                    return {
+                        'success': True,
+                        'message': f'인스턴스 {instance_id}는 이미 {current_state} 상태입니다.',
+                        'data': {'State': {'Name': current_state}}
+                    }
+            except Exception as status_error:
+                logging.warning(f"인스턴스 상태 확인 중 오류: {str(status_error)}")
+            
+            # 인스턴스 중지 요청
+            logging.info(f"인스턴스 {instance_id} 중지 요청 시작")
             response = self.ec2_client.stop_instances(InstanceIds=[instance_id])
+            logging.info(f"인스턴스 {instance_id} 중지 요청 응답: {response}")
+            
             # 데이터베이스 업데이트
             self._update_instance_state(instance_id, 'stopping')
+            
             return {
                 'success': True,
                 'message': f'인스턴스 {instance_id} 중지 요청이 성공적으로 처리되었습니다.',
                 'data': response
             }
         except Exception as e:
+            logging.error(f"인스턴스 {instance_id} 중지 중 오류 발생: {str(e)}")
+            import traceback
+            logging.error(f"상세 오류: {traceback.format_exc()}")
             return {
                 'success': False,
                 'message': f'인스턴스 중지 중 오류가 발생했습니다: {str(e)}',
