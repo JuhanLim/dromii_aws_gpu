@@ -53,15 +53,86 @@ def start_instance_job(instance_id, reservation_id):
     """
     예약된 시간에 인스턴스를 시작하는 작업
     """
+    # 작업 시작 로그 - 눈에 띄게 표시
+    logger.info(f"======================================================")
+    logger.info(f"===== 인스턴스 시작 작업 실행 시작 - {timezone.localtime()} =====")
+    logger.info(f"======================================================")
+    
     try:
+        # 현재 시간 로깅 (서버 시간과 UTC 시간 모두 기록)
+        now_local = timezone.localtime()
+        now_utc = timezone.now()
         logger.info(f"예약 {reservation_id}에 따라 인스턴스 {instance_id} 시작 작업 실행")
-        response = ec2_service.start_instance(instance_id)
-        if response['success']:
-            logger.info(f"인스턴스 {instance_id} 시작 성공: {response['message']}")
+        logger.info(f"현재 서버 시간(한국): {now_local.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+        logger.info(f"현재 UTC 시간: {now_utc.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+        
+        # 예약 정보 조회 및 로깅
+        from .models import Reservation
+        try:
+            reservation = Reservation.objects.get(id=reservation_id)
+            logger.info(f"예약 정보 - 시작: {reservation.start_time}, 종료: {reservation.end_time}, 상태: {reservation.status}")
+        except Reservation.DoesNotExist:
+            logger.warning(f"예약 ID {reservation_id}에 해당하는 예약 정보를 찾을 수 없습니다.")
+        
+        # 인스턴스 상태 확인
+        logger.info(f"인스턴스 {instance_id} 상태 확인 중...")
+        status_response = ec2_service.get_instance_status(instance_id)
+        if status_response['success']:
+            current_state = status_response['data']['state']
+            logger.info(f"시작 작업 전 인스턴스 {instance_id}의 현재 상태: {current_state}")
+            
+            # 이미 실행 중이거나 시작 중인 상태인지 확인
+            if current_state in ['running', 'pending']:
+                logger.info(f"인스턴스 {instance_id}는 이미 {current_state} 상태입니다. 시작 작업을 건너뜁니다.")
+                return
+            # 중지 중인 상태인지 확인
+            elif current_state == 'stopping':
+                logger.warning(f"인스턴스 {instance_id}는 현재 {current_state} 상태입니다. 완전히 중지될 때까지 기다려야 합니다.")
+                return
         else:
-            logger.error(f"인스턴스 {instance_id} 시작 실패: {response['message']}")
+            logger.warning(f"인스턴스 상태 확인 실패: {status_response['message']}")
+            # 상태 확인 실패해도 시작 시도
+            logger.info(f"상태 확인 실패했지만 시작 작업 계속 진행합니다.")
+        
+        # 인스턴스 시작 요청 - 여러 번 시도
+        max_attempts = 3
+        for attempt in range(1, max_attempts + 1):
+            logger.info(f"인스턴스 {instance_id} 시작 요청 시작 (시도 {attempt}/{max_attempts})...")
+            response = ec2_service.start_instance(instance_id)
+            logger.info(f"인스턴스 {instance_id} 시작 요청 응답 (시도 {attempt}): {response}")
+            
+            if response['success']:
+                logger.info(f"인스턴스 {instance_id} 시작 요청이 성공적으로 처리되었습니다.")
+                break
+            else:
+                logger.error(f"인스턴스 {instance_id} 시작 요청 실패 (시도 {attempt}): {response['message']}")
+                if attempt < max_attempts:
+                    import time
+                    logger.info(f"3초 후 다시 시도합니다...")
+                    time.sleep(3)
+        
+        # 시작 요청 후 상태 확인
+        try:
+            logger.info(f"시작 요청 후 인스턴스 상태 확인 중...")
+            status_after = ec2_service.get_instance_status(instance_id)
+            if status_after['success']:
+                after_state = status_after['data']['state']
+                logger.info(f"시작 요청 후 인스턴스 {instance_id}의 상태: {after_state}")
+            else:
+                logger.warning(f"시작 요청 후 상태 확인 실패: {status_after['message']}")
+        except Exception as status_error:
+            logger.error(f"시작 요청 후 상태 확인 중 오류: {str(status_error)}")
+            import traceback
+            logger.error(f"상태 확인 오류 상세: {traceback.format_exc()}")
+        
+        logger.info(f"======================================================")
+        logger.info(f"===== 인스턴스 시작 작업 실행 완료 - {timezone.localtime()} =====")
+        logger.info(f"======================================================")
+            
     except Exception as e:
         logger.error(f"인스턴스 {instance_id} 시작 중 오류 발생: {str(e)}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
 
 def stop_instance_job(instance_id, reservation_id):
     """
