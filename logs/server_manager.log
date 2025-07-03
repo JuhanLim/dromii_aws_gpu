@@ -1,7 +1,64 @@
-INFO 2025-07-03 04:11:43,486 scheduler 예약 ID 4 스케줄링 시작
-INFO 2025-07-03 04:11:43,486 scheduler 현재 서버 시간(한국): 2025-07-03 13:11:43 KST+0900
-INFO 2025-07-03 04:11:43,486 scheduler 현재 UTC 시간: 2025-07-03 04:11:43 UTC+0000
-INFO 2025-07-03 04:11:43,486 scheduler 예약 시작 시간: 2025-07-03 04:11:00 UTC+0000
-INFO 2025-07-03 04:11:43,486 scheduler 예약 종료 시간: 2025-07-03 04:13:00 UTC+0000
-INFO 2025-07-03 04:11:43,486 scheduler 인스턴스 i-0fd598907992e2172 시작 시간이 현재보다 과거이므로 시작 작업을 스케줄링하지 않습니다.
-INFO 2025-07-03 04:11:43,487 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-07-03 04:13:00+00:00에 예약되었습니다.
+INFO 2025-07-03 04:47:35,370 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-07-03 13:47:35 KST+0900
+INFO 2025-07-03 04:47:35,370 scheduler 현재 UTC 시간: 2025-07-03 04:47:35 UTC+0000
+INFO 2025-07-03 04:47:35,378 scheduler 활성 예약 조회 결과: 0개 발견
+INFO 2025-07-03 04:47:35,381 scheduler 0개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-07-03 04:47:35,382 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-07-03 04:47:35,426 scheduler 초기화 후 스케줄러에 등록된 작업 수: 0
+INFO 2025-07-03 04:47:35,427 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-07-03 04:47:35,427 apps 스케줄러가 실행 중입니다.
+INFO 2025-07-03 04:47:35,428 apps 등록된 작업 수: 0
+INFO 2025-07-03 04:47:35,473 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-07-03 13:47:35 KST+0900
+INFO 2025-07-03 04:47:35,473 scheduler 현재 UTC 시간: 2025-07-03 04:47:35 UTC+0000
+INFO 2025-07-03 04:47:35,473 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-07-03 13:47:35 KST+0900
+INFO 2025-07-03 04:47:35,474 scheduler 현재 UTC 시간: 2025-07-03 04:47:35 UTC+0000
+INFO 2025-07-03 04:47:35,481 scheduler 활성 예약 조회 결과: 0개 발견
+INFO 2025-07-03 04:47:35,482 scheduler 활성 예약 조회 결과: 0개 발견
+INFO 2025-07-03 04:47:35,483 scheduler 0개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-07-03 04:47:35,484 scheduler 0개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-07-03 04:47:35,484 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-07-03 04:47:35,485 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-07-03 04:47:35,523 scheduler 초기화 후 스케줄러에 등록된 작업 수: 0
+INFO 2025-07-03 04:47:35,523 scheduler 초기화 후 스케줄러에 등록된 작업 수: 0
+INFO 2025-07-03 04:47:35,523 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-07-03 04:47:35,523 apps 스케줄러가 실행 중입니다.
+INFO 2025-07-03 04:47:35,523 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-07-03 04:47:35,523 apps 스케줄러가 실행 중입니다.
+INFO 2025-07-03 04:47:35,524 apps 등록된 작업 수: 0
+INFO 2025-07-03 04:47:35,524 apps 등록된 작업 수: 0
+INFO 2025-07-03 04:48:50,078 scheduler 예약 ID 6 스케줄링 시작
+INFO 2025-07-03 04:48:50,078 scheduler 현재 서버 시간(한국): 2025-07-03 13:48:50 KST+0900
+INFO 2025-07-03 04:48:50,078 scheduler 현재 UTC 시간: 2025-07-03 04:48:50 UTC+0000
+INFO 2025-07-03 04:48:50,078 scheduler 예약 시작 시간: 2025-07-03 04:49:00 UTC+0000
+INFO 2025-07-03 04:48:50,078 scheduler 예약 종료 시간: 2025-07-03 04:50:00 UTC+0000
+INFO 2025-07-03 04:48:50,081 scheduler 인스턴스 i-0fd598907992e2172 시작 작업이 2025-07-03 04:49:00+00:00에 예약되었습니다.
+INFO 2025-07-03 04:48:50,083 scheduler 시작 작업 확인: ID=start_instance_6, 다음 실행 시간=2025-07-03 04:49:00+00:00
+INFO 2025-07-03 04:48:50,085 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-07-03 04:50:00+00:00에 예약되었습니다.
+INFO 2025-07-03 04:48:50,086 scheduler 중지 작업 확인: ID=stop_instance_6, 다음 실행 시간=2025-07-03 04:50:00+00:00
+ERROR 2025-07-03 04:48:50,086 scheduler 중지 작업 스케줄링 중 오류: local variable 'test_stop_job_id' referenced before assignment
+ERROR 2025-07-03 04:48:50,086 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 253, in schedule_reservation_jobs
+    test_job = scheduler.get_job(test_stop_job_id)
+UnboundLocalError: local variable 'test_stop_job_id' referenced before assignment
+
+INFO 2025-07-03 04:49:00,002 scheduler 예약 6에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-07-03 04:49:01,339 scheduler 인스턴스 i-0fd598907992e2172 시작 성공: 인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.
+INFO 2025-07-03 04:49:01,340 scheduler 작업 실행됨: start_instance_6, 실행 시간: 2025-07-03 13:49:01 KST+0900
+INFO 2025-07-03 04:50:00,002 scheduler ======================================================
+INFO 2025-07-03 04:50:00,003 scheduler ===== 인스턴스 중지 작업 실행 시작 - 2025-07-03 13:50:00.003187+09:00 =====
+INFO 2025-07-03 04:50:00,004 scheduler ======================================================
+INFO 2025-07-03 04:50:00,004 scheduler 예약 6에 따라 인스턴스 i-0fd598907992e2172 중지 작업 실행
+INFO 2025-07-03 04:50:00,005 scheduler 현재 서버 시간(한국): 2025-07-03 13:50:00 KST+0900
+INFO 2025-07-03 04:50:00,005 scheduler 현재 UTC 시간: 2025-07-03 04:50:00 UTC+0000
+INFO 2025-07-03 04:50:00,010 scheduler 예약 정보 - 시작: 2025-07-03 04:49:00+00:00, 종료: 2025-07-03 04:50:00+00:00, 상태: approved
+INFO 2025-07-03 04:50:00,010 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-07-03 04:50:00,249 scheduler 중지 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-07-03 04:50:00,249 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 시작 (시도 1/3)...
+INFO 2025-07-03 04:50:01,094 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.', 'data': {'StoppingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 64, 'Name': 'stopping'}, 'PreviousState': {'Code': 16, 'Name': 'running'}}], 'ResponseMetadata': {'RequestId': '179afebe-cf5e-4261-a997-9d31c061ba3e', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '179afebe-cf5e-4261-a997-9d31c061ba3e', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Thu, 03 Jul 2025 04:50:01 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-07-03 04:50:01,095 scheduler 인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.
+INFO 2025-07-03 04:50:01,095 scheduler 중지 요청 후 인스턴스 상태 확인 중...
+INFO 2025-07-03 04:50:01,355 scheduler 중지 요청 후 인스턴스 i-0fd598907992e2172의 상태: stopping
+INFO 2025-07-03 04:50:01,358 scheduler 예약 ID 6 상태를 'completed'로 업데이트했습니다.
+INFO 2025-07-03 04:50:01,358 scheduler ======================================================
+INFO 2025-07-03 04:50:01,358 scheduler ===== 인스턴스 중지 작업 실행 완료 - 2025-07-03 13:50:01.358548+09:00 =====
+INFO 2025-07-03 04:50:01,358 scheduler ======================================================
+INFO 2025-07-03 04:50:01,358 scheduler 작업 실행됨: stop_instance_6, 실행 시간: 2025-07-03 13:50:01 KST+0900
