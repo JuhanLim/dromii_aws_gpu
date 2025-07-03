@@ -33,7 +33,21 @@ def stop_instance_job(instance_id, reservation_id):
     예약된 시간에 인스턴스를 중지하는 작업
     """
     try:
+        # 현재 시간 로깅 (서버 시간과 UTC 시간 모두 기록)
+        now_local = timezone.localtime()
+        now_utc = timezone.now()
         logger.info(f"예약 {reservation_id}에 따라 인스턴스 {instance_id} 중지 작업 실행")
+        logger.info(f"현재 서버 시간(한국): {now_local.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+        logger.info(f"현재 UTC 시간: {now_utc.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+        
+        # 예약 정보 조회 및 로깅
+        from .models import Reservation
+        try:
+            reservation = Reservation.objects.get(id=reservation_id)
+            logger.info(f"예약 정보 - 시작: {reservation.start_time}, 종료: {reservation.end_time}")
+        except Reservation.DoesNotExist:
+            logger.warning(f"예약 ID {reservation_id}에 해당하는 예약 정보를 찾을 수 없습니다.")
+        
         response = ec2_service.stop_instance(instance_id)
         if response['success']:
             logger.info(f"인스턴스 {instance_id} 중지 성공: {response['message']}")
@@ -48,13 +62,22 @@ def schedule_reservation_jobs(reservation):
     """
     if reservation.status != 'approved':
         # 승인된 예약만 스케줄링
+        logger.info(f"예약 ID {reservation.id}는 승인되지 않아 스케줄링하지 않습니다. 현재 상태: {reservation.status}")
         return
     
     instance_id = reservation.instance.instance_id
     reservation_id = reservation.id
     
-    # 현재 시간
+    # 현재 시간 (로컬 및 UTC)
     now = timezone.now()
+    now_local = timezone.localtime(now)
+    
+    # 시간 정보 로깅
+    logger.info(f"예약 ID {reservation_id} 스케줄링 시작")
+    logger.info(f"현재 서버 시간(한국): {now_local.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+    logger.info(f"현재 UTC 시간: {now.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+    logger.info(f"예약 시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+    logger.info(f"예약 종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     
     # 시작 시간이 현재보다 미래인 경우에만 시작 작업 스케줄링
     if reservation.start_time > now:
@@ -69,6 +92,8 @@ def schedule_reservation_jobs(reservation):
             name=f"인스턴스 {instance_id} 시작 (예약 ID: {reservation_id})"
         )
         logger.info(f"인스턴스 {instance_id} 시작 작업이 {reservation.start_time}에 예약되었습니다.")
+    else:
+        logger.info(f"인스턴스 {instance_id} 시작 시간이 현재보다 과거이므로 시작 작업을 스케줄링하지 않습니다.")
     
     # 종료 시간이 현재보다 미래인 경우에만 종료 작업 스케줄링
     if reservation.end_time > now:
@@ -83,6 +108,8 @@ def schedule_reservation_jobs(reservation):
             name=f"인스턴스 {instance_id} 중지 (예약 ID: {reservation_id})"
         )
         logger.info(f"인스턴스 {instance_id} 중지 작업이 {reservation.end_time}에 예약되었습니다.")
+    else:
+        logger.info(f"인스턴스 {instance_id} 종료 시간이 현재보다 과거이므로 중지 작업을 스케줄링하지 않습니다.")
 
 def cancel_reservation_jobs(reservation):
     """

@@ -163,17 +163,33 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
+        'error_file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/app/aws_gpu_monitoring/logs/django_error.log',
+            'filename': BASE_DIR / 'aws_gpu_monitoring' / 'logs' / 'django_error.log',
+            'formatter': 'verbose',
+        },
+        'debug_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'aws_gpu_monitoring' / 'logs' / 'server_manager.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['error_file', 'console'],
             'level': 'ERROR',
+            'propagate': True,
+        },
+        'server_manager': {
+            'handlers': ['debug_file', 'console'],
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
