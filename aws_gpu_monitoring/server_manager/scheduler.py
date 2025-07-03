@@ -210,6 +210,8 @@ def schedule_reservation_jobs(reservation):
     # 종료 시간이 현재보다 미래인 경우에만 종료 작업 스케줄링
     if reservation.end_time > now:
         stop_job_id = f"stop_instance_{reservation_id}"
+        test_stop_job_id = None  # 변수 미리 초기화
+        
         try:
             # 디버깅 모드인 경우에만 테스트 작업 추가 (개발 환경에서만)
             if 'runserver' in sys.argv:
@@ -249,12 +251,13 @@ def schedule_reservation_jobs(reservation):
             else:
                 logger.error(f"중지 작업이 등록되지 않았습니다: {stop_job_id}")
                 
-            # 테스트 작업 확인
-            test_job = scheduler.get_job(test_stop_job_id)
-            if test_job:
-                logger.info(f"테스트 중지 작업 확인: ID={test_job.id}, 다음 실행 시간={test_job.next_run_time}")
-            else:
-                logger.error(f"테스트 중지 작업이 등록되지 않았습니다: {test_stop_job_id}")
+            # 테스트 작업 확인 (테스트 작업이 생성된 경우에만)
+            if test_stop_job_id:
+                test_job = scheduler.get_job(test_stop_job_id)
+                if test_job:
+                    logger.info(f"테스트 중지 작업 확인: ID={test_job.id}, 다음 실행 시간={test_job.next_run_time}")
+                else:
+                    logger.error(f"테스트 중지 작업이 등록되지 않았습니다: {test_stop_job_id}")
         except Exception as e:
             logger.error(f"중지 작업 스케줄링 중 오류: {str(e)}")
             import traceback
