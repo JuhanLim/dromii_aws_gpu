@@ -31,6 +31,6 @@ urlpatterns = [
     path('reservations/<int:reservation_id>/', reservation_views.reservation_detail, name='reservation_detail'),
     path('reservations/<int:reservation_id>/cancel/', reservation_views.cancel_reservation, name='cancel_reservation'),
     path('reservations/admin/', reservation_views.admin_reservation_list, name='admin_reservation_list'),
-    path('reservations/<int:reservation_id>/admin-update/', reservation_views.admin_reservation_update, name='admin_reservation_update'),
+    path('reservations/admin/<int:reservation_id>/update/', reservation_views.admin_reservation_update, name='admin_reservation_update'),
     path('reservations/availability/<str:instance_id>/', reservation_views.instance_availability, name='instance_availability'),
 ]
