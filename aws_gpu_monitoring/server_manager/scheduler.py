@@ -339,24 +339,59 @@ def schedule_reservation_jobs(reservation):
 def cancel_reservation_jobs(reservation):
     """
     예약에 대한 스케줄링된 작업 취소
+    
+    Args:
+        reservation: 취소할 예약 객체
+        
+    Returns:
+        dict: 작업 취소 결과 {'start_job_canceled': bool, 'stop_job_canceled': bool}
     """
     reservation_id = reservation.id
+    instance_id = reservation.instance.instance_id if reservation.instance else "알 수 없음"
+    result = {'start_job_canceled': False, 'stop_job_canceled': False}
+    
+    logger.info(f"예약 ID {reservation_id}, 인스턴스 ID {instance_id}에 대한 스케줄링된 작업 취소 시작")
     
     # 시작 작업 취소
     start_job_id = f"start_instance_{reservation_id}"
     try:
-        scheduler.remove_job(start_job_id)
-        logger.info(f"예약 {reservation_id}에 대한 시작 작업이 취소되었습니다.")
+        # 작업이 존재하는지 확인
+        job = scheduler.get_job(start_job_id)
+        if job:
+            next_run_time = job.next_run_time.strftime('%Y-%m-%d %H:%M:%S') if job.next_run_time else "None"
+            logger.info(f"예약 {reservation_id}의 시작 작업 발견. 다음 실행 시간: {next_run_time}")
+            
+            scheduler.remove_job(start_job_id)
+            logger.info(f"예약 {reservation_id}에 대한 시작 작업이 성공적으로 취소되었습니다.")
+            result['start_job_canceled'] = True
+        else:
+            logger.info(f"예약 {reservation_id}에 대한 시작 작업이 스케줄러에 존재하지 않습니다.")
     except Exception as e:
-        logger.debug(f"예약 {reservation_id}에 대한 시작 작업 취소 실패: {str(e)}")
+        logger.error(f"예약 {reservation_id}에 대한 시작 작업 취소 실패: {str(e)}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
     
     # 종료 작업 취소
     stop_job_id = f"stop_instance_{reservation_id}"
     try:
-        scheduler.remove_job(stop_job_id)
-        logger.info(f"예약 {reservation_id}에 대한 종료 작업이 취소되었습니다.")
+        # 작업이 존재하는지 확인
+        job = scheduler.get_job(stop_job_id)
+        if job:
+            next_run_time = job.next_run_time.strftime('%Y-%m-%d %H:%M:%S') if job.next_run_time else "None"
+            logger.info(f"예약 {reservation_id}의 종료 작업 발견. 다음 실행 시간: {next_run_time}")
+            
+            scheduler.remove_job(stop_job_id)
+            logger.info(f"예약 {reservation_id}에 대한 종료 작업이 성공적으로 취소되었습니다.")
+            result['stop_job_canceled'] = True
+        else:
+            logger.info(f"예약 {reservation_id}에 대한 종료 작업이 스케줄러에 존재하지 않습니다.")
     except Exception as e:
-        logger.debug(f"예약 {reservation_id}에 대한 종료 작업 취소 실패: {str(e)}")
+        logger.error(f"예약 {reservation_id}에 대한 종료 작업 취소 실패: {str(e)}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
+    
+    logger.info(f"예약 ID {reservation_id} 작업 취소 결과: {result}")
+    return result
 
 def initialize_scheduler():
     """

@@ -67,20 +67,35 @@ def cancel_reservation(request, reservation_id):
     """
     예약 취소
     """
-    reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+    # 관리자인 경우 모든 예약 취소 가능, 일반 사용자는 자신의 예약만 취소 가능
+    if request.user.is_admin:
+        reservation = get_object_or_404(Reservation, id=reservation_id)
+    else:
+        reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
     
-    if reservation.status == 'approved' and reservation.is_active():
-        messages.error(request, _('현재 사용 중인 예약은 취소할 수 없습니다.'))
-        return redirect('reservation_list')
-    
+    # 예약 상태 변경 및 저장
+    previous_status = reservation.status
     reservation.status = 'canceled'
     reservation.save()
     
-    # 예약 취소 시 스케줄링된 작업 취소
-    cancel_reservation_jobs(reservation)
+    # 승인된 예약인 경우에만 스케줄링된 작업 취소
+    if previous_status == 'approved':
+        try:
+            logger.info(f"예약 ID {reservation_id} 취소로 인한 스케줄링된 작업 취소 시작")
+            cancel_result = cancel_reservation_jobs(reservation)
+            logger.info(f"예약 ID {reservation_id} 취소로 인한 스케줄링된 작업 취소 완료: {cancel_result}")
+        except Exception as e:
+            logger.error(f"예약 ID {reservation_id} 취소 중 오류 발생: {str(e)}")
+            import traceback
+            logger.error(f"상세 오류: {traceback.format_exc()}")
     
     messages.success(request, _('예약이 취소되었습니다.'))
-    return redirect('reservation_list')
+    
+    # 관리자가 취소한 경우 관리자 페이지로, 일반 사용자가 취소한 경우 예약 목록으로 리다이렉트
+    if request.user.is_admin and 'admin' in request.META.get('HTTP_REFERER', ''):
+        return redirect('admin_reservation_list')
+    else:
+        return redirect('reservation_list')
 
 
 @login_required
@@ -129,6 +144,7 @@ def admin_reservation_update(request, reservation_id):
         return redirect('dashboard')
     
     reservation = get_object_or_404(Reservation, id=reservation_id)
+    logger.info(f"관리자 {request.user.username}가 예약 ID {reservation_id} 상태 업데이트 시작")
     
     if request.method == 'POST':
         form = ReservationAdminForm(request.POST, instance=reservation)
@@ -136,12 +152,33 @@ def admin_reservation_update(request, reservation_id):
             old_status = reservation.status
             updated_reservation = form.save()
             
+            logger.info(f"예약 ID {reservation_id} 상태 변경: {old_status} -> {updated_reservation.status}")
+            
             # 상태가 승인됨으로 변경된 경우 스케줄러에 작업 추가
             if old_status != 'approved' and updated_reservation.status == 'approved':
-                schedule_reservation_jobs(updated_reservation)
+                try:
+                    logger.info(f"예약 ID {reservation_id} 승인으로 인한 스케줄링 작업 추가 시작")
+                    schedule_reservation_jobs(updated_reservation)
+                    logger.info(f"예약 ID {reservation_id} 승인으로 인한 스케줄링 작업 추가 완료")
+                except Exception as e:
+                    logger.error(f"예약 ID {reservation_id} 승인 중 오류 발생: {str(e)}")
+                    import traceback
+                    logger.error(f"상세 오류: {traceback.format_exc()}")
+                    messages.error(request, _('예약 스케줄링 중 오류가 발생했습니다.'))
+            
             # 상태가 승인됨에서 다른 상태로 변경된 경우 스케줄러에서 작업 제거
             elif old_status == 'approved' and updated_reservation.status != 'approved':
-                cancel_reservation_jobs(updated_reservation)
+                try:
+                    logger.info(f"예약 ID {reservation_id} 상태 변경으로 인한 스케줄링된 작업 취소 시작")
+                    
+                    # 서버 상태는 변경하지 않고 스케줄링된 작업만 취소
+                    cancel_result = cancel_reservation_jobs(updated_reservation)
+                    logger.info(f"예약 ID {reservation_id} 상태 변경으로 인한 스케줄링된 작업 취소 완료: {cancel_result}")
+                except Exception as e:
+                    logger.error(f"예약 ID {reservation_id} 상태 변경 중 오류 발생: {str(e)}")
+                    import traceback
+                    logger.error(f"상세 오류: {traceback.format_exc()}")
+                    messages.error(request, _('예약 상태 변경 중 오류가 발생했습니다.'))
             
             messages.success(request, _('예약 상태가 업데이트되었습니다.'))
             return redirect('admin_reservation_list')
