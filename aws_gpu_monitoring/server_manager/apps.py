@@ -34,6 +34,14 @@ class ServerManagerConfig(AppConfig):
             
         # 스케줄러 초기화 및 시작
         try:
+            # 먼저 django_apscheduler 테이블이 있는지 확인
+            from django.db import connection
+            tables = connection.introspection.table_names()
+            if 'django_apscheduler_djangojob' not in tables:
+                logger.warning("django_apscheduler 테이블이 없습니다. 마이그레이션이 필요합니다.")
+                logger.warning("python manage.py migrate django_apscheduler 명령을 실행하세요.")
+                return
+                
             from .scheduler import initialize_scheduler, scheduler
             
             # 스케줄러가 이미 실행 중인지 확인
@@ -47,10 +55,16 @@ class ServerManagerConfig(AppConfig):
                 # 스케줄러 상태 확인
                 if scheduler.running:
                     logger.info("스케줄러가 실행 중입니다.")
-                    jobs = scheduler.get_jobs()
-                    logger.info(f"등록된 작업 수: {len(jobs)}")
-                    for job in jobs:
-                        logger.info(f"작업: {job.id}, 다음 실행: {job.next_run_time}")
+                    try:
+                        jobs = scheduler.get_jobs()
+                        logger.info(f"등록된 작업 수: {len(jobs)}")
+                        for job in jobs:
+                            if hasattr(job, 'next_run_time'):
+                                logger.info(f"작업: {job.id}, 다음 실행: {job.next_run_time}")
+                            else:
+                                logger.info(f"작업: {job.id}, 다음 실행: 알 수 없음")
+                    except Exception as job_error:
+                        logger.error(f"작업 정보 확인 중 오류: {str(job_error)}")
                 else:
                     logger.error("스케줄러가 초기화되었지만 실행 중이 아닙니다.")
         except Exception as e:

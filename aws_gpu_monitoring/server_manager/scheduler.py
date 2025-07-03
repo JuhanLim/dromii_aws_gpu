@@ -211,19 +211,24 @@ def schedule_reservation_jobs(reservation):
     if reservation.end_time > now:
         stop_job_id = f"stop_instance_{reservation_id}"
         try:
-            # 현재 시간으로부터 10초 후에 즉시 실행하는 테스트 작업 추가 (디버깅용)
-            test_stop_job_id = f"test_stop_instance_{reservation_id}"
-            test_run_date = now + datetime.timedelta(seconds=10)
-            scheduler.add_job(
-                stop_instance_job,
-                trigger='date',
-                run_date=test_run_date,
-                id=test_stop_job_id,
-                replace_existing=True,
-                args=[instance_id, reservation_id],
-                name=f"인스턴스 {instance_id} 테스트 중지 (예약 ID: {reservation_id})"
-            )
-            logger.info(f"인스턴스 {instance_id} 테스트 중지 작업이 {test_run_date}에 예약되었습니다.")
+            # 디버깅 모드인 경우에만 테스트 작업 추가 (개발 환경에서만)
+            if 'runserver' in sys.argv:
+                # 현재 시간으로부터 10초 후에 즉시 실행하는 테스트 작업 추가 (디버깅용)
+                test_stop_job_id = f"test_stop_instance_{reservation_id}"
+                test_run_date = now + datetime.timedelta(seconds=10)
+                try:
+                    scheduler.add_job(
+                        stop_instance_job,
+                        trigger='date',
+                        run_date=test_run_date,
+                        id=test_stop_job_id,
+                        replace_existing=True,
+                        args=[instance_id, reservation_id],
+                        name=f"인스턴스 {instance_id} 테스트 중지 (예약 ID: {reservation_id})"
+                    )
+                    logger.info(f"인스턴스 {instance_id} 테스트 중지 작업이 {test_run_date}에 예약되었습니다.")
+                except Exception as test_error:
+                    logger.error(f"테스트 중지 작업 스케줄링 중 오류: {str(test_error)}")
             
             # 실제 종료 작업 예약
             scheduler.add_job(
@@ -294,24 +299,35 @@ def initialize_scheduler():
     # 스케줄러 상태 확인
     if scheduler.running:
         logger.info("스케줄러가 이미 실행 중입니다. 기존 작업을 확인합니다.")
-        jobs = scheduler.get_jobs()
-        logger.info(f"현재 스케줄러에 등록된 작업 수: {len(jobs)}")
-        for job in jobs:
-            logger.info(f"작업 ID: {job.id}, 다음 실행 시간: {job.next_run_time}")
+        try:
+            jobs = scheduler.get_jobs()
+            logger.info(f"현재 스케줄러에 등록된 작업 수: {len(jobs)}")
+            for job in jobs:
+                if hasattr(job, 'next_run_time'):
+                    logger.info(f"작업 ID: {job.id}, 다음 실행 시간: {job.next_run_time}")
+                else:
+                    logger.info(f"작업 ID: {job.id}, 다음 실행 시간: 알 수 없음")
+        except Exception as e:
+            logger.error(f"작업 목록 확인 중 오류: {str(e)}")
     
     # 승인된 예약 중 종료 시간이 현재보다 미래인 것만 로드
-    active_reservations = Reservation.objects.filter(
-        status='approved',
-        end_time__gt=now
-    )
-    
-    logger.info(f"활성 예약 조회 결과: {active_reservations.count()}개 발견")
-    
-    for reservation in active_reservations:
-        logger.info(f"예약 ID {reservation.id} 스케줄링 시작 (인스턴스: {reservation.instance.instance_id})")
-        schedule_reservation_jobs(reservation)
-    
-    logger.info(f"{active_reservations.count()}개의 활성 예약이 스케줄러에 로드되었습니다.")
+    try:
+        active_reservations = Reservation.objects.filter(
+            status='approved',
+            end_time__gt=now
+        )
+        
+        logger.info(f"활성 예약 조회 결과: {active_reservations.count()}개 발견")
+        
+        for reservation in active_reservations:
+            logger.info(f"예약 ID {reservation.id} 스케줄링 시작 (인스턴스: {reservation.instance.instance_id})")
+            schedule_reservation_jobs(reservation)
+        
+        logger.info(f"{active_reservations.count()}개의 활성 예약이 스케줄러에 로드되었습니다.")
+    except Exception as e:
+        logger.error(f"활성 예약 로드 중 오류: {str(e)}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
     
     # 스케줄러 시작
     if not scheduler.running:
@@ -326,7 +342,15 @@ def initialize_scheduler():
         logger.info("스케줄러가 이미 실행 중입니다. 새로 시작하지 않습니다.")
     
     # 등록된 작업 확인
-    jobs_after = scheduler.get_jobs()
-    logger.info(f"초기화 후 스케줄러에 등록된 작업 수: {len(jobs_after)}")
-    for job in jobs_after:
-        logger.info(f"작업 ID: {job.id}, 다음 실행 시간: {job.next_run_time}")
+    try:
+        jobs_after = scheduler.get_jobs()
+        logger.info(f"초기화 후 스케줄러에 등록된 작업 수: {len(jobs_after)}")
+        for job in jobs_after:
+            if hasattr(job, 'next_run_time'):
+                logger.info(f"작업 ID: {job.id}, 다음 실행 시간: {job.next_run_time}")
+            else:
+                logger.info(f"작업 ID: {job.id}, 다음 실행 시간: 알 수 없음")
+    except Exception as e:
+        logger.error(f"작업 목록 확인 중 오류: {str(e)}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
