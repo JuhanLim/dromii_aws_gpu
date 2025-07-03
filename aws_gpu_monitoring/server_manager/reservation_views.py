@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Instance, Reservation
 from .forms import ReservationForm, ReservationAdminForm
+from .scheduler import schedule_reservation_jobs, cancel_reservation_jobs
 
 
 @login_required
@@ -75,6 +76,9 @@ def cancel_reservation(request, reservation_id):
     reservation.status = 'canceled'
     reservation.save()
     
+    # 예약 취소 시 스케줄링된 작업 취소
+    cancel_reservation_jobs(reservation)
+    
     messages.success(request, _('예약이 취소되었습니다.'))
     return redirect('reservation_list')
 
@@ -129,7 +133,16 @@ def admin_reservation_update(request, reservation_id):
     if request.method == 'POST':
         form = ReservationAdminForm(request.POST, instance=reservation)
         if form.is_valid():
-            form.save()
+            old_status = reservation.status
+            updated_reservation = form.save()
+            
+            # 상태가 승인됨으로 변경된 경우 스케줄러에 작업 추가
+            if old_status != 'approved' and updated_reservation.status == 'approved':
+                schedule_reservation_jobs(updated_reservation)
+            # 상태가 승인됨에서 다른 상태로 변경된 경우 스케줄러에서 작업 제거
+            elif old_status == 'approved' and updated_reservation.status != 'approved':
+                cancel_reservation_jobs(updated_reservation)
+            
             messages.success(request, _('예약 상태가 업데이트되었습니다.'))
             return redirect('admin_reservation_list')
     else:
@@ -227,9 +240,17 @@ def admin_reservation_update_api(request, reservation_id):
                 admin_comment = data.get('admin_comment', '')
                 
                 if status in ['pending', 'approved', 'rejected', 'canceled', 'completed']:
+                    old_status = reservation.status
                     reservation.status = status
                     reservation.admin_comment = admin_comment
                     reservation.save()
+                    
+                    # 상태가 승인됨으로 변경된 경우 스케줄러에 작업 추가
+                    if old_status != 'approved' and status == 'approved':
+                        schedule_reservation_jobs(reservation)
+                    # 상태가 승인됨에서 다른 상태로 변경된 경우 스케줄러에서 작업 제거
+                    elif old_status == 'approved' and status != 'approved':
+                        cancel_reservation_jobs(reservation)
                     
                     return JsonResponse({'success': True, 'message': '예약 상태가 업데이트되었습니다.'})
                 else:
