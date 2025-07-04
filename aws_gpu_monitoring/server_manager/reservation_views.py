@@ -198,18 +198,24 @@ def instance_availability(request, instance_id):
     """
     instance = get_object_or_404(Instance, instance_id=instance_id)
     
-    # 오늘부터 30일 이내의 승인된 예약 조회
+    # 오늘부터 30일 이내의 모든 예약 조회
     now = timezone.now()
     end_date = now + timezone.timedelta(days=30)
     
     reservations = Reservation.objects.filter(
         instance=instance,
-        status='approved',
         start_time__gte=now,
         start_time__lte=end_date
-    ).values('start_time', 'end_time', 'user__username')
+    ).values('id', 'start_time', 'end_time', 'user__username', 'status', 'purpose')
     
-    return JsonResponse(list(reservations), safe=False)
+    reservation_list = list(reservations)
+    
+    # JSON 직렬화 가능한 형태로 변환
+    for reservation in reservation_list:
+        reservation['start_time'] = reservation['start_time'].isoformat()
+        reservation['end_time'] = reservation['end_time'].isoformat()
+    
+    return JsonResponse({'reservations': reservation_list}, safe=False)
 
 
 @login_required

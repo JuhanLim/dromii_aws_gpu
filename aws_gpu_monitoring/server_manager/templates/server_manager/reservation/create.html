@@ -126,13 +126,30 @@
     .fc-event {
         cursor: pointer;
     }
-    .fc-event-reserved {
-        background-color: #dc3545;
+    .fc-event-approved {
+        background-color: #198754; /* 승인됨 - 초록색 */
+        border-color: #198754;
+    }
+    .fc-event-pending {
+        background-color: #ffc107; /* 대기 중 - 노란색 */
+        border-color: #ffc107;
+    }
+    .fc-event-rejected {
+        background-color: #dc3545; /* 거부됨 - 빨간색 */
         border-color: #dc3545;
     }
-    .fc-event-available {
-        background-color: #198754;
-        border-color: #198754;
+    .fc-event-cancelled {
+        background-color: #6c757d; /* 취소됨 - 회색 */
+        border-color: #6c757d;
+    }
+    .fc-tooltip {
+        position: absolute;
+        z-index: 10000;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 </style>
 {% endblock %}
@@ -142,6 +159,36 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('availabilityCalendar');
+        
+        // 상태 텍스트 변환 함수
+        function getStatusText(status) {
+            switch(status) {
+                case 'approved': return '승인됨';
+                case 'pending': return '대기 중';
+                case 'rejected': return '거부됨';
+                case 'cancelled': return '취소됨';
+                default: return status;
+            }
+        }
+        
+        // 날짜 형식 변환 함수
+        function formatDateTime(date) {
+            if (!date) return '';
+            return date.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+        }
+        
+        // 툴팁 위치 설정 함수
+        function positionTooltip(tooltip, event) {
+            tooltip.style.left = (event.pageX + 10) + 'px';
+            tooltip.style.top = (event.pageY + 10) + 'px';
+        }
         
         if (!calendarEl) return;
         
@@ -173,11 +220,32 @@
                         // 예약된 시간 표시
                         if (response.reservations) {
                             response.reservations.forEach(function(reservation) {
+                                // 상태에 따른 클래스 및 제목 설정
+                                let statusClass = 'fc-event-pending';
+                                let statusText = '대기 중';
+                                
+                                if (reservation.status === 'approved') {
+                                    statusClass = 'fc-event-approved';
+                                    statusText = '승인됨';
+                                } else if (reservation.status === 'rejected') {
+                                    statusClass = 'fc-event-rejected';
+                                    statusText = '거부됨';
+                                } else if (reservation.status === 'cancelled') {
+                                    statusClass = 'fc-event-cancelled';
+                                    statusText = '취소됨';
+                                }
+                                
                                 events.push({
-                                    title: '예약됨',
+                                    id: reservation.id,
+                                    title: `[${statusText}] ${reservation.user__username}`,
                                     start: reservation.start_time,
                                     end: reservation.end_time,
-                                    className: 'fc-event-reserved'
+                                    className: statusClass,
+                                    extendedProps: {
+                                        status: reservation.status,
+                                        username: reservation.user__username,
+                                        purpose: reservation.purpose
+                                    }
                                 });
                             });
                         }
@@ -187,6 +255,38 @@
                     error: function(error) {
                         console.error('예약 정보를 가져오는 중 오류가 발생했습니다:', error);
                         failureCallback(error);
+                    }
+                });
+            },
+            eventClick: function(info) {
+                // 예약 정보 클릭 시 상세 정보 표시
+                const event = info.event;
+                const props = event.extendedProps;
+                
+                // 툴팁 생성
+                let tooltip = document.createElement('div');
+                tooltip.className = 'fc-tooltip';
+                tooltip.innerHTML = `
+                    <h6>예약 정보</h6>
+                    <p><strong>사용자:</strong> ${props.username}</p>
+                    <p><strong>상태:</strong> ${getStatusText(props.status)}</p>
+                    <p><strong>시작:</strong> ${formatDateTime(event.start)}</p>
+                    <p><strong>종료:</strong> ${formatDateTime(event.end)}</p>
+                    <p><strong>목적:</strong> ${props.purpose || '정보 없음'}</p>
+                `;
+                
+                document.body.appendChild(tooltip);
+                
+                // 마우스 위치에 툴팁 표시
+                positionTooltip(tooltip, info.jsEvent);
+                
+                // 클릭 이벤트 외부 클릭 시 툴팁 제거
+                document.addEventListener('click', function hideTooltip(e) {
+                    if (!tooltip.contains(e.target)) {
+                        if (document.body.contains(tooltip)) {
+                            document.body.removeChild(tooltip);
+                        }
+                        document.removeEventListener('click', hideTooltip);
                     }
                 });
             }
