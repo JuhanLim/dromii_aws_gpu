@@ -145,11 +145,28 @@
     .fc-tooltip {
         position: absolute;
         z-index: 10000;
-        padding: 10px;
+        padding: 12px;
         background-color: #fff;
         border: 1px solid #ddd;
-        border-radius: 4px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        border-radius: 6px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+        font-size: 14px;
+        min-width: 250px;
+        max-width: 350px;
+        transition: opacity 0.2s;
+    }
+    .fc-tooltip h6 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-weight: bold;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+    }
+    .fc-tooltip p {
+        margin-bottom: 6px;
+    }
+    .fc-tooltip p:last-child {
+        margin-bottom: 0;
     }
 </style>
 {% endblock %}
@@ -239,14 +256,15 @@
                                 
                                 events.push({
                                     id: reservation.id,
-                                    title: `[${statusText}] ${reservation.user__username}`,
+                                    title: '', // 제목 없이 색상으로만 표시
                                     start: reservation.start_time,
                                     end: reservation.end_time,
                                     className: statusClass,
                                     extendedProps: {
                                         status: reservation.status,
                                         username: reservation.user__username,
-                                        purpose: reservation.purpose
+                                        purpose: reservation.purpose,
+                                        statusText: statusText
                                     }
                                 });
                             });
@@ -260,9 +278,16 @@
                     }
                 });
             },
-            eventClick: function(info) {
-                // 예약 정보 클릭 시 상세 정보 표시
-                const event = info.event;
+            // 현재 표시된 툴팁
+            let currentTooltip = null;
+            
+            // 툴팁 생성 함수
+            function createTooltip(event, jsEvent) {
+                // 기존 툴팁 제거
+                if (currentTooltip && document.body.contains(currentTooltip)) {
+                    document.body.removeChild(currentTooltip);
+                }
+                
                 const props = event.extendedProps;
                 
                 // 툴팁 생성
@@ -271,7 +296,7 @@
                 tooltip.innerHTML = `
                     <h6>예약 정보</h6>
                     <p><strong>사용자:</strong> ${props.username}</p>
-                    <p><strong>상태:</strong> ${getStatusText(props.status)}</p>
+                    <p><strong>상태:</strong> ${props.statusText}</p>
                     <p><strong>시작:</strong> ${formatDateTime(event.start)}</p>
                     <p><strong>종료:</strong> ${formatDateTime(event.end)}</p>
                     <p><strong>목적:</strong> ${props.purpose || '정보 없음'}</p>
@@ -280,13 +305,34 @@
                 document.body.appendChild(tooltip);
                 
                 // 마우스 위치에 툴팁 표시
-                positionTooltip(tooltip, info.jsEvent);
+                positionTooltip(tooltip, jsEvent);
                 
-                // 클릭 이벤트 외부 클릭 시 툴팁 제거
+                return tooltip;
+            }
+            
+            // 마우스 호버 시 툴팁 표시
+            eventMouseEnter: function(info) {
+                currentTooltip = createTooltip(info.event, info.jsEvent);
+            },
+            
+            // 마우스가 벗어나면 툴팁 제거
+            eventMouseLeave: function() {
+                if (currentTooltip && document.body.contains(currentTooltip)) {
+                    document.body.removeChild(currentTooltip);
+                    currentTooltip = null;
+                }
+            },
+            
+            // 클릭 시에도 툴팁 표시 (모바일 지원)
+            eventClick: function(info) {
+                currentTooltip = createTooltip(info.event, info.jsEvent);
+                
+                // 다른 곳 클릭 시 툴팁 제거
                 document.addEventListener('click', function hideTooltip(e) {
-                    if (!tooltip.contains(e.target)) {
-                        if (document.body.contains(tooltip)) {
-                            document.body.removeChild(tooltip);
+                    if (currentTooltip && !currentTooltip.contains(e.target)) {
+                        if (document.body.contains(currentTooltip)) {
+                            document.body.removeChild(currentTooltip);
+                            currentTooltip = null;
                         }
                         document.removeEventListener('click', hideTooltip);
                     }
