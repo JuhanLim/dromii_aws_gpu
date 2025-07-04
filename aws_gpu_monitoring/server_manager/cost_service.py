@@ -4,6 +4,7 @@ import datetime
 from decimal import Decimal
 import requests
 from django.conf import settings
+from decouple import config
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +13,12 @@ def get_cost_explorer_client():
     AWS Cost Explorer 클라이언트 생성
     """
     try:
-        return boto3.client('ce', region_name='us-east-1')
+        return boto3.client(
+            'ce', 
+            region_name=config('AWS_DEFAULT_REGION', default='us-east-1'),
+            aws_access_key_id=config('AWS_ACCESS_KEY_ID'),
+            aws_secret_access_key=config('AWS_SECRET_ACCESS_KEY')
+        )
     except Exception as e:
         logger.error(f"Cost Explorer 클라이언트 생성 중 오류 발생: {str(e)}")
         return None
