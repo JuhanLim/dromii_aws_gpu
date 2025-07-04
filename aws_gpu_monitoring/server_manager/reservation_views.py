@@ -215,7 +215,7 @@ def instance_availability(request, instance_id):
         reservation['start_time'] = reservation['start_time'].isoformat()
         reservation['end_time'] = reservation['end_time'].isoformat()
     
-    return JsonResponse({'reservations': reservation_list}, safe=False)
+    return JsonResponse({'reservations': reservation_list})
 
 
 @login_required
