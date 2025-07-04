@@ -1,0 +1,462 @@
+{% extends 'server_manager/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'AWS 비용 대시보드' %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+<style>
+    .cost-card {
+        transition: transform 0.3s;
+    }
+    .cost-card:hover {
+        transform: translateY(-5px);
+    }
+    .currency-usd {
+        color: #28a745;
+    }
+    .currency-krw {
+        color: #007bff;
+    }
+    .chart-container {
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .table-responsive {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <h1 class="h3 mb-4">{% trans 'AWS 비용 대시보드' %}</h1>
+    
+    {% if error %}
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> {{ error }}
+    </div>
+    {% endif %}
+    
+    <!-- 날짜 범위 선택 -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">{% trans '날짜 범위 선택' %}</h6>
+        </div>
+        <div class="card-body">
+            <form method="post" id="date-range-form">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" id="date-range" name="date-range" class="form-control" />
+                            <input type="hidden" id="start_date" name="start_date" value="{{ start_date }}" />
+                            <input type="hidden" id="end_date" name="end_date" value="{{ end_date }}" />
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> {% trans '조회' %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    {% if costs and not costs.error %}
+    <!-- 요약 정보 -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-left-primary shadow h-100 py-2 cost-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {% trans '총 비용 (USD)' %}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800 currency-usd">
+                                ${{ costs.total_usd|floatformat:2 }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-left-success shadow h-100 py-2 cost-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                {% trans '총 비용 (KRW)' %}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800 currency-krw">
+                                ₩{{ costs.total_krw|floatformat:0|intcomma }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-won-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-left-info shadow h-100 py-2 cost-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                {% trans '적용 환율' %}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                1 USD = ₩{{ costs.exchange_rate|floatformat:2 }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-exchange-alt fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-left-warning shadow h-100 py-2 cost-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                {% trans '조회 기간' %}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ costs.time_periods|length }} {% trans '일' %}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 차트 -->
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">{% trans '일별 비용 추이' %}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="dailyCostChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">{% trans '서비스별 비용 분포' %}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="servicePieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 서비스별 비용 테이블 -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">{% trans '서비스별 비용 상세' %}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="serviceTable" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>{% trans '서비스' %}</th>
+                                    <th>{% trans '비용 (USD)' %}</th>
+                                    <th>{% trans '비용 (KRW)' %}</th>
+                                    <th>{% trans '비율' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for service_name, service_data in costs.services.items %}
+                                <tr>
+                                    <td>{{ service_name }}</td>
+                                    <td class="text-right currency-usd">${{ service_data.total_usd|floatformat:2 }}</td>
+                                    <td class="text-right currency-krw">₩{{ service_data.total_krw|floatformat:0|intcomma }}</td>
+                                    <td class="text-right">
+                                        {% if costs.total_usd > 0 %}
+                                            {{ service_data.total_usd|div:costs.total_usd|mul:100|floatformat:1 }}%
+                                        {% else %}
+                                            0%
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- EC2 인스턴스별 비용 -->
+    {% if instance_costs and not instance_costs.error %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">{% trans 'EC2 인스턴스별 비용' %}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="instanceCostChart"></canvas>
+                    </div>
+                    <div class="table-responsive mt-4">
+                        <table class="table table-bordered table-hover" id="instanceTable" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>{% trans '인스턴스 유형' %}</th>
+                                    <th>{% trans '비용 (USD)' %}</th>
+                                    <th>{% trans '비용 (KRW)' %}</th>
+                                    <th>{% trans '비율' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for instance_type, instance_data in instance_costs.instances.items %}
+                                <tr>
+                                    <td>{{ instance_type }}</td>
+                                    <td class="text-right currency-usd">${{ instance_data.total_usd|floatformat:2 }}</td>
+                                    <td class="text-right currency-krw">₩{{ instance_data.total_krw|floatformat:0|intcomma }}</td>
+                                    <td class="text-right">
+                                        {% if instance_costs.total_usd > 0 %}
+                                            {{ instance_data.total_usd|div:instance_costs.total_usd|mul:100|floatformat:1 }}%
+                                        {% else %}
+                                            0%
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% else %}
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> {% trans '비용 정보를 불러올 수 없습니다. AWS Cost Explorer API 설정을 확인하세요.' %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+$(document).ready(function() {
+    // 날짜 범위 선택기 초기화
+    $('#date-range').daterangepicker({
+        startDate: moment('{{ start_date }}'),
+        endDate: moment('{{ end_date }}'),
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    }, function(start, end) {
+        $('#start_date').val(start.format('YYYY-MM-DD'));
+        $('#end_date').val(end.format('YYYY-MM-DD'));
+    });
+    
+    {% if costs and not costs.error %}
+    // 색상 배열
+    const colors = [
+        '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b', '#5a5c69',
+        '#6610f2', '#fd7e14', '#20c997', '#6f42c1', '#d63384', '#fd7e14'
+    ];
+    
+    // 일별 비용 차트
+    const dailyLabels = [];
+    const dailyData = [];
+    
+    {% for period in costs.time_periods %}
+        dailyLabels.push('{{ period.start }}');
+        dailyData.push({{ period.total_usd|floatformat:2 }});
+    {% endfor %}
+    
+    const dailyCostCtx = document.getElementById('dailyCostChart').getContext('2d');
+    new Chart(dailyCostCtx, {
+        type: 'line',
+        data: {
+            labels: dailyLabels,
+            datasets: [{
+                label: '{% trans '일별 비용 (USD)' %}',
+                data: dailyData,
+                backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                borderColor: 'rgba(78, 115, 223, 1)',
+                pointRadius: 3,
+                pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+                pointBorderColor: 'rgba(78, 115, 223, 1)',
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
+                pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
+                pointHitRadius: 10,
+                pointBorderWidth: 2,
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value;
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return '$' + context.raw.toFixed(2) + ' (₩' + (context.raw * {{ costs.exchange_rate }}).toFixed(0) + ')';
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // 서비스별 비용 차트
+    const serviceLabels = [];
+    const serviceData = [];
+    const serviceColors = [];
+    
+    let i = 0;
+    {% for service_name, service_data in costs.services.items %}
+        serviceLabels.push('{{ service_name }}');
+        serviceData.push({{ service_data.total_usd|floatformat:2 }});
+        serviceColors.push(colors[i % colors.length]);
+        i++;
+    {% endfor %}
+    
+    const servicePieCtx = document.getElementById('servicePieChart').getContext('2d');
+    new Chart(servicePieCtx, {
+        type: 'pie',
+        data: {
+            labels: serviceLabels,
+            datasets: [{
+                data: serviceData,
+                backgroundColor: serviceColors,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return '$' + value.toFixed(2) + ' (' + percentage + '%)';
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    {% if instance_costs and not instance_costs.error %}
+    // 인스턴스별 비용 차트
+    const instanceLabels = [];
+    const instanceData = [];
+    const instanceColors = [];
+    
+    let j = 0;
+    {% for instance_type, instance_data in instance_costs.instances.items %}
+        instanceLabels.push('{{ instance_type }}');
+        instanceData.push({{ instance_data.total_usd|floatformat:2 }});
+        instanceColors.push(colors[j % colors.length]);
+        j++;
+    {% endfor %}
+    
+    const instanceCostCtx = document.getElementById('instanceCostChart').getContext('2d');
+    new Chart(instanceCostCtx, {
+        type: 'bar',
+        data: {
+            labels: instanceLabels,
+            datasets: [{
+                label: '{% trans '인스턴스별 비용 (USD)' %}',
+                data: instanceData,
+                backgroundColor: instanceColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value;
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return '$' + context.raw.toFixed(2) + ' (₩' + (context.raw * {{ instance_costs.exchange_rate }}).toFixed(0) + ')';
+                        }
+                    }
+                }
+            }
+        }
+    });
+    {% endif %}
+    
+    // 테이블 초기화
+    $('#serviceTable, #instanceTable').DataTable({
+        order: [[1, 'desc']],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Korean.json'
+        }
+    });
+    {% endif %}
+});
+</script>
+{% endblock %}

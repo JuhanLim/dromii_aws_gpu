@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from . import auth_views
 from . import reservation_views
+from . import cost_views
 
 urlpatterns = [
     # 대시보드 - 메인 페이지
@@ -37,4 +38,9 @@ urlpatterns = [
     # 예약 관련 API URL
     path('api/reservations/<int:reservation_id>/', reservation_views.reservation_detail_api, name='reservation_detail_api'),
     path('api/reservations/admin/<int:reservation_id>/update/', reservation_views.admin_reservation_update_api, name='admin_reservation_update_api'),
+    
+    # 비용 관련 URL
+    path('costs/', cost_views.cost_dashboard, name='cost_dashboard'),
+    path('api/costs/', cost_views.cost_api, name='cost_api'),
+    path('api/costs/instances/', cost_views.instance_cost_api, name='instance_cost_api'),
 ]
