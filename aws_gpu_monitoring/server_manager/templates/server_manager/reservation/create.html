@@ -215,10 +215,12 @@
                     url: '{% url "instance_availability" instance_id=instance.instance_id %}',
                     type: 'GET',
                     success: function(response) {
+                        console.log('서버에서 받은 응답:', response);
                         const events = [];
                         
                         // 예약된 시간 표시
                         if (response.reservations) {
+                            console.log('예약 목록:', response.reservations);
                             response.reservations.forEach(function(reservation) {
                                 // 상태에 따른 클래스 및 제목 설정
                                 let statusClass = 'fc-event-pending';
