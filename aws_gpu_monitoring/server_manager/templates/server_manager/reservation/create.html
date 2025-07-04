@@ -209,6 +209,38 @@
         
         if (!calendarEl) return;
         
+        // 현재 표시된 툴팁
+        let currentTooltip = null;
+        
+        // 툴팁 생성 함수
+        function createTooltip(event, jsEvent) {
+            // 기존 툴팁 제거
+            if (currentTooltip && document.body.contains(currentTooltip)) {
+                document.body.removeChild(currentTooltip);
+            }
+            
+            const props = event.extendedProps;
+            
+            // 툴팁 생성
+            let tooltip = document.createElement('div');
+            tooltip.className = 'fc-tooltip';
+            tooltip.innerHTML = `
+                <h6>예약 정보</h6>
+                <p><strong>사용자:</strong> ${props.username}</p>
+                <p><strong>상태:</strong> ${props.statusText}</p>
+                <p><strong>시작:</strong> ${formatDateTime(event.start)}</p>
+                <p><strong>종료:</strong> ${formatDateTime(event.end)}</p>
+                <p><strong>목적:</strong> ${props.purpose || '정보 없음'}</p>
+            `;
+            
+            document.body.appendChild(tooltip);
+            
+            // 마우스 위치에 툴팁 표시
+            positionTooltip(tooltip, jsEvent);
+            
+            return tooltip;
+        }
+        
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',
             headerToolbar: {
@@ -278,53 +310,19 @@
                     }
                 });
             },
-            // 현재 표시된 툴팁
-            let currentTooltip = null;
-            
-            // 툴팁 생성 함수
-            function createTooltip(event, jsEvent) {
-                // 기존 툴팁 제거
-                if (currentTooltip && document.body.contains(currentTooltip)) {
-                    document.body.removeChild(currentTooltip);
-                }
-                
-                const props = event.extendedProps;
-                
-                // 툴팁 생성
-                let tooltip = document.createElement('div');
-                tooltip.className = 'fc-tooltip';
-                tooltip.innerHTML = `
-                    <h6>예약 정보</h6>
-                    <p><strong>사용자:</strong> ${props.username}</p>
-                    <p><strong>상태:</strong> ${props.statusText}</p>
-                    <p><strong>시작:</strong> ${formatDateTime(event.start)}</p>
-                    <p><strong>종료:</strong> ${formatDateTime(event.end)}</p>
-                    <p><strong>목적:</strong> ${props.purpose || '정보 없음'}</p>
-                `;
-                
-                document.body.appendChild(tooltip);
-                
-                // 마우스 위치에 툴팁 표시
-                positionTooltip(tooltip, jsEvent);
-                
-                return tooltip;
-            }
-            
-            // 마우스 호버 시 툴팁 표시
             eventMouseEnter: function(info) {
+                // 마우스 호버 시 툴팁 표시
                 currentTooltip = createTooltip(info.event, info.jsEvent);
             },
-            
-            // 마우스가 벗어나면 툴팁 제거
             eventMouseLeave: function() {
+                // 마우스가 벗어나면 툴팁 제거
                 if (currentTooltip && document.body.contains(currentTooltip)) {
                     document.body.removeChild(currentTooltip);
                     currentTooltip = null;
                 }
             },
-            
-            // 클릭 시에도 툴팁 표시 (모바일 지원)
             eventClick: function(info) {
+                // 클릭 시에도 툴팁 표시 (모바일 지원)
                 currentTooltip = createTooltip(info.event, info.jsEvent);
                 
                 // 다른 곳 클릭 시 툴팁 제거
