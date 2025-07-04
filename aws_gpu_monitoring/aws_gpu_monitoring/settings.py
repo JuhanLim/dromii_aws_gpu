@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize', # 비용관리에 사용되는 필터를 사용하기 위함
     'server_manager',
 ]
 
