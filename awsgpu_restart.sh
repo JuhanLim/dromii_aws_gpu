@@ -29,6 +29,6 @@ docker exec -d $CONTAINER_ID /app/venv_awsgpu/bin/gunicorn \
   --bind unix:/app/aws_gpu_monitoring/gunicorn.sock \
   --workers 3 \
   --chdir /app/aws_gpu_monitoring \
-  --log-file /app/aws_gpu_monitoring/aws_gpu_monitoring/logs/gunicorn_error.log
+  --log-file /app/aws_gpu_monitoring/logs/gunicorn_error.log
 
 echo "✅ Gunicorn 재시작 완료"

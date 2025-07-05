@@ -1,0 +1,1349 @@
+[2025-07-01 03:40:45 +0000] [89] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 03:40:45 +0000] [89] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (89)
+[2025-07-01 03:40:45 +0000] [89] [INFO] Using worker: sync
+[2025-07-01 03:40:45 +0000] [95] [INFO] Booting worker with pid: 95
+[2025-07-01 03:40:45 +0000] [95] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 992, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'aws_gpu_monitoring.aws_gpu_monitoring'
+[2025-07-01 03:40:45 +0000] [95] [INFO] Worker exiting (pid: 95)
+[2025-07-01 03:40:45 +0000] [89] [ERROR] Worker (pid:95) exited with code 3
+[2025-07-01 03:40:45 +0000] [89] [ERROR] Shutting down: Master
+[2025-07-01 03:40:45 +0000] [89] [ERROR] Reason: Worker failed to boot.
+[2025-07-01 03:41:25 +0000] [102] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 03:41:25 +0000] [102] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (102)
+[2025-07-01 03:41:25 +0000] [102] [INFO] Using worker: sync
+[2025-07-01 03:41:25 +0000] [107] [INFO] Booting worker with pid: 107
+[2025-07-01 03:41:25 +0000] [108] [INFO] Booting worker with pid: 108
+[2025-07-01 03:41:25 +0000] [109] [INFO] Booting worker with pid: 109
+[2025-07-01 03:59:30 +0000] [107] [INFO] Worker exiting (pid: 107)
+[2025-07-01 03:59:30 +0000] [108] [INFO] Worker exiting (pid: 108)
+[2025-07-01 03:59:30 +0000] [109] [INFO] Worker exiting (pid: 109)
+[2025-07-01 03:59:30 +0000] [102] [INFO] Handling signal: term
+[2025-07-01 03:59:31 +0000] [102] [INFO] Shutting down: Master
+[2025-07-01 03:59:31 +0000] [116] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 03:59:31 +0000] [116] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (116)
+[2025-07-01 03:59:31 +0000] [116] [INFO] Using worker: sync
+[2025-07-01 03:59:31 +0000] [122] [INFO] Booting worker with pid: 122
+[2025-07-01 03:59:31 +0000] [123] [INFO] Booting worker with pid: 123
+[2025-07-01 03:59:31 +0000] [124] [INFO] Booting worker with pid: 124
+[2025-07-01 04:04:51 +0000] [124] [INFO] Worker exiting (pid: 124)
+[2025-07-01 04:04:51 +0000] [123] [INFO] Worker exiting (pid: 123)
+[2025-07-01 04:04:51 +0000] [122] [INFO] Worker exiting (pid: 122)
+[2025-07-01 04:04:51 +0000] [116] [INFO] Handling signal: term
+[2025-07-01 04:04:51 +0000] [116] [INFO] Shutting down: Master
+[2025-07-01 04:04:51 +0000] [131] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 04:04:51 +0000] [131] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (131)
+[2025-07-01 04:04:51 +0000] [131] [INFO] Using worker: sync
+[2025-07-01 04:04:51 +0000] [137] [INFO] Booting worker with pid: 137
+[2025-07-01 04:04:51 +0000] [138] [INFO] Booting worker with pid: 138
+[2025-07-01 04:04:52 +0000] [139] [INFO] Booting worker with pid: 139
+[2025-07-01 04:05:02 +0000] [138] [ERROR] Error handling request /
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/sync.py", line 134, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/sync.py", line 177, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/wsgi.py", line 124, in __call__
+    response = self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 140, in get_response
+    response = self._middleware_chain(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 2, in <module>
+    from . import views
+  File "/app/aws_gpu_monitoring/server_manager/views.py", line 8, in <module>
+    from .ec2_service import EC2Service
+  File "/app/aws_gpu_monitoring/server_manager/ec2_service.py", line 7, in <module>
+    from server_manager.models.instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/__init__.py", line 1, in <module>
+    from .instance import Instance
+  File "/app/aws_gpu_monitoring/server_manager/models/instance.py", line 3, in <module>
+    class Instance(models.Model):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/base.py", line 136, in __new__
+    raise RuntimeError(
+RuntimeError: Model class server_manager.models.instance.Instance doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+[2025-07-01 04:05:34 +0000] [137] [INFO] Worker exiting (pid: 137)
+[2025-07-01 04:05:34 +0000] [131] [INFO] Handling signal: term
+[2025-07-01 04:05:34 +0000] [139] [INFO] Worker exiting (pid: 139)
+[2025-07-01 04:05:34 +0000] [138] [INFO] Worker exiting (pid: 138)
+[2025-07-01 04:05:34 +0000] [131] [INFO] Shutting down: Master
+[2025-07-01 04:05:34 +0000] [146] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 04:05:34 +0000] [146] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (146)
+[2025-07-01 04:05:34 +0000] [146] [INFO] Using worker: sync
+[2025-07-01 04:05:34 +0000] [152] [INFO] Booting worker with pid: 152
+[2025-07-01 04:05:34 +0000] [153] [INFO] Booting worker with pid: 153
+[2025-07-01 04:05:34 +0000] [154] [INFO] Booting worker with pid: 154
+[2025-07-01 04:15:04 +0000] [154] [INFO] Worker exiting (pid: 154)
+[2025-07-01 04:15:04 +0000] [152] [INFO] Worker exiting (pid: 152)
+[2025-07-01 04:15:04 +0000] [146] [INFO] Handling signal: term
+[2025-07-01 04:15:04 +0000] [146] [ERROR] Worker (pid:152) was sent SIGTERM!
+[2025-07-01 04:15:04 +0000] [153] [INFO] Worker exiting (pid: 153)
+[2025-07-01 04:15:04 +0000] [146] [ERROR] Worker (pid:154) was sent SIGTERM!
+[2025-07-01 04:15:04 +0000] [146] [INFO] Shutting down: Master
+[2025-07-01 04:15:05 +0000] [161] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 04:15:05 +0000] [161] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (161)
+[2025-07-01 04:15:05 +0000] [161] [INFO] Using worker: sync
+[2025-07-01 04:15:05 +0000] [167] [INFO] Booting worker with pid: 167
+[2025-07-01 04:15:05 +0000] [168] [INFO] Booting worker with pid: 168
+[2025-07-01 04:15:05 +0000] [169] [INFO] Booting worker with pid: 169
+[2025-07-01 08:08:49 +0000] [168] [INFO] Worker exiting (pid: 168)
+[2025-07-01 08:08:49 +0000] [167] [INFO] Worker exiting (pid: 167)
+[2025-07-01 08:08:49 +0000] [161] [INFO] Handling signal: term
+[2025-07-01 08:08:49 +0000] [169] [INFO] Worker exiting (pid: 169)
+[2025-07-01 08:08:49 +0000] [161] [ERROR] Worker (pid:168) was sent SIGTERM!
+[2025-07-01 08:08:49 +0000] [176] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:08:49 +0000] [176] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (176)
+[2025-07-01 08:08:49 +0000] [176] [INFO] Using worker: sync
+[2025-07-01 08:08:49 +0000] [181] [INFO] Booting worker with pid: 181
+[2025-07-01 08:08:49 +0000] [161] [INFO] Shutting down: Master
+[2025-07-01 08:08:49 +0000] [182] [INFO] Booting worker with pid: 182
+[2025-07-01 08:08:49 +0000] [183] [INFO] Booting worker with pid: 183
+[2025-07-01 08:13:55 +0000] [183] [INFO] Worker exiting (pid: 183)
+[2025-07-01 08:13:55 +0000] [181] [INFO] Worker exiting (pid: 181)
+[2025-07-01 08:13:55 +0000] [182] [INFO] Worker exiting (pid: 182)
+[2025-07-01 08:13:55 +0000] [176] [INFO] Handling signal: term
+[2025-07-01 08:13:55 +0000] [176] [ERROR] Worker (pid:181) was sent SIGTERM!
+[2025-07-01 08:13:55 +0000] [176] [ERROR] Worker (pid:183) was sent SIGTERM!
+[2025-07-01 08:13:55 +0000] [176] [ERROR] Worker (pid:182) was sent SIGTERM!
+[2025-07-01 08:13:56 +0000] [176] [INFO] Shutting down: Master
+[2025-07-01 08:13:56 +0000] [190] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:13:56 +0000] [190] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (190)
+[2025-07-01 08:13:56 +0000] [190] [INFO] Using worker: sync
+[2025-07-01 08:13:56 +0000] [195] [INFO] Booting worker with pid: 195
+[2025-07-01 08:13:56 +0000] [196] [INFO] Booting worker with pid: 196
+[2025-07-01 08:13:56 +0000] [197] [INFO] Booting worker with pid: 197
+[2025-07-01 08:14:02 +0000] [197] [ERROR] Error handling request /accounts/login/?next=/
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/sync.py", line 134, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/sync.py", line 177, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/wsgi.py", line 124, in __call__
+    response = self.get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 140, in get_response
+    response = self._middleware_chain(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 182, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 69, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 428, in get_traceback_html
+    c = Context(self.get_traceback_data(), use_l10n=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 411, in get_traceback_data
+    c["raising_view_name"] = get_caller(self.request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/views/debug.py", line 102, in get_caller
+    resolver_match = resolve(request.path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/urls.py", line 22, in <module>
+    path('', include('server_manager.urls')),  # server_manager 앱의 URL 포함
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/urls.py", line 32, in <module>
+    path('reservations/<int:reservation_id>/update/', reservation_views.update_reservation_status, name='update_reservation_status'),
+AttributeError: module 'server_manager.reservation_views' has no attribute 'update_reservation_status'
+[2025-07-01 08:16:01 +0000] [197] [INFO] Worker exiting (pid: 197)
+[2025-07-01 08:16:01 +0000] [196] [INFO] Worker exiting (pid: 196)
+[2025-07-01 08:16:01 +0000] [190] [INFO] Handling signal: term
+[2025-07-01 08:16:01 +0000] [195] [INFO] Worker exiting (pid: 195)
+[2025-07-01 08:16:01 +0000] [204] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:16:01 +0000] [204] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (204)
+[2025-07-01 08:16:01 +0000] [204] [INFO] Using worker: sync
+[2025-07-01 08:16:01 +0000] [210] [INFO] Booting worker with pid: 210
+[2025-07-01 08:16:01 +0000] [190] [INFO] Shutting down: Master
+[2025-07-01 08:16:01 +0000] [211] [INFO] Booting worker with pid: 211
+[2025-07-01 08:16:01 +0000] [212] [INFO] Booting worker with pid: 212
+[2025-07-01 08:25:18 +0000] [212] [INFO] Worker exiting (pid: 212)
+[2025-07-01 08:25:18 +0000] [210] [INFO] Worker exiting (pid: 210)
+[2025-07-01 08:25:18 +0000] [204] [INFO] Handling signal: term
+[2025-07-01 08:25:18 +0000] [211] [INFO] Worker exiting (pid: 211)
+[2025-07-01 08:25:18 +0000] [204] [ERROR] Worker (pid:212) was sent SIGTERM!
+[2025-07-01 08:25:18 +0000] [204] [INFO] Shutting down: Master
+[2025-07-01 08:25:18 +0000] [219] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:25:18 +0000] [219] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (219)
+[2025-07-01 08:25:18 +0000] [219] [INFO] Using worker: sync
+[2025-07-01 08:25:18 +0000] [225] [INFO] Booting worker with pid: 225
+[2025-07-01 08:25:18 +0000] [226] [INFO] Booting worker with pid: 226
+[2025-07-01 08:25:18 +0000] [227] [INFO] Booting worker with pid: 227
+[2025-07-01 08:30:02 +0000] [225] [INFO] Worker exiting (pid: 225)
+[2025-07-01 08:30:02 +0000] [227] [INFO] Worker exiting (pid: 227)
+[2025-07-01 08:30:02 +0000] [226] [INFO] Worker exiting (pid: 226)
+[2025-07-01 08:30:02 +0000] [219] [INFO] Handling signal: term
+[2025-07-01 08:30:02 +0000] [219] [INFO] Shutting down: Master
+[2025-07-01 08:30:02 +0000] [236] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:30:02 +0000] [236] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (236)
+[2025-07-01 08:30:02 +0000] [236] [INFO] Using worker: sync
+[2025-07-01 08:30:02 +0000] [242] [INFO] Booting worker with pid: 242
+[2025-07-01 08:30:02 +0000] [243] [INFO] Booting worker with pid: 243
+[2025-07-01 08:30:02 +0000] [244] [INFO] Booting worker with pid: 244
+[2025-07-01 08:35:40 +0000] [243] [INFO] Worker exiting (pid: 243)
+[2025-07-01 08:35:40 +0000] [242] [INFO] Worker exiting (pid: 242)
+[2025-07-01 08:35:40 +0000] [244] [INFO] Worker exiting (pid: 244)
+[2025-07-01 08:35:40 +0000] [236] [INFO] Handling signal: term
+[2025-07-01 08:35:40 +0000] [236] [ERROR] Worker (pid:244) was sent SIGTERM!
+[2025-07-01 08:35:40 +0000] [236] [INFO] Shutting down: Master
+[2025-07-01 08:35:40 +0000] [256] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:35:40 +0000] [256] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (256)
+[2025-07-01 08:35:40 +0000] [256] [INFO] Using worker: sync
+[2025-07-01 08:35:40 +0000] [261] [INFO] Booting worker with pid: 261
+[2025-07-01 08:35:40 +0000] [262] [INFO] Booting worker with pid: 262
+[2025-07-01 08:35:40 +0000] [263] [INFO] Booting worker with pid: 263
+[2025-07-01 08:36:14 +0000] [263] [INFO] Worker exiting (pid: 263)
+[2025-07-01 08:36:14 +0000] [261] [INFO] Worker exiting (pid: 261)
+[2025-07-01 08:36:14 +0000] [262] [INFO] Worker exiting (pid: 262)
+[2025-07-01 08:36:14 +0000] [256] [INFO] Handling signal: term
+[2025-07-01 08:36:14 +0000] [256] [ERROR] Worker (pid:263) was sent SIGTERM!
+[2025-07-01 08:36:14 +0000] [256] [INFO] Shutting down: Master
+[2025-07-01 08:36:14 +0000] [272] [INFO] Starting gunicorn 23.0.0
+[2025-07-01 08:36:14 +0000] [272] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (272)
+[2025-07-01 08:36:14 +0000] [272] [INFO] Using worker: sync
+[2025-07-01 08:36:14 +0000] [277] [INFO] Booting worker with pid: 277
+[2025-07-01 08:36:14 +0000] [278] [INFO] Booting worker with pid: 278
+[2025-07-01 08:36:15 +0000] [279] [INFO] Booting worker with pid: 279
+[2025-07-02 00:59:17 +0000] [272] [INFO] Handling signal: term
+[2025-07-02 00:59:17 +0000] [272] [ERROR] Worker (pid:277) exited with code 1
+[2025-07-02 00:59:17 +0000] [272] [ERROR] Worker (pid:277) exited with code 1.
+[2025-07-02 00:59:17 +0000] [272] [ERROR] Worker (pid:279) exited with code 1
+[2025-07-02 00:59:17 +0000] [272] [ERROR] Worker (pid:279) exited with code 1.
+[2025-07-02 00:59:17 +0000] [272] [ERROR] Worker (pid:278) exited with code 1
+[2025-07-02 00:59:17 +0000] [272] [ERROR] Worker (pid:278) exited with code 1.
+[2025-07-02 00:59:17 +0000] [272] [INFO] Shutting down: Master
+[2025-07-02 00:59:17 +0000] [286] [INFO] Starting gunicorn 23.0.0
+[2025-07-02 00:59:17 +0000] [286] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (286)
+[2025-07-02 00:59:17 +0000] [286] [INFO] Using worker: sync
+[2025-07-02 00:59:17 +0000] [293] [INFO] Booting worker with pid: 293
+[2025-07-02 00:59:17 +0000] [294] [INFO] Booting worker with pid: 294
+[2025-07-02 00:59:17 +0000] [295] [INFO] Booting worker with pid: 295
+[2025-07-02 23:55:41 +0000] [294] [INFO] Worker exiting (pid: 294)
+[2025-07-02 23:55:41 +0000] [293] [INFO] Worker exiting (pid: 293)
+[2025-07-02 23:55:41 +0000] [295] [INFO] Worker exiting (pid: 295)
+[2025-07-02 23:55:41 +0000] [286] [INFO] Handling signal: term
+[2025-07-02 23:55:41 +0000] [286] [ERROR] Worker (pid:293) was sent SIGTERM!
+[2025-07-02 23:55:41 +0000] [286] [ERROR] Worker (pid:295) was sent SIGTERM!
+[2025-07-02 23:55:41 +0000] [286] [ERROR] Worker (pid:294) was sent SIGTERM!
+[2025-07-02 23:55:41 +0000] [286] [INFO] Shutting down: Master
+[2025-07-02 23:55:42 +0000] [302] [INFO] Starting gunicorn 23.0.0
+[2025-07-02 23:55:42 +0000] [302] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (302)
+[2025-07-02 23:55:42 +0000] [302] [INFO] Using worker: sync
+[2025-07-02 23:55:42 +0000] [308] [INFO] Booting worker with pid: 308
+[2025-07-02 23:55:42 +0000] [309] [INFO] Booting worker with pid: 309
+[2025-07-02 23:55:42 +0000] [310] [INFO] Booting worker with pid: 310
+[2025-07-03 01:52:43 +0000] [308] [INFO] Worker exiting (pid: 308)
+[2025-07-03 01:52:43 +0000] [309] [INFO] Worker exiting (pid: 309)
+[2025-07-03 01:52:43 +0000] [302] [INFO] Handling signal: term
+[2025-07-03 01:52:43 +0000] [310] [INFO] Worker exiting (pid: 310)
+[2025-07-03 01:52:43 +0000] [317] [INFO] Starting gunicorn 23.0.0
+[2025-07-03 01:52:43 +0000] [317] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (317)
+[2025-07-03 01:52:43 +0000] [317] [INFO] Using worker: sync
+[2025-07-03 01:52:43 +0000] [323] [INFO] Booting worker with pid: 323
+[2025-07-03 01:52:43 +0000] [302] [INFO] Shutting down: Master
+[2025-07-03 01:52:43 +0000] [324] [INFO] Booting worker with pid: 324
+[2025-07-03 01:52:43 +0000] [325] [INFO] Booting worker with pid: 325
+[2025-07-03 01:55:12 +0000] [324] [INFO] Worker exiting (pid: 324)
+[2025-07-03 01:55:12 +0000] [323] [INFO] Worker exiting (pid: 323)
+[2025-07-03 01:55:12 +0000] [325] [INFO] Worker exiting (pid: 325)
+[2025-07-03 01:55:12 +0000] [317] [INFO] Handling signal: term
+[2025-07-03 01:55:12 +0000] [317] [ERROR] Worker (pid:324) was sent SIGTERM!
+[2025-07-03 01:55:12 +0000] [317] [ERROR] Worker (pid:323) was sent SIGTERM!
+[2025-07-03 01:55:12 +0000] [317] [INFO] Shutting down: Master
+[2025-07-03 01:55:12 +0000] [332] [INFO] Starting gunicorn 23.0.0
+[2025-07-03 01:55:12 +0000] [332] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (332)
+[2025-07-03 01:55:12 +0000] [332] [INFO] Using worker: sync
+[2025-07-03 01:55:12 +0000] [338] [INFO] Booting worker with pid: 338
+[2025-07-03 01:55:12 +0000] [339] [INFO] Booting worker with pid: 339
+[2025-07-03 01:55:12 +0000] [340] [INFO] Booting worker with pid: 340
+[2025-07-03 02:00:12 +0000] [338] [INFO] Worker exiting (pid: 338)
+[2025-07-03 02:00:12 +0000] [339] [INFO] Worker exiting (pid: 339)
+[2025-07-03 02:00:12 +0000] [340] [INFO] Worker exiting (pid: 340)
+[2025-07-03 02:00:12 +0000] [332] [INFO] Handling signal: term
+[2025-07-03 02:00:12 +0000] [332] [ERROR] Worker (pid:338) was sent SIGTERM!
+[2025-07-03 02:00:12 +0000] [332] [ERROR] Worker (pid:339) was sent SIGTERM!
+[2025-07-03 02:00:12 +0000] [332] [INFO] Shutting down: Master
+[2025-07-03 02:00:12 +0000] [347] [INFO] Starting gunicorn 23.0.0
+[2025-07-03 02:00:12 +0000] [347] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (347)
+[2025-07-03 02:00:12 +0000] [347] [INFO] Using worker: sync
+[2025-07-03 02:00:12 +0000] [353] [INFO] Booting worker with pid: 353
+[2025-07-03 02:00:12 +0000] [354] [INFO] Booting worker with pid: 354
+[2025-07-03 02:00:12 +0000] [355] [INFO] Booting worker with pid: 355
+[2025-07-03 02:13:02 +0000] [355] [INFO] Worker exiting (pid: 355)
+[2025-07-03 02:13:02 +0000] [353] [INFO] Worker exiting (pid: 353)
+[2025-07-03 02:13:02 +0000] [347] [INFO] Handling signal: term
+[2025-07-03 02:13:02 +0000] [354] [INFO] Worker exiting (pid: 354)
+[2025-07-03 02:13:02 +0000] [367] [INFO] Starting gunicorn 23.0.0
+[2025-07-03 02:13:02 +0000] [367] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (367)
+[2025-07-03 02:13:02 +0000] [367] [INFO] Using worker: sync
+[2025-07-03 02:13:02 +0000] [373] [INFO] Booting worker with pid: 373
+[2025-07-03 02:13:02 +0000] [347] [INFO] Shutting down: Master
+[2025-07-03 02:13:02 +0000] [374] [INFO] Booting worker with pid: 374
+[2025-07-03 02:13:03 +0000] [375] [INFO] Booting worker with pid: 375
+[2025-07-03 04:00:53 +0000] [375] [INFO] Worker exiting (pid: 375)
+[2025-07-03 04:00:53 +0000] [373] [INFO] Worker exiting (pid: 373)
+[2025-07-03 04:00:53 +0000] [374] [INFO] Worker exiting (pid: 374)
+[2025-07-03 04:00:53 +0000] [367] [INFO] Handling signal: term
+[2025-07-03 04:00:53 +0000] [382] [INFO] Starting gunicorn 23.0.0
+[2025-07-03 04:00:53 +0000] [382] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (382)
+[2025-07-03 04:00:53 +0000] [382] [INFO] Using worker: sync
+[2025-07-03 04:00:53 +0000] [388] [INFO] Booting worker with pid: 388
+[2025-07-03 04:00:53 +0000] [367] [INFO] Shutting down: Master
+[2025-07-03 04:00:53 +0000] [389] [INFO] Booting worker with pid: 389
+[2025-07-03 04:00:53 +0000] [390] [INFO] Booting worker with pid: 390
