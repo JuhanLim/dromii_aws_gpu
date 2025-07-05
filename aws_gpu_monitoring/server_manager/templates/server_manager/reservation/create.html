@@ -126,22 +126,15 @@
     .fc-event {
         cursor: pointer;
     }
-    .fc-event-approved {
-        background-color: #198754; /* 승인됨 - 초록색 */
+    .fc-event-approved, .fc-event-completed {
+        background-color: #198754; /* 승인됨, 완료됨 - 초록색 */
         border-color: #198754;
     }
     .fc-event-pending {
         background-color: #ffc107; /* 대기 중 - 노란색 */
         border-color: #ffc107;
     }
-    .fc-event-rejected {
-        background-color: #dc3545; /* 거부됨 - 빨간색 */
-        border-color: #dc3545;
-    }
-    .fc-event-cancelled {
-        background-color: #6c757d; /* 취소됨 - 회색 */
-        border-color: #6c757d;
-    }
+    /* 거부됨과 취소됨은 캘린더에 표시하지 않음 */
     .fc-tooltip {
         position: absolute;
         z-index: 10000;
@@ -192,6 +185,7 @@
                 case 'pending': return '대기 중';
                 case 'rejected': return '거부됨';
                 case 'cancelled': return '취소됨';
+                case 'completed': return '완료됨';
                 default: return status;
             }
         }
@@ -302,12 +296,15 @@
                                 if (reservation.status === 'approved') {
                                     statusClass = 'fc-event-approved';
                                     statusText = '승인됨';
-                                } else if (reservation.status === 'rejected') {
-                                    statusClass = 'fc-event-rejected';
-                                    statusText = '거부됨';
-                                } else if (reservation.status === 'cancelled') {
-                                    statusClass = 'fc-event-cancelled';
-                                    statusText = '취소됨';
+                                } else if (reservation.status === 'completed') {
+                                    statusClass = 'fc-event-completed';
+                                    statusText = '완료됨';
+                                } else if (reservation.status === 'pending') {
+                                    statusClass = 'fc-event-pending';
+                                    statusText = '대기 중';
+                                } else if (reservation.status === 'rejected' || reservation.status === 'cancelled') {
+                                    // 거부됨과 취소됨은 캘린더에 표시하지 않음
+                                    return;
                                 }
                                 
                                 events.push({
