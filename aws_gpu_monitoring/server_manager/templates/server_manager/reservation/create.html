@@ -308,11 +308,17 @@
                                     return;
                                 }
                                 
+                                // 시간대 정보가 포함된 ISO 문자열을 Date 객체로 변환
+                                const startTime = new Date(reservation.start_time);
+                                const endTime = new Date(reservation.end_time);
+                                
+                                console.log('예약 시간 변환:', reservation.start_time, '->', startTime);
+                                
                                 events.push({
                                     id: reservation.id,
                                     title: '', // 제목 없이 색상으로만 표시
-                                    start: reservation.start_time,
-                                    end: reservation.end_time,
+                                    start: startTime,
+                                    end: endTime,
                                     className: statusClass,
                                     extendedProps: {
                                         status: reservation.status,
