@@ -229,6 +229,22 @@
             
             const props = event.extendedProps;
             
+            // 시작 및 종료 시간 파싱
+            let startDate, endDate;
+            
+            // ISO 형식 문자열이면 시간대 정보를 고려하여 파싱
+            if (typeof event.start === 'string') {
+                startDate = new Date(event.start);
+            } else {
+                startDate = event.start;
+            }
+            
+            if (typeof event.end === 'string') {
+                endDate = new Date(event.end);
+            } else {
+                endDate = event.end;
+            }
+            
             // 툴팁 생성
             let tooltip = document.createElement('div');
             tooltip.className = 'fc-tooltip';
@@ -236,8 +252,8 @@
                 <h6>예약 정보</h6>
                 <p><strong>사용자:</strong> ${props.username}</p>
                 <p><strong>상태:</strong> ${props.statusText}</p>
-                <p><strong>시작:</strong> ${formatDateTime(event.start)}</p>
-                <p><strong>종료:</strong> ${formatDateTime(event.end)}</p>
+                <p><strong>시작:</strong> ${formatDateTime(startDate)}</p>
+                <p><strong>종료:</strong> ${formatDateTime(endDate)}</p>
                 <p><strong>목적:</strong> ${props.purpose || '정보 없음'}</p>
             `;
             
