@@ -200,22 +200,9 @@
             }
 
             const props = event.extendedProps;
-            
-            // 시작 및 종료 시간 포맷팅
-            let startDate = event.start;
-            let endDate = event.end;
-            
-            // 문자열이면 Date 객체로 변환
-            if (typeof startDate === 'string') {
-                startDate = new Date(startDate);
-            }
-            
-            if (typeof endDate === 'string') {
-                endDate = new Date(endDate);
-            }
-            
-            // 한국 시간대로 포맷팅
-            const startStr = startDate.toLocaleString('ko-KR', {
+
+            // 원본 시간 문자열을 extendedProps에서 가져와 포맷팅
+            const startStr = new Date(props.originalStart).toLocaleString('ko-KR', {
                 timeZone: 'Asia/Seoul',
                 year: 'numeric',
                 month: '2-digit',
@@ -224,8 +211,8 @@
                 minute: '2-digit',
                 hour12: false
             });
-            
-            const endStr = endDate.toLocaleString('ko-KR', {
+
+            const endStr = new Date(props.originalEnd).toLocaleString('ko-KR', {
                 timeZone: 'Asia/Seoul',
                 year: 'numeric',
                 month: '2-digit',
@@ -234,8 +221,8 @@
                 minute: '2-digit',
                 hour12: false
             });
-            
-            console.log('툴팁 시간 변환:', event.start, '->', startStr);
+
+            console.log('툴팁 시간 변환:', props.originalStart, '->', startStr);
 
             let tooltip = document.createElement('div');
             tooltip.className = 'fc-tooltip';
@@ -316,7 +303,9 @@
                                         status: reservation.status,
                                         username: reservation.user__username,
                                         purpose: reservation.purpose,
-                                        statusText: statusText
+                                        statusText: statusText,
+                                        originalStart: reservation.start_time, // 원본 시간 문자열 저장
+                                        originalEnd: reservation.end_time      // 원본 시간 문자열 저장
                                     }
                                 });
                                 console.log('이벤트 객체:', {
