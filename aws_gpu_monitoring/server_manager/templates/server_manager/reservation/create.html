@@ -200,30 +200,42 @@
             }
 
             const props = event.extendedProps;
-            let startStr = event.start;
-            let endStr = event.end;
-            if (typeof event.start === 'string') {
-                startStr = new Date(event.start).toLocaleString('ko-KR', {
-                    timeZone: 'Asia/Seoul',
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                });
+            
+            // 시작 및 종료 시간 포맷팅
+            let startDate = event.start;
+            let endDate = event.end;
+            
+            // 문자열이면 Date 객체로 변환
+            if (typeof startDate === 'string') {
+                startDate = new Date(startDate);
             }
-            if (typeof event.end === 'string') {
-                endStr = new Date(event.end).toLocaleString('ko-KR', {
-                    timeZone: 'Asia/Seoul',
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                });
+            
+            if (typeof endDate === 'string') {
+                endDate = new Date(endDate);
             }
+            
+            // 한국 시간대로 포맷팅
+            const startStr = startDate.toLocaleString('ko-KR', {
+                timeZone: 'Asia/Seoul',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            
+            const endStr = endDate.toLocaleString('ko-KR', {
+                timeZone: 'Asia/Seoul',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            
+            console.log('툴팁 시간 변환:', event.start, '->', startStr);
 
             let tooltip = document.createElement('div');
             tooltip.className = 'fc-tooltip';
