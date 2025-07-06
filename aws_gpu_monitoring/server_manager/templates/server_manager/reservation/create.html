@@ -278,7 +278,7 @@
                         if (response.reservations) {
                             console.log('예약 목록:', response.reservations);
                             response.reservations.forEach(function(reservation) {
-                                if (reservation.status === 'rejected' || reservation.status === 'cancelled') {
+                                if (reservation.status === 'rejected' || reservation.status === 'canceled') {
                                     return;
                                 }
 
