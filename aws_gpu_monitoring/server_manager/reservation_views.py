@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 import json
 import datetime
+import pytz
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Instance, Reservation
@@ -239,13 +240,17 @@ def instance_availability(request, instance_id):
         }
         reservation_list.append(test_reservation)
     
-    # JSON 직렬화 가능한 형태로 변환 (시간대 정보 포함)
+    # JSON 직렬화 가능한 형태로 변환 (KST 시간대로 강제 변환)
+    kst = pytz.timezone('Asia/Seoul')
     for reservation in reservation_list:
         if isinstance(reservation['start_time'], datetime.datetime):
-            # 시간대 정보를 포함한 ISO 형식으로 변환
-            reservation['start_time'] = reservation['start_time'].strftime('%Y-%m-%dT%H:%M:%S%z')
+            # UTC 시간을 KST로 변환
+            start_time_kst = reservation['start_time'].astimezone(kst)
+            reservation['start_time'] = start_time_kst.strftime('%Y-%m-%dT%H:%M:%S%z')
         if isinstance(reservation['end_time'], datetime.datetime):
-            reservation['end_time'] = reservation['end_time'].strftime('%Y-%m-%dT%H:%M:%S%z')
+            # UTC 시간을 KST로 변환
+            end_time_kst = reservation['end_time'].astimezone(kst)
+            reservation['end_time'] = end_time_kst.strftime('%Y-%m-%dT%H:%M:%S%z')
         
         # 디버깅을 위해 시간 정보 로깅
         logger.info(f"예약 ID {reservation['id']} 시간: {reservation['start_time']} ~ {reservation['end_time']}")

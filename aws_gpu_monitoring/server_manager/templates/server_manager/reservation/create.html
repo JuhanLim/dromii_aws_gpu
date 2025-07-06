@@ -177,7 +177,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('availabilityCalendar');
-
+        
+        // 상태 텍스트 변환 함수
         function getStatusText(status) {
             switch(status) {
                 case 'approved': return '승인됨';
@@ -188,66 +189,79 @@
                 default: return status;
             }
         }
-
+        
+        // 날짜 형식 변환 함수
+        function formatDateTime(date) {
+            if (!date) return '';
+            return date.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+        }
+        
+        // 툴팁 위치 설정 함수
         function positionTooltip(tooltip, event) {
             tooltip.style.left = (event.pageX + 10) + 'px';
             tooltip.style.top = (event.pageY + 10) + 'px';
         }
-
+        
+        if (!calendarEl) return;
+        
+        // 현재 표시된 툴팁
+        let currentTooltip = null;
+        
+        // 툴팁 생성 함수
         function createTooltip(event, jsEvent) {
+            // 기존 툴팁 제거
             if (currentTooltip && document.body.contains(currentTooltip)) {
                 document.body.removeChild(currentTooltip);
             }
-
+            
             const props = event.extendedProps;
-            let startStr = event.start;
-            let endStr = event.end;
+            
+            // 시작 및 종료 시간 파싱
+            let startDate, endDate;
+            
+            // ISO 형식 문자열이면 시간대 정보를 고려하여 파싱
             if (typeof event.start === 'string') {
-                startStr = new Date(event.start).toLocaleString('ko-KR', {
-                    timeZone: 'Asia/Seoul',
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                });
+                startDate = new Date(event.start);
+            } else {
+                startDate = event.start;
             }
+            
             if (typeof event.end === 'string') {
-                endStr = new Date(event.end).toLocaleString('ko-KR', {
-                    timeZone: 'Asia/Seoul',
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                });
+                endDate = new Date(event.end);
+            } else {
+                endDate = event.end;
             }
-
+            
+            // 툴팁 생성
             let tooltip = document.createElement('div');
             tooltip.className = 'fc-tooltip';
             tooltip.innerHTML = `
                 <h6>예약 정보</h6>
                 <p><strong>사용자:</strong> ${props.username}</p>
                 <p><strong>상태:</strong> ${props.statusText}</p>
-                <p><strong>시작:</strong> ${startStr}</p>
-                <p><strong>종료:</strong> ${endStr}</p>
+                <p><strong>시작:</strong> ${formatDateTime(startDate)}</p>
+                <p><strong>종료:</strong> ${formatDateTime(endDate)}</p>
                 <p><strong>목적:</strong> ${props.purpose || '정보 없음'}</p>
             `;
-
+            
             document.body.appendChild(tooltip);
+            
+            // 마우스 위치에 툴팁 표시
             positionTooltip(tooltip, jsEvent);
+            
             return tooltip;
         }
-
-        if (!calendarEl) return;
-
-        let currentTooltip = null;
-
+        
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',
-            timeZone: 'Asia/Seoul',
+            timeZone: 'Asia/Seoul', // 한국 시간대 설정
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
@@ -257,48 +271,54 @@
             slotMaxTime: '24:00',
             allDaySlot: false,
             locale: 'ko',
+            timeZone: 'Asia/Seoul',
             slotLabelFormat: {
                 hour: '2-digit',
                 minute: '2-digit',
                 hour12: false
             },
-            eventTimeFormat: {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-                timeZone: 'Asia/Seoul'
-            },
             events: function(fetchInfo, successCallback, failureCallback) {
+                // 서버에서 예약 정보 가져오기
                 $.ajax({
                     url: '{% url "instance_availability" instance_id=instance.instance_id %}',
                     type: 'GET',
                     success: function(response) {
                         console.log('서버에서 받은 응답:', response);
                         const events = [];
-
+                        
+                        // 예약된 시간 표시
                         if (response.reservations) {
                             console.log('예약 목록:', response.reservations);
                             response.reservations.forEach(function(reservation) {
-                                if (reservation.status === 'rejected' || reservation.status === 'cancelled') {
-                                    return;
-                                }
-
+                                // 상태에 따른 클래스 및 제목 설정
                                 let statusClass = 'fc-event-pending';
                                 let statusText = '대기 중';
+                                
                                 if (reservation.status === 'approved') {
                                     statusClass = 'fc-event-approved';
                                     statusText = '승인됨';
                                 } else if (reservation.status === 'completed') {
                                     statusClass = 'fc-event-completed';
                                     statusText = '완료됨';
+                                } else if (reservation.status === 'pending') {
+                                    statusClass = 'fc-event-pending';
+                                    statusText = '대기 중';
+                                } else if (reservation.status === 'rejected' || reservation.status === 'cancelled') {
+                                    // 거부됨과 취소됨은 캘린더에 표시하지 않음
+                                    return;
                                 }
-
-                                console.log('원본 시간:', reservation.start_time, reservation.end_time);
+                                
+                                // 시간대 정보가 포함된 ISO 문자열을 Date 객체로 변환
+                                const startTime = new Date(reservation.start_time);
+                                const endTime = new Date(reservation.end_time);
+                                
+                                console.log('예약 시간 변환:', reservation.start_time, '->', startTime);
+                                
                                 events.push({
                                     id: reservation.id,
-                                    title: '',
-                                    start: reservation.start_time,
-                                    end: reservation.end_time,
+                                    title: '', // 제목 없이 색상으로만 표시
+                                    start: startTime,
+                                    end: endTime,
                                     className: statusClass,
                                     extendedProps: {
                                         status: reservation.status,
@@ -307,12 +327,9 @@
                                         statusText: statusText
                                     }
                                 });
-                                console.log('이벤트 객체:', {
-                                    start: reservation.start_time,
-                                    end: reservation.end_time
-                                });
                             });
                         }
+                        
                         successCallback(events);
                     },
                     error: function(error) {
@@ -322,16 +339,21 @@
                 });
             },
             eventMouseEnter: function(info) {
+                // 마우스 호버 시 툴팁 표시
                 currentTooltip = createTooltip(info.event, info.jsEvent);
             },
             eventMouseLeave: function() {
+                // 마우스가 벗어나면 툴팁 제거
                 if (currentTooltip && document.body.contains(currentTooltip)) {
                     document.body.removeChild(currentTooltip);
                     currentTooltip = null;
                 }
             },
             eventClick: function(info) {
+                // 클릭 시에도 툴팁 표시 (모바일 지원)
                 currentTooltip = createTooltip(info.event, info.jsEvent);
+                
+                // 다른 곳 클릭 시 툴팁 제거
                 document.addEventListener('click', function hideTooltip(e) {
                     if (currentTooltip && !currentTooltip.contains(e.target)) {
                         if (document.body.contains(currentTooltip)) {
@@ -343,14 +365,17 @@
                 });
             }
         });
-
+        
         calendar.render();
-
+        
+        // 시작 시간 선택 시 종료 시간 자동 설정 (기본 1시간)
         $('#{{ form.start_time.id_for_label }}').on('change', function() {
             const startTime = new Date($(this).val());
             if (!isNaN(startTime.getTime())) {
                 const endTime = new Date(startTime);
                 endTime.setHours(endTime.getHours() + 1);
+                
+                // YYYY-MM-DDThh:mm 형식으로 변환
                 const endTimeStr = endTime.toISOString().slice(0, 16);
                 $('#{{ form.end_time.id_for_label }}').val(endTimeStr);
             }
