@@ -1347,3 +1347,119 @@ AttributeError: module 'server_manager.reservation_views' has no attribute 'upda
 [2025-07-03 04:00:53 +0000] [367] [INFO] Shutting down: Master
 [2025-07-03 04:00:53 +0000] [389] [INFO] Booting worker with pid: 389
 [2025-07-03 04:00:53 +0000] [390] [INFO] Booting worker with pid: 390
+[2025-07-05 16:13:56 +0900] [1291] [INFO] Starting gunicorn 23.0.0
+[2025-07-05 16:13:56 +0900] [1291] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1291)
+[2025-07-05 16:13:56 +0900] [1291] [INFO] Using worker: sync
+[2025-07-05 16:13:56 +0900] [1297] [INFO] Booting worker with pid: 1297
+[2025-07-05 16:13:56 +0900] [1298] [INFO] Booting worker with pid: 1298
+[2025-07-05 16:13:56 +0900] [1299] [INFO] Booting worker with pid: 1299
+[2025-07-05 16:16:40 +0900] [1299] [INFO] Worker exiting (pid: 1299)
+[2025-07-05 16:16:40 +0900] [1298] [INFO] Worker exiting (pid: 1298)
+[2025-07-05 16:16:40 +0900] [1297] [INFO] Worker exiting (pid: 1297)
+[2025-07-05 16:16:40 +0900] [1291] [INFO] Handling signal: term
+[2025-07-05 16:16:40 +0900] [1309] [INFO] Starting gunicorn 23.0.0
+[2025-07-05 16:16:40 +0900] [1309] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1309)
+[2025-07-05 16:16:40 +0900] [1309] [INFO] Using worker: sync
+[2025-07-05 16:16:40 +0900] [1315] [INFO] Booting worker with pid: 1315
+[2025-07-05 16:16:40 +0900] [1291] [INFO] Shutting down: Master
+[2025-07-05 16:16:40 +0900] [1316] [INFO] Booting worker with pid: 1316
+[2025-07-05 16:16:40 +0900] [1317] [INFO] Booting worker with pid: 1317
+[2025-07-05 16:19:51 +0900] [1317] [INFO] Worker exiting (pid: 1317)
+[2025-07-05 16:19:51 +0900] [1316] [INFO] Worker exiting (pid: 1316)
+[2025-07-05 16:19:51 +0900] [1309] [INFO] Handling signal: term
+[2025-07-05 16:19:51 +0900] [1315] [INFO] Worker exiting (pid: 1315)
+[2025-07-05 16:19:52 +0900] [1309] [INFO] Shutting down: Master
+[2025-07-05 16:19:52 +0900] [1327] [INFO] Starting gunicorn 23.0.0
+[2025-07-05 16:19:52 +0900] [1327] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1327)
+[2025-07-05 16:19:52 +0900] [1327] [INFO] Using worker: sync
+[2025-07-05 16:19:52 +0900] [1333] [INFO] Booting worker with pid: 1333
+[2025-07-05 16:19:52 +0900] [1334] [INFO] Booting worker with pid: 1334
+[2025-07-05 16:19:52 +0900] [1335] [INFO] Booting worker with pid: 1335
+[2025-07-06 15:22:10 +0900] [1334] [INFO] Worker exiting (pid: 1334)
+[2025-07-06 15:22:10 +0900] [1333] [INFO] Worker exiting (pid: 1333)
+[2025-07-06 15:22:10 +0900] [1327] [INFO] Handling signal: term
+[2025-07-06 15:22:10 +0900] [1335] [INFO] Worker exiting (pid: 1335)
+[2025-07-06 15:22:10 +0900] [1327] [INFO] Shutting down: Master
+[2025-07-06 15:22:10 +0900] [1351] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 15:22:10 +0900] [1351] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1351)
+[2025-07-06 15:22:10 +0900] [1351] [INFO] Using worker: sync
+[2025-07-06 15:22:10 +0900] [1357] [INFO] Booting worker with pid: 1357
+[2025-07-06 15:22:10 +0900] [1358] [INFO] Booting worker with pid: 1358
+[2025-07-06 15:22:10 +0900] [1359] [INFO] Booting worker with pid: 1359
+[2025-07-06 16:25:59 +0900] [1359] [INFO] Worker exiting (pid: 1359)
+[2025-07-06 16:25:59 +0900] [1358] [INFO] Worker exiting (pid: 1358)
+[2025-07-06 16:25:59 +0900] [1351] [INFO] Handling signal: term
+[2025-07-06 16:25:59 +0900] [1357] [INFO] Worker exiting (pid: 1357)
+[2025-07-06 16:25:59 +0900] [1351] [INFO] Shutting down: Master
+[2025-07-06 16:25:59 +0900] [1369] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 16:25:59 +0900] [1369] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1369)
+[2025-07-06 16:25:59 +0900] [1369] [INFO] Using worker: sync
+[2025-07-06 16:25:59 +0900] [1375] [INFO] Booting worker with pid: 1375
+[2025-07-06 16:25:59 +0900] [1376] [INFO] Booting worker with pid: 1376
+[2025-07-06 16:25:59 +0900] [1377] [INFO] Booting worker with pid: 1377
+[2025-07-06 16:48:20 +0900] [1377] [INFO] Worker exiting (pid: 1377)
+[2025-07-06 16:48:20 +0900] [1376] [INFO] Worker exiting (pid: 1376)
+[2025-07-06 16:48:20 +0900] [1375] [INFO] Worker exiting (pid: 1375)
+[2025-07-06 16:48:20 +0900] [1369] [INFO] Handling signal: term
+[2025-07-06 16:48:21 +0900] [1369] [INFO] Shutting down: Master
+[2025-07-06 16:48:21 +0900] [1387] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 16:48:21 +0900] [1387] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1387)
+[2025-07-06 16:48:21 +0900] [1387] [INFO] Using worker: sync
+[2025-07-06 16:48:21 +0900] [1393] [INFO] Booting worker with pid: 1393
+[2025-07-06 16:48:21 +0900] [1394] [INFO] Booting worker with pid: 1394
+[2025-07-06 16:48:21 +0900] [1395] [INFO] Booting worker with pid: 1395
+[2025-07-06 16:53:10 +0900] [1395] [INFO] Worker exiting (pid: 1395)
+[2025-07-06 16:53:10 +0900] [1393] [INFO] Worker exiting (pid: 1393)
+[2025-07-06 16:53:10 +0900] [1394] [INFO] Worker exiting (pid: 1394)
+[2025-07-06 16:53:10 +0900] [1387] [INFO] Handling signal: term
+[2025-07-06 16:53:10 +0900] [1387] [INFO] Shutting down: Master
+[2025-07-06 16:53:10 +0900] [1405] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 16:53:10 +0900] [1405] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1405)
+[2025-07-06 16:53:10 +0900] [1405] [INFO] Using worker: sync
+[2025-07-06 16:53:10 +0900] [1411] [INFO] Booting worker with pid: 1411
+[2025-07-06 16:53:10 +0900] [1412] [INFO] Booting worker with pid: 1412
+[2025-07-06 16:53:10 +0900] [1413] [INFO] Booting worker with pid: 1413
+[2025-07-06 16:58:46 +0900] [1413] [INFO] Worker exiting (pid: 1413)
+[2025-07-06 16:58:46 +0900] [1411] [INFO] Worker exiting (pid: 1411)
+[2025-07-06 16:58:46 +0900] [1412] [INFO] Worker exiting (pid: 1412)
+[2025-07-06 16:58:46 +0900] [1405] [INFO] Handling signal: term
+[2025-07-06 16:58:47 +0900] [1405] [INFO] Shutting down: Master
+[2025-07-06 16:58:47 +0900] [1423] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 16:58:47 +0900] [1423] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1423)
+[2025-07-06 16:58:47 +0900] [1423] [INFO] Using worker: sync
+[2025-07-06 16:58:47 +0900] [1429] [INFO] Booting worker with pid: 1429
+[2025-07-06 16:58:47 +0900] [1430] [INFO] Booting worker with pid: 1430
+[2025-07-06 16:58:47 +0900] [1431] [INFO] Booting worker with pid: 1431
+[2025-07-06 17:06:10 +0900] [1430] [INFO] Worker exiting (pid: 1430)
+[2025-07-06 17:06:10 +0900] [1429] [INFO] Worker exiting (pid: 1429)
+[2025-07-06 17:06:10 +0900] [1431] [INFO] Worker exiting (pid: 1431)
+[2025-07-06 17:06:10 +0900] [1423] [INFO] Handling signal: term
+[2025-07-06 17:06:10 +0900] [1423] [INFO] Shutting down: Master
+[2025-07-06 17:06:10 +0900] [1441] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 17:06:10 +0900] [1441] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1441)
+[2025-07-06 17:06:10 +0900] [1441] [INFO] Using worker: sync
+[2025-07-06 17:06:10 +0900] [1447] [INFO] Booting worker with pid: 1447
+[2025-07-06 17:06:10 +0900] [1448] [INFO] Booting worker with pid: 1448
+[2025-07-06 17:06:10 +0900] [1449] [INFO] Booting worker with pid: 1449
+[2025-07-06 17:07:44 +0900] [1447] [INFO] Worker exiting (pid: 1447)
+[2025-07-06 17:07:44 +0900] [1448] [INFO] Worker exiting (pid: 1448)
+[2025-07-06 17:07:44 +0900] [1441] [INFO] Handling signal: term
+[2025-07-06 17:07:44 +0900] [1449] [INFO] Worker exiting (pid: 1449)
+[2025-07-06 17:07:44 +0900] [1441] [INFO] Shutting down: Master
+[2025-07-06 17:07:44 +0900] [1459] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 17:07:44 +0900] [1459] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1459)
+[2025-07-06 17:07:44 +0900] [1459] [INFO] Using worker: sync
+[2025-07-06 17:07:44 +0900] [1465] [INFO] Booting worker with pid: 1465
+[2025-07-06 17:07:44 +0900] [1466] [INFO] Booting worker with pid: 1466
+[2025-07-06 17:07:44 +0900] [1467] [INFO] Booting worker with pid: 1467
+[2025-07-06 17:19:11 +0900] [1466] [INFO] Worker exiting (pid: 1466)
+[2025-07-06 17:19:11 +0900] [1465] [INFO] Worker exiting (pid: 1465)
+[2025-07-06 17:19:11 +0900] [1467] [INFO] Worker exiting (pid: 1467)
+[2025-07-06 17:19:11 +0900] [1459] [INFO] Handling signal: term
+[2025-07-06 17:19:12 +0900] [1459] [INFO] Shutting down: Master
+[2025-07-06 17:19:12 +0900] [1477] [INFO] Starting gunicorn 23.0.0
+[2025-07-06 17:19:12 +0900] [1477] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1477)
+[2025-07-06 17:19:12 +0900] [1477] [INFO] Using worker: sync
+[2025-07-06 17:19:12 +0900] [1483] [INFO] Booting worker with pid: 1483
+[2025-07-06 17:19:12 +0900] [1484] [INFO] Booting worker with pid: 1484
+[2025-07-06 17:19:12 +0900] [1485] [INFO] Booting worker with pid: 1485

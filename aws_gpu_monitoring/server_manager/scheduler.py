@@ -250,33 +250,33 @@ def schedule_reservation_jobs(reservation):
     logger.info(f"예약 시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     logger.info(f"예약 종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     
-    # 시작 시간이 현재보다 미래인 경우에만 시작 작업 스케줄링
-    if reservation.start_time > now:
-        start_job_id = f"start_instance_{reservation_id}"
-        try:
-            scheduler.add_job(
-                start_instance_job,
-                trigger='date',
-                run_date=reservation.start_time,
-                id=start_job_id,
-                replace_existing=True,
-                args=[instance_id, reservation_id],
-                name=f"인스턴스 {instance_id} 시작 (예약 ID: {reservation_id})"
-            )
-            logger.info(f"인스턴스 {instance_id} 시작 작업이 {reservation.start_time}에 예약되었습니다.")
-            
-            # 작업이 제대로 등록되었는지 확인
-            job = scheduler.get_job(start_job_id)
-            if job:
-                logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
-            else:
-                logger.error(f"시작 작업이 등록되지 않았습니다: {start_job_id}")
-        except Exception as e:
-            logger.error(f"시작 작업 스케줄링 중 오류: {str(e)}")
-            import traceback
-            logger.error(f"상세 오류: {traceback.format_exc()}")
-    else:
-        logger.info(f"인스턴스 {instance_id} 시작 시간이 현재보다 과거이므로 시작 작업을 스케줄링하지 않습니다.")
+    # 시작 시간이 현재보다 미래인 경우에만 시작 작업 스케줄링 - 조건 해제 
+    # if reservation.start_time > now:
+    start_job_id = f"start_instance_{reservation_id}"
+    try:
+        scheduler.add_job(
+            start_instance_job,
+            trigger='date',
+            run_date=reservation.start_time,
+            id=start_job_id,
+            replace_existing=True,
+            args=[instance_id, reservation_id],
+            name=f"인스턴스 {instance_id} 시작 (예약 ID: {reservation_id})"
+        )
+        logger.info(f"인스턴스 {instance_id} 시작 작업이 {reservation.start_time}에 예약되었습니다.")
+        
+        # 작업이 제대로 등록되었는지 확인
+        job = scheduler.get_job(start_job_id)
+        if job:
+            logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+        else:
+            logger.error(f"시작 작업이 등록되지 않았습니다: {start_job_id}")
+    except Exception as e:
+        logger.error(f"시작 작업 스케줄링 중 오류: {str(e)}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
+    # else:
+    #     logger.info(f"인스턴스 {instance_id} 시작 시간이 현재보다 과거이므로 시작 작업을 스케줄링하지 않습니다.")
     
     # 종료 시간이 현재보다 미래인 경우에만 종료 작업 스케줄링
     if reservation.end_time > now:

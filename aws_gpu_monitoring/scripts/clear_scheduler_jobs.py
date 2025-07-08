@@ -79,7 +79,8 @@ if __name__ == "__main__":
     elif args.jobs:
         clear_specific_jobs(args.jobs)
     else:
-        # 기본적으로 로그에서 발견된 작업 제거
-        default_jobs = ['start_instance_23', 'stop_instance_23']
-        logger.info(f"기본 작업 제거 모드: {', '.join(default_jobs)}")
-        clear_specific_jobs(default_jobs)
+        # # 기본적으로 로그에서 발견된 작업 제거
+        # default_jobs = ['start_instance_23', 'stop_instance_23']
+        # logger.info(f"기본 작업 제거 모드: {', '.join(default_jobs)}")
+        # clear_specific_jobs(default_jobs)
+        clear_all_jobs()
