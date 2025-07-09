@@ -250,20 +250,26 @@ def schedule_reservation_jobs(reservation):
     logger.info(f"예약 시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     logger.info(f"예약 종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     
-    # 시작 시간이 현재보다 미래인 경우에만 시작 작업 스케줄링 - 조건 해제 
-    # if reservation.start_time > now:
+    # 시작 시간이 현재보다 미래인 경우 스케줄링, 과거인 경우 즉시 실행
     start_job_id = f"start_instance_{reservation_id}"
     try:
-        scheduler.add_job(
-            start_instance_job,
-            trigger='date',
-            run_date=reservation.start_time,
-            id=start_job_id,
-            replace_existing=True,
-            args=[instance_id, reservation_id],
-            name=f"인스턴스 {instance_id} 시작 (예약 ID: {reservation_id})"
-        )
-        logger.info(f"인스턴스 {instance_id} 시작 작업이 {reservation.start_time}에 예약되었습니다.")
+        if reservation.start_time > now:
+            # 미래 시간인 경우 예약
+            scheduler.add_job(
+                start_instance_job,
+                trigger='date',
+                run_date=reservation.start_time,
+                id=start_job_id,
+                replace_existing=True,
+                args=[instance_id, reservation_id],
+                name=f"인스턴스 {instance_id} 시작 (예약 ID: {reservation_id})"
+            )
+            logger.info(f"인스턴스 {instance_id} 시작 작업이 {reservation.start_time}에 예약되었습니다.")
+        else:
+            # 과거 시간인 경우 즉시 실행
+            logger.info(f"예약 시작 시간이 현재보다 과거입니다. 인스턴스 {instance_id} 시작 작업을 즉시 실행합니다.")
+            start_instance_job(instance_id, reservation_id)
+            # 스케줄러에 작업 추가는 하지 않음
         
         # 작업이 제대로 등록되었는지 확인
         job = scheduler.get_job(start_job_id)
