@@ -33,17 +33,15 @@ class SMSNotificationService:
         """
         NCP API 요청을 위한 서명 생성
         """
-        method = "POST"
         uri = f"/sms/v2/services/{self.service_id}/messages"
-        
-        message = method + " " + uri + "\n" + timestamp + "\n" + self.access_key
-        message = bytes(message, 'UTF-8')
+        message = f"POST {uri}\n{timestamp}\n{self.access_key}"
         
         secret_key_bytes = bytes(self.secret_key, 'UTF-8')
-        signing_key = base64.urlsafe_b64encode(hmac.new(secret_key_bytes, message, digestmod=hashlib.sha256).digest()
-)
+        message = bytes(message, 'UTF-8')
         
-        return signing_key.decode('ascii')
+        signing_key = base64.b64encode(hmac.new(secret_key_bytes, message, digestmod=hashlib.sha256).digest())
+        
+        return signing_key.decode('UTF-8')
     
     def send_sms(self, phone_number, message):
         """
@@ -70,7 +68,7 @@ class SMSNotificationService:
         
         # 요청 헤더
         headers = {
-            'Content-Type': 'application/json; charset=utf-8',
+            'Content-Type': 'application/json; charset=UTF-8',
             'x-ncp-apigw-timestamp': timestamp,
             'x-ncp-iam-access-key': self.access_key,
             'x-ncp-apigw-signature-v2': self._make_signature(timestamp)
@@ -85,8 +83,7 @@ class SMSNotificationService:
             'content': message,
             'messages': [
                 {
-                    'to': phone_number,
-                    'content': message  # 각 메시지별로 내용 지정
+                    'to': phone_number
                 }
             ]
         }
@@ -95,12 +92,11 @@ class SMSNotificationService:
         
         try:
             # API 요청
-            json_data = json.dumps(request_data, ensure_ascii=False)
             logger.info(f"API 요청 URL: {self.api_url}")
             response = requests.post(
                 self.api_url, 
                 headers=headers, 
-                json=request_data
+                data=json.dumps(request_data)
             )
             
             # 응답 처리
