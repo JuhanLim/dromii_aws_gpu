@@ -1463,3 +1463,394 @@ AttributeError: module 'server_manager.reservation_views' has no attribute 'upda
 [2025-07-06 17:19:12 +0900] [1483] [INFO] Booting worker with pid: 1483
 [2025-07-06 17:19:12 +0900] [1484] [INFO] Booting worker with pid: 1484
 [2025-07-06 17:19:12 +0900] [1485] [INFO] Booting worker with pid: 1485
+[2025-07-08 17:36:14 +0900] [1485] [INFO] Worker exiting (pid: 1485)
+[2025-07-08 17:36:14 +0900] [1483] [INFO] Worker exiting (pid: 1483)
+[2025-07-08 17:36:14 +0900] [1484] [INFO] Worker exiting (pid: 1484)
+[2025-07-08 17:36:14 +0900] [1477] [INFO] Handling signal: term
+[2025-07-08 17:36:14 +0900] [1477] [ERROR] Worker (pid:1483) was sent SIGTERM!
+[2025-07-08 17:36:14 +0900] [1477] [ERROR] Worker (pid:1485) was sent SIGTERM!
+[2025-07-08 17:36:14 +0900] [1477] [ERROR] Worker (pid:1484) was sent SIGTERM!
+[2025-07-08 17:36:14 +0900] [1477] [INFO] Shutting down: Master
+[2025-07-08 17:36:14 +0900] [1504] [INFO] Starting gunicorn 23.0.0
+[2025-07-08 17:36:14 +0900] [1504] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1504)
+[2025-07-08 17:36:14 +0900] [1504] [INFO] Using worker: sync
+[2025-07-08 17:36:14 +0900] [1510] [INFO] Booting worker with pid: 1510
+[2025-07-08 17:36:14 +0900] [1511] [INFO] Booting worker with pid: 1511
+[2025-07-08 17:36:14 +0900] [1512] [INFO] Booting worker with pid: 1512
+[2025-07-09 15:47:59 +0900] [1510] [INFO] Worker exiting (pid: 1510)
+[2025-07-09 15:47:59 +0900] [1511] [INFO] Worker exiting (pid: 1511)
+[2025-07-09 15:47:59 +0900] [1512] [INFO] Worker exiting (pid: 1512)
+[2025-07-09 15:47:59 +0900] [1504] [INFO] Handling signal: term
+[2025-07-09 15:47:59 +0900] [1504] [ERROR] Worker (pid:1511) was sent SIGTERM!
+[2025-07-09 15:47:59 +0900] [1504] [ERROR] Worker (pid:1512) was sent SIGTERM!
+[2025-07-09 15:47:59 +0900] [1504] [ERROR] Worker (pid:1510) was sent SIGTERM!
+[2025-07-09 15:48:00 +0900] [1504] [INFO] Shutting down: Master
+[2025-07-09 15:48:00 +0900] [1523] [INFO] Starting gunicorn 23.0.0
+[2025-07-09 15:48:00 +0900] [1523] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1523)
+[2025-07-09 15:48:00 +0900] [1523] [INFO] Using worker: sync
+[2025-07-09 15:48:00 +0900] [1529] [INFO] Booting worker with pid: 1529
+[2025-07-09 15:48:00 +0900] [1530] [INFO] Booting worker with pid: 1530
+[2025-07-09 15:48:00 +0900] [1531] [INFO] Booting worker with pid: 1531
+[2025-07-18 13:15:44 +0900] [1530] [INFO] Worker exiting (pid: 1530)
+[2025-07-18 13:15:44 +0900] [1531] [INFO] Worker exiting (pid: 1531)
+[2025-07-18 13:15:44 +0900] [1529] [INFO] Worker exiting (pid: 1529)
+[2025-07-18 13:15:44 +0900] [1523] [INFO] Handling signal: term
+[2025-07-18 13:15:44 +0900] [1523] [ERROR] Worker (pid:1530) was sent SIGTERM!
+[2025-07-18 13:15:44 +0900] [1523] [ERROR] Worker (pid:1531) was sent SIGTERM!
+[2025-07-18 13:15:44 +0900] [1523] [ERROR] Worker (pid:1529) was sent SIGTERM!
+[2025-07-18 13:15:45 +0900] [1523] [INFO] Shutting down: Master
+[2025-07-18 13:15:45 +0900] [1544] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 13:15:45 +0900] [1544] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1544)
+[2025-07-18 13:15:45 +0900] [1544] [INFO] Using worker: sync
+[2025-07-18 13:15:45 +0900] [1550] [INFO] Booting worker with pid: 1550
+[2025-07-18 13:15:45 +0900] [1551] [INFO] Booting worker with pid: 1551
+[2025-07-18 13:15:45 +0900] [1552] [INFO] Booting worker with pid: 1552
+[2025-07-18 13:15:45 +0900] [1551] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/apps/registry.py", line 124, in populate
+    app_config.ready()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/apps.py", line 27, in ready
+    self.module.autodiscover()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/__init__.py", line 52, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/admin.py", line 3, in <module>
+    from .models import Instance, Reservation, User
+ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aws_gpu_monitoring/server_manager/models/__init__.py)
+[2025-07-18 13:15:45 +0900] [1550] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/apps/registry.py", line 124, in populate
+    app_config.ready()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/apps.py", line 27, in ready
+    self.module.autodiscover()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/__init__.py", line 52, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/admin.py", line 3, in <module>
+    from .models import Instance, Reservation, User
+ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aws_gpu_monitoring/server_manager/models/__init__.py)
+[2025-07-18 13:15:45 +0900] [1550] [INFO] Worker exiting (pid: 1550)
+[2025-07-18 13:15:45 +0900] [1551] [INFO] Worker exiting (pid: 1551)
+[2025-07-18 13:15:45 +0900] [1544] [ERROR] Worker (pid:1550) exited with code 3
+[2025-07-18 13:15:45 +0900] [1552] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/apps/registry.py", line 124, in populate
+    app_config.ready()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/apps.py", line 27, in ready
+    self.module.autodiscover()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/__init__.py", line 52, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/admin.py", line 3, in <module>
+    from .models import Instance, Reservation, User
+ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aws_gpu_monitoring/server_manager/models/__init__.py)
+[2025-07-18 13:15:45 +0900] [1552] [INFO] Worker exiting (pid: 1552)
+[2025-07-18 13:15:45 +0900] [1544] [ERROR] Worker (pid:1551) exited with code 3
+[2025-07-18 13:17:36 +0900] [1560] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 13:17:36 +0900] [1560] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1560)
+[2025-07-18 13:17:36 +0900] [1560] [INFO] Using worker: sync
+[2025-07-18 13:17:36 +0900] [1566] [INFO] Booting worker with pid: 1566
+[2025-07-18 13:17:36 +0900] [1567] [INFO] Booting worker with pid: 1567
+[2025-07-18 13:17:37 +0900] [1568] [INFO] Booting worker with pid: 1568
+[2025-07-18 13:17:37 +0900] [1566] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/apps/registry.py", line 124, in populate
+    app_config.ready()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/apps.py", line 27, in ready
+    self.module.autodiscover()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/__init__.py", line 52, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/admin.py", line 4, in <module>
+    from .models import Instance, Reservation, Profile
+ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aws_gpu_monitoring/server_manager/models/__init__.py)
+[2025-07-18 13:17:37 +0900] [1566] [INFO] Worker exiting (pid: 1566)
+[2025-07-18 13:17:37 +0900] [1560] [ERROR] Worker (pid:1566) exited with code 3
+[2025-07-18 13:17:37 +0900] [1567] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/apps/registry.py", line 124, in populate
+    app_config.ready()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/apps.py", line 27, in ready
+    self.module.autodiscover()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/__init__.py", line 52, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/admin.py", line 4, in <module>
+    from .models import Instance, Reservation, Profile
+ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aws_gpu_monitoring/server_manager/models/__init__.py)
+[2025-07-18 13:17:37 +0900] [1567] [INFO] Worker exiting (pid: 1567)
+[2025-07-18 13:17:37 +0900] [1568] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/aws_gpu_monitoring/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/apps/registry.py", line 124, in populate
+    app_config.ready()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/apps.py", line 27, in ready
+    self.module.autodiscover()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/admin/__init__.py", line 52, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/aws_gpu_monitoring/server_manager/admin.py", line 4, in <module>
+    from .models import Instance, Reservation, Profile
+ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aws_gpu_monitoring/server_manager/models/__init__.py)
+[2025-07-18 13:17:37 +0900] [1568] [INFO] Worker exiting (pid: 1568)
+[2025-07-18 13:17:37 +0900] [1560] [ERROR] Worker (pid:1567) exited with code 3
+[2025-07-18 13:22:18 +0900] [1575] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 13:22:18 +0900] [1575] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1575)
+[2025-07-18 13:22:18 +0900] [1575] [INFO] Using worker: sync
+[2025-07-18 13:22:18 +0900] [1581] [INFO] Booting worker with pid: 1581
+[2025-07-18 13:22:19 +0900] [1582] [INFO] Booting worker with pid: 1582
+[2025-07-18 13:22:19 +0900] [1583] [INFO] Booting worker with pid: 1583
+[2025-07-18 13:23:22 +0900] [1582] [INFO] Worker exiting (pid: 1582)
+[2025-07-18 13:23:22 +0900] [1581] [INFO] Worker exiting (pid: 1581)
+[2025-07-18 13:23:22 +0900] [1583] [INFO] Worker exiting (pid: 1583)
+[2025-07-18 13:23:22 +0900] [1575] [INFO] Handling signal: term
+[2025-07-18 13:23:22 +0900] [1575] [INFO] Shutting down: Master
+[2025-07-18 13:23:22 +0900] [1598] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 13:23:22 +0900] [1598] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1598)
+[2025-07-18 13:23:22 +0900] [1598] [INFO] Using worker: sync
+[2025-07-18 13:23:22 +0900] [1604] [INFO] Booting worker with pid: 1604
+[2025-07-18 13:23:22 +0900] [1605] [INFO] Booting worker with pid: 1605
+[2025-07-18 13:23:22 +0900] [1606] [INFO] Booting worker with pid: 1606
+[2025-07-18 13:26:15 +0900] [1605] [INFO] Worker exiting (pid: 1605)
+[2025-07-18 13:26:15 +0900] [1606] [INFO] Worker exiting (pid: 1606)
+[2025-07-18 13:26:15 +0900] [1604] [INFO] Worker exiting (pid: 1604)
+[2025-07-18 13:26:15 +0900] [1598] [INFO] Handling signal: term
+[2025-07-18 13:26:15 +0900] [1598] [INFO] Shutting down: Master
+[2025-07-18 13:26:15 +0900] [1616] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 13:26:15 +0900] [1616] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1616)
+[2025-07-18 13:26:15 +0900] [1616] [INFO] Using worker: sync
+[2025-07-18 13:26:15 +0900] [1622] [INFO] Booting worker with pid: 1622
+[2025-07-18 13:26:15 +0900] [1623] [INFO] Booting worker with pid: 1623
+[2025-07-18 13:26:15 +0900] [1624] [INFO] Booting worker with pid: 1624
+[2025-07-18 13:31:24 +0900] [1623] [INFO] Worker exiting (pid: 1623)
+[2025-07-18 13:31:24 +0900] [1622] [INFO] Worker exiting (pid: 1622)
+[2025-07-18 13:31:24 +0900] [1624] [INFO] Worker exiting (pid: 1624)
+[2025-07-18 13:31:24 +0900] [1616] [INFO] Handling signal: term
+[2025-07-18 13:31:24 +0900] [1616] [INFO] Shutting down: Master
+[2025-07-18 13:31:24 +0900] [1634] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 13:31:24 +0900] [1634] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1634)
+[2025-07-18 13:31:24 +0900] [1634] [INFO] Using worker: sync
+[2025-07-18 13:31:24 +0900] [1639] [INFO] Booting worker with pid: 1639
+[2025-07-18 13:31:24 +0900] [1640] [INFO] Booting worker with pid: 1640
+[2025-07-18 13:31:24 +0900] [1641] [INFO] Booting worker with pid: 1641

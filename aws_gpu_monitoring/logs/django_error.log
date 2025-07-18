@@ -32,3 +32,63 @@ Traceback (most recent call last):
   File "/app/venv_awsgpu/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: server_manager/reservation/admin_update.html
+ERROR 2025-07-18 13:22:21,660 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: 오류:  server_manager_user.phone_number 칼럼 없음
+LINE 1: ...."first_name", "server_manager_user"."last_name", "server_ma...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 56, in _view_wrapper
+    test_pass = test_func(request.user)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 79, in <lambda>
+    lambda u: u.is_authenticated,
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/auth/middleware.py", line 40, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/auth/middleware.py", line 20, in get_user
+    request._cached_user = auth.get_user(request)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 311, in get_user
+    user = backend.get_user(user_id)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/contrib/auth/backends.py", line 232, in get_user
+    user = UserModel._default_manager.get(pk=user_id)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/query.py", line 629, in get
+    num = len(clone)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/query.py", line 366, in __len__
+    self._fetch_all()
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/app/venv_awsgpu/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: 오류:  server_manager_user.phone_number 칼럼 없음
+LINE 1: ...."first_name", "server_manager_user"."last_name", "server_ma...
+                                                             ^
+

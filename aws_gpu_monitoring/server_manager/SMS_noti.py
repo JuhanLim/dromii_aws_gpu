@@ -20,9 +20,9 @@ class SMSNotificationService:
     """
     def __init__(self):
         # 환경 변수에서 API 키 및 설정 가져오기
-        self.access_key = os.environ.get('NCP_ACCESS_KEY', '')
-        self.secret_key = os.environ.get('NCP_SECRET_KEY', '')
-        self.service_id = os.environ.get('NCP_SERVICE_ID', '')
+        self.access_key = config('NCP_ACCESS_KEY')
+        self.secret_key = config('NCP_SECRET_KEY')
+        self.service_id = config('NCP_SERVICE_ID')
         self.api_url = f"https://sens.apigw.ntruss.com/sms/v2/services/{self.service_id}/messages"
         
         # API 키가 없으면 로그 출력
@@ -80,7 +80,7 @@ class SMSNotificationService:
             'type': 'SMS',
             'contentType': 'COMM',
             'countryCode': '82',
-            'from': '01012345678',  # 발신번호 (실제 등록된 번호로 변경 필요)
+            'from': '01062664396',  # 발신번호 (실제 등록된 번호로 변경 필요)
             'content': message,
             'messages': [
                 {
@@ -122,10 +122,10 @@ class SMSNotificationService:
         """
         return f"[드로미 GPU 서버 예약 알림]\n\n" \
                f"사용자: {reservation.user.username}\n" \
-               f"인스턴스: {reservation.instance.name}\n" \
-               f"시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M')}\n" \
-               f"종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M')}\n" \
-               f"목적: {reservation.purpose}\n\n" \
+            #    f"인스턴스: {reservation.instance.name}\n" \
+            #    f"시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M')}\n" \
+            #    f"종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M')}\n" \
+            #    f"목적: {reservation.purpose}\n\n" \
                f"관리자 페이지에서 승인해주세요."
     
     def to_user_body(self, reservation):
@@ -139,12 +139,12 @@ class SMSNotificationService:
             str: 메시지 내용
         """
         return f"[드로미 GPU 서버 예약 승인 알림]\n\n" \
-               f"{reservation.user.username}님의 예약이 승인되었습니다.\n\n" \
-               f"인스턴스: {reservation.instance.name}\n" \
-               f"시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M')}\n" \
-               f"종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M')}\n" \
-               f"목적: {reservation.purpose}\n\n" \
-               f"예약된 시간에 자동으로 인스턴스가 시작됩니다."
+               f"{reservation.user.username}님의 예약이 승인되었습니다.\n\n" #\
+            #    f"인스턴스: {reservation.instance.name}\n" \
+            #    f"시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M')}\n" \
+            #    f"종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M')}\n" \
+            #    f"목적: {reservation.purpose}\n\n" \
+            #    f"예약된 시간에 자동으로 인스턴스가 시작됩니다."
     
     def send_reservation_notification_to_admin(self, reservation):
         """
@@ -157,7 +157,7 @@ class SMSNotificationService:
             bool: 전송 성공 여부
         """
         # 관리자 전화번호 (환경 변수에서 가져오기)
-        admin_phone = os.environ.get('ADMIN_PHONE_NUMBER', '')
+        admin_phone = config('ADMIN_PHONE_NUMBER')
         if not admin_phone:
             logger.error("관리자 전화번호가 설정되지 않아 SMS를 전송할 수 없습니다.")
             return False
