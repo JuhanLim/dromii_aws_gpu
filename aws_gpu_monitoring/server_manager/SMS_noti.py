@@ -94,7 +94,7 @@ class SMSNotificationService:
             response = requests.post(
                 self.api_url, 
                 headers=headers, 
-                data=json.dumps(request_data)
+                data=json.dumps(request_data, ensure_ascii=False).encode('utf-8')
             )
             
             # 응답 처리
