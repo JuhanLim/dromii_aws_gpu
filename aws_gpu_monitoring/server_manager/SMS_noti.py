@@ -85,17 +85,22 @@ class SMSNotificationService:
             'content': message,
             'messages': [
                 {
-                    'to': phone_number
+                    'to': phone_number,
+                    'content': message  # 각 메시지별로 내용 지정
                 }
             ]
         }
+        # 로그에 요청 데이터 기록 (민감 정보 제외)
+        logger.info(f"SMS 요청 데이터: 수신자={phone_number}, 메시지 길이={len(message)}")
         
         try:
             # API 요청
+            json_data = json.dumps(request_data, ensure_ascii=False)
+            logger.info(f"API 요청 URL: {self.api_url}")
             response = requests.post(
                 self.api_url, 
                 headers=headers, 
-                data=json.dumps(request_data, ensure_ascii=False).encode('utf-8')
+                json=request_data
             )
             
             # 응답 처리
