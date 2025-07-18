@@ -24,7 +24,7 @@ class SMSNotificationService:
         self.secret_key = config('NCP_SECRET_KEY')
         self.service_id = config('NCP_SERVICE_ID')
         self.api_url = f"https://sens.apigw.ntruss.com/sms/v2/services/{self.service_id}/messages"
-        
+        #logger.info(f"{self.access_key},{self.secret_key},{self.service_id},{self.api_url}")
         # API 키가 없으면 로그 출력
         if not self.access_key or not self.secret_key or not self.service_id:
             logger.warning("NCP SMS API 키가 설정되지 않았습니다.")
@@ -40,9 +40,10 @@ class SMSNotificationService:
         message = bytes(message, 'UTF-8')
         
         secret_key_bytes = bytes(self.secret_key, 'UTF-8')
-        signing_key = base64.b64encode(hmac.new(secret_key_bytes, message, digestmod=hashlib.sha256).digest())
+        signing_key = base64.urlsafe_b64encode(hmac.new(secret_key_bytes, message, digestmod=hashlib.sha256).digest()
+)
         
-        return signing_key.decode('UTF-8')
+        return signing_key.decode('ascii')
     
     def send_sms(self, phone_number, message):
         """
@@ -107,7 +108,7 @@ class SMSNotificationService:
                 return False
                 
         except Exception as e:
-            logger.error(f"SMS 전송 중 오류 발생: {str(e)}")
+            logger.exception("SMS 전송 중 오류 발생")
             return False
     
     def to_admin_body(self, reservation):
