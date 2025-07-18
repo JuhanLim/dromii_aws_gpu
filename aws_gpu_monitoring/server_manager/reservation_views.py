@@ -359,9 +359,20 @@ def admin_reservation_update_api(request, reservation_id):
                     reservation.admin_comment = admin_comment
                     reservation.save()
                     
-                    # 상태가 승인됨으로 변경된 경우 스케줄러에 작업 추가
+                    # 상태가 승인됨으로 변경된 경우 스케줄러에 작업 추가 및 사용자에게 알림
                     if old_status != 'approved' and status == 'approved':
                         schedule_reservation_jobs(reservation)
+                        
+                        # SMS 알림 전송 (사용자에게)
+                        try:
+                            from .SMS_noti import sms_service
+                            sms_result = sms_service.send_approval_notification_to_user(reservation)
+                            logger.info(f"예약 ID {reservation_id} SMS 승인 알림 전송 완료: {sms_result}")
+                        except Exception as e:
+                            logger.error(f"SMS 알림 전송 실패: {str(e)}")
+                            import traceback
+                            logger.error(f"상세 오류: {traceback.format_exc()}")
+                    
                     # 상태가 승인됨에서 다른 상태로 변경된 경우 스케줄러에서 작업 제거
                     elif old_status == 'approved' and status != 'approved':
                         cancel_reservation_jobs(reservation)
