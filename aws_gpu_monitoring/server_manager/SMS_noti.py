@@ -1,7 +1,6 @@
 """
 SMS 알림 서비스 - 네이버 클라우드 플랫폼 SMS API 사용
 """
-import os
 import time
 import hmac
 import base64
@@ -11,6 +10,7 @@ import json
 import logging
 from datetime import datetime
 from django.conf import settings
+from decouple import config
 
 logger = logging.getLogger(__name__)
 
@@ -121,12 +121,8 @@ class SMSNotificationService:
             str: 메시지 내용
         """
         return f"[드로미 GPU 서버 예약 알림]\n\n" \
-               f"사용자: {reservation.user.username}\n" \
-            #    f"인스턴스: {reservation.instance.name}\n" \
-            #    f"시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M')}\n" \
-            #    f"종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M')}\n" \
-            #    f"목적: {reservation.purpose}\n\n" \
-               f"관리자 페이지에서 승인해주세요."
+                f"사용자: {reservation.user.username}\n" \
+                f"관리자 페이지에서 승인해주세요."
     
     def to_user_body(self, reservation):
         """
@@ -139,12 +135,7 @@ class SMSNotificationService:
             str: 메시지 내용
         """
         return f"[드로미 GPU 서버 예약 승인 알림]\n\n" \
-               f"{reservation.user.username}님의 예약이 승인되었습니다.\n\n" #\
-            #    f"인스턴스: {reservation.instance.name}\n" \
-            #    f"시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M')}\n" \
-            #    f"종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M')}\n" \
-            #    f"목적: {reservation.purpose}\n\n" \
-            #    f"예약된 시간에 자동으로 인스턴스가 시작됩니다."
+                f"{reservation.user.username}님의 예약이 승인되었습니다."
     
     def send_reservation_notification_to_admin(self, reservation):
         """
