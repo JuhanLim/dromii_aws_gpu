@@ -46,6 +46,7 @@ class User(AbstractUser):
     username = models.CharField(_('사용자 이름'), max_length=50, unique=True)
     first_name = models.CharField(_('이름'), max_length=30, blank=True)
     last_name = models.CharField(_('성'), max_length=30, blank=True)
+    phone_number = models.CharField(_('전화번호'), max_length=20, blank=True, null=True)
     is_active = models.BooleanField(_('활성화 상태'), default=True)
     is_staff = models.BooleanField(_('스태프 상태'), default=False)
     is_admin = models.BooleanField(_('관리자 상태'), default=False)
