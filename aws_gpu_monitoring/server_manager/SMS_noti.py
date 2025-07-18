@@ -60,10 +60,9 @@ class SMSNotificationService:
         
         # 전화번호 형식 확인 및 변환
         phone_number = phone_number.replace('-', '')
-        if not phone_number.startswith('+82') and phone_number.startswith('0'):
-            # 한국 번호인 경우 +82 형식으로 변환
-            phone_number = '+82' + phone_number[1:]
-        
+        # if not phone_number.startswith('+82') and phone_number.startswith('0'):
+        #     # 한국 번호인 경우 +82 형식으로 변환
+        #     phone_number = '+82' + phone_number[1:]
         timestamp = str(int(time.time() * 1000))
         
         # 요청 헤더
@@ -73,7 +72,6 @@ class SMSNotificationService:
             'x-ncp-iam-access-key': self.access_key,
             'x-ncp-apigw-signature-v2': self._make_signature(timestamp)
         }
-        
         # 요청 데이터
         request_data = {
             'type': 'SMS',
