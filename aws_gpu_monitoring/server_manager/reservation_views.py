@@ -54,12 +54,12 @@ def create_reservation(request, instance_id):
                 reservation.instance = instance
                 reservation.save()
                 
-                # # 카카오톡 알림 전송 (관리자에게)
-                # try:
-                #     from .services.kakao_service import kakao_service
-                #     kakao_service.send_reservation_notification_to_admin(reservation)
-                # except Exception as e:
-                #     logger.error(f"카카오톡 알림 전송 실패: {str(e)}")
+                # 카카오톡 알림 전송 (관리자에게)
+                try:
+                    from .KAKAO_noti import kakao_service
+                    kakao_service.send_reservation_notification_to_admin(reservation)
+                except Exception as e:
+                    logger.error(f"카카오톡 알림 전송 실패: {str(e)}")
                 
                 # SMS 알림 전송 (관리자에게)
                 try:
@@ -178,15 +178,15 @@ def admin_reservation_update(request, reservation_id):
                     schedule_reservation_jobs(updated_reservation)
                     logger.info(f"예약 ID {reservation_id} 승인으로 인한 스케줄링 작업 추가 완료")
                     
-                    # # 카카오톡 알림 전송 (사용자에게)
-                    # try:
-                    #     from .services.kakao_service import kakao_service
-                    #     kakao_service.send_approval_notification_to_user(updated_reservation)
-                    #     logger.info(f"예약 ID {reservation_id} 카카오톡 승인 알림 전송 완료")
-                    # except Exception as e:
-                    #     logger.error(f"카카오톡 알림 전송 실패: {str(e)}")
+                    # 카카오톡 알림 전송 (사용자에게)
+                    try:
+                        from .KAKAO_noti import kakao_service
+                        kakao_service.send_approval_notification_to_user(updated_reservation)
+                        logger.info(f"예약 ID {reservation_id} 카카오톡 승인 알림 전송 완료")
+                    except Exception as e:
+                        logger.error(f"카카오톡 알림 전송 실패: {str(e)}")
                     
-                    # SMS 알림 전송 (사용자에게)
+                    #SMS 알림 전송 (사용자에게)
                     try:
                         from .SMS_noti import sms_service
                         sms_service.send_approval_notification_to_user(updated_reservation)
