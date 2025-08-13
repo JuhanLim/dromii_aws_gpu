@@ -1967,3 +1967,53 @@ ImportError: cannot import name 'Instance' from 'server_manager.models' (/app/aw
 [2025-07-18 14:21:54 +0900] [1819] [INFO] Booting worker with pid: 1819
 [2025-07-18 14:21:54 +0900] [1820] [INFO] Booting worker with pid: 1820
 [2025-07-18 14:21:54 +0900] [1821] [INFO] Booting worker with pid: 1821
+[2025-07-18 14:47:01 +0900] [1819] [INFO] Worker exiting (pid: 1819)
+[2025-07-18 14:47:01 +0900] [1820] [INFO] Worker exiting (pid: 1820)
+[2025-07-18 14:47:01 +0900] [1813] [INFO] Handling signal: term
+[2025-07-18 14:47:01 +0900] [1821] [INFO] Worker exiting (pid: 1821)
+[2025-07-18 14:47:01 +0900] [1813] [INFO] Shutting down: Master
+[2025-07-18 14:47:01 +0900] [1831] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 14:47:01 +0900] [1831] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (1831)
+[2025-07-18 14:47:01 +0900] [1831] [INFO] Using worker: sync
+[2025-07-18 14:47:01 +0900] [1837] [INFO] Booting worker with pid: 1837
+[2025-07-18 14:47:01 +0900] [1838] [INFO] Booting worker with pid: 1838
+[2025-07-18 14:47:01 +0900] [1839] [INFO] Booting worker with pid: 1839
+[2025-08-04 14:34:22 +0900] [22] [INFO] Starting gunicorn 23.0.0
+[2025-08-04 14:34:22 +0900] [22] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (22)
+[2025-08-04 14:34:22 +0900] [22] [INFO] Using worker: sync
+[2025-08-04 14:34:22 +0900] [28] [INFO] Booting worker with pid: 28
+[2025-08-04 14:34:22 +0900] [29] [INFO] Booting worker with pid: 29
+[2025-08-04 14:34:22 +0900] [30] [INFO] Booting worker with pid: 30
+[2025-08-04 14:35:55 +0900] [22] [INFO] Handling signal: term
+[2025-08-04 14:35:55 +0900] [37] [INFO] Starting gunicorn 23.0.0
+[2025-08-04 14:35:55 +0900] [37] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (37)
+[2025-08-04 14:35:55 +0900] [37] [INFO] Using worker: sync
+[2025-08-04 14:35:55 +0900] [43] [INFO] Booting worker with pid: 43
+[2025-08-04 14:35:55 +0900] [44] [INFO] Booting worker with pid: 44
+[2025-08-04 14:35:56 +0900] [45] [INFO] Booting worker with pid: 45
+[2025-08-04 14:36:18 +0900] [37] [INFO] Handling signal: term
+[2025-08-04 14:36:18 +0900] [52] [INFO] Starting gunicorn 23.0.0
+[2025-08-04 14:36:18 +0900] [52] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (52)
+[2025-08-04 14:36:18 +0900] [52] [INFO] Using worker: sync
+[2025-08-04 14:36:18 +0900] [58] [INFO] Booting worker with pid: 58
+[2025-08-04 14:36:18 +0900] [59] [INFO] Booting worker with pid: 59
+[2025-08-04 14:36:18 +0900] [60] [INFO] Booting worker with pid: 60
+[2025-08-04 14:36:25 +0900] [22] [INFO] Shutting down: Master
+[2025-08-04 14:36:48 +0900] [37] [INFO] Shutting down: Master
+[2025-08-12 15:49:23 +0900] [12] [INFO] Starting gunicorn 23.0.0
+[2025-08-12 15:49:23 +0900] [12] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (12)
+[2025-08-12 15:49:23 +0900] [12] [INFO] Using worker: sync
+[2025-08-12 15:49:23 +0900] [18] [INFO] Booting worker with pid: 18
+[2025-08-12 15:49:23 +0900] [19] [INFO] Booting worker with pid: 19
+[2025-08-12 15:49:23 +0900] [20] [INFO] Booting worker with pid: 20
+[2025-08-13 09:18:52 +0900] [19] [INFO] Worker exiting (pid: 19)
+[2025-08-13 09:18:52 +0900] [20] [INFO] Worker exiting (pid: 20)
+[2025-08-13 09:18:52 +0900] [18] [INFO] Worker exiting (pid: 18)
+[2025-08-13 09:18:52 +0900] [12] [INFO] Handling signal: term
+[2025-08-13 09:18:53 +0900] [12] [INFO] Shutting down: Master
+[2025-08-13 09:18:53 +0900] [31] [INFO] Starting gunicorn 23.0.0
+[2025-08-13 09:18:53 +0900] [31] [INFO] Listening at: unix:/app/aws_gpu_monitoring/gunicorn.sock (31)
+[2025-08-13 09:18:53 +0900] [31] [INFO] Using worker: sync
+[2025-08-13 09:18:53 +0900] [37] [INFO] Booting worker with pid: 37
+[2025-08-13 09:18:53 +0900] [38] [INFO] Booting worker with pid: 38
+[2025-08-13 09:18:53 +0900] [39] [INFO] Booting worker with pid: 39
