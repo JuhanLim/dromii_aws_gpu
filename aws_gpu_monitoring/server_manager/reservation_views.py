@@ -363,6 +363,16 @@ def admin_reservation_update_api(request, reservation_id):
                     if old_status != 'approved' and status == 'approved':
                         schedule_reservation_jobs(reservation)
                         
+                        # 카카오톡 알림 전송 (사용자에게)
+                        try:
+                            from .KAKAO_noti import kakao_service
+                            kakao_result = kakao_service.send_approval_notification_to_user(reservation)
+                            logger.info(f"예약 ID {reservation_id} 카카오톡 승인 알림 전송 완료: {kakao_result}")
+                        except Exception as e:
+                            logger.error(f"카카오톡 알림 전송 실패: {str(e)}")
+                            import traceback
+                            logger.error(f"상세 오류: {traceback.format_exc()}")
+                        
                         # SMS 알림 전송 (사용자에게)
                         try:
                             from .SMS_noti import sms_service
