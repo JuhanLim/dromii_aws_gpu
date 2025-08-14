@@ -3749,3 +3749,481 @@ INFO 2025-08-13 09:20:49,293 SMS_noti SMS 요청 데이터: 수신자=0105132377
 INFO 2025-08-13 09:20:49,293 SMS_noti API 요청 URL: https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:82460946810:dromii_sms_kakao/messages
 INFO 2025-08-13 09:20:49,352 SMS_noti SMS 전송 성공: {'requestId': 'RSSA-1755044449337-4028-78002647-hFrpvUsJ', 'requestTime': '2025-08-13T09:20:49.337', 'statusCode': '202', 'statusName': 'success'}
 INFO 2025-08-13 09:20:49,352 reservation_views 예약 ID 64 SMS 승인 알림 전송 완료: True
+INFO 2025-08-13 09:35:02,702 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,703 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,705 scheduler 활성 예약 조회 결과: 1개 발견
+INFO 2025-08-13 09:35:02,709 scheduler 예약 ID 64 스케줄링 시작 (인스턴스: i-0fd598907992e2172)
+INFO 2025-08-13 09:35:02,709 scheduler 예약 ID 64 스케줄링 시작
+INFO 2025-08-13 09:35:02,709 scheduler 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,709 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,710 scheduler 예약 시작 시간: 2025-08-13 00:20:00 UTC+0000
+INFO 2025-08-13 09:35:02,710 scheduler 예약 종료 시간: 2025-08-13 08:20:00 UTC+0000
+INFO 2025-08-13 09:35:02,710 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-13 09:35:02,710 scheduler ======================================================
+INFO 2025-08-13 09:35:02,710 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-13 09:35:02.710370+09:00 =====
+INFO 2025-08-13 09:35:02,710 scheduler ======================================================
+INFO 2025-08-13 09:35:02,710 scheduler 예약 64에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-13 09:35:02,710 scheduler 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,710 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,712 scheduler 예약 정보 - 시작: 2025-08-13 00:20:00+00:00, 종료: 2025-08-13 08:20:00+00:00, 상태: approved
+INFO 2025-08-13 09:35:02,712 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 09:35:02,748 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,748 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,750 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,750 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,753 scheduler 활성 예약 조회 결과: 1개 발견
+INFO 2025-08-13 09:35:02,755 scheduler 활성 예약 조회 결과: 1개 발견
+INFO 2025-08-13 09:35:02,758 scheduler 예약 ID 64 스케줄링 시작 (인스턴스: i-0fd598907992e2172)
+INFO 2025-08-13 09:35:02,758 scheduler 예약 ID 64 스케줄링 시작
+INFO 2025-08-13 09:35:02,759 scheduler 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,759 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,759 scheduler 예약 시작 시간: 2025-08-13 00:20:00 UTC+0000
+INFO 2025-08-13 09:35:02,759 scheduler 예약 종료 시간: 2025-08-13 08:20:00 UTC+0000
+INFO 2025-08-13 09:35:02,759 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-13 09:35:02,759 scheduler ======================================================
+INFO 2025-08-13 09:35:02,759 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-13 09:35:02.759430+09:00 =====
+INFO 2025-08-13 09:35:02,759 scheduler ======================================================
+INFO 2025-08-13 09:35:02,759 scheduler 예약 64에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-13 09:35:02,759 scheduler 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,759 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,761 scheduler 예약 ID 64 스케줄링 시작 (인스턴스: i-0fd598907992e2172)
+INFO 2025-08-13 09:35:02,761 scheduler 예약 ID 64 스케줄링 시작
+INFO 2025-08-13 09:35:02,761 scheduler 예약 정보 - 시작: 2025-08-13 00:20:00+00:00, 종료: 2025-08-13 08:20:00+00:00, 상태: approved
+INFO 2025-08-13 09:35:02,761 scheduler 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,761 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 09:35:02,761 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,761 scheduler 예약 시작 시간: 2025-08-13 00:20:00 UTC+0000
+INFO 2025-08-13 09:35:02,761 scheduler 예약 종료 시간: 2025-08-13 08:20:00 UTC+0000
+INFO 2025-08-13 09:35:02,761 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-13 09:35:02,761 scheduler ======================================================
+INFO 2025-08-13 09:35:02,761 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-13 09:35:02.761785+09:00 =====
+INFO 2025-08-13 09:35:02,761 scheduler ======================================================
+INFO 2025-08-13 09:35:02,761 scheduler 예약 64에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-13 09:35:02,762 scheduler 현재 서버 시간(한국): 2025-08-13 09:35:02 KST+0900
+INFO 2025-08-13 09:35:02,762 scheduler 현재 UTC 시간: 2025-08-13 00:35:02 UTC+0000
+INFO 2025-08-13 09:35:02,763 scheduler 예약 정보 - 시작: 2025-08-13 00:20:00+00:00, 종료: 2025-08-13 08:20:00+00:00, 상태: approved
+INFO 2025-08-13 09:35:02,763 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 09:35:03,527 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: stopped
+INFO 2025-08-13 09:35:03,527 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 시작 (시도 1/3)...
+INFO 2025-08-13 09:35:03,528 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: stopped
+INFO 2025-08-13 09:35:03,528 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 시작 (시도 1/3)...
+INFO 2025-08-13 09:35:03,570 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: stopped
+INFO 2025-08-13 09:35:03,571 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 시작 (시도 1/3)...
+INFO 2025-08-13 09:35:04,157 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.', 'data': {'StartingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 0, 'Name': 'pending'}, 'PreviousState': {'Code': 80, 'Name': 'stopped'}}], 'ResponseMetadata': {'RequestId': 'ca4023ef-5258-48e7-bc43-7d5824eb253b', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'ca4023ef-5258-48e7-bc43-7d5824eb253b', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Wed, 13 Aug 2025 00:35:04 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 09:35:04,157 scheduler 인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 09:35:04,157 scheduler 시작 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 09:35:04,169 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.', 'data': {'StartingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 0, 'Name': 'pending'}, 'PreviousState': {'Code': 0, 'Name': 'pending'}}], 'ResponseMetadata': {'RequestId': 'ec0ea05d-7eac-43ad-8bcf-032a0eb39977', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'ec0ea05d-7eac-43ad-8bcf-032a0eb39977', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '410', 'date': 'Wed, 13 Aug 2025 00:35:04 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 09:35:04,170 scheduler 인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 09:35:04,170 scheduler 시작 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 09:35:04,380 scheduler 시작 요청 후 인스턴스 i-0fd598907992e2172의 상태: stopped
+INFO 2025-08-13 09:35:04,381 scheduler ======================================================
+INFO 2025-08-13 09:35:04,381 scheduler ===== 인스턴스 시작 작업 실행 완료 - 2025-08-13 09:35:04.381306+09:00 =====
+INFO 2025-08-13 09:35:04,381 scheduler ======================================================
+ERROR 2025-08-13 09:35:04,381 scheduler 시작 작업이 등록되지 않았습니다: start_instance_64
+INFO 2025-08-13 09:35:04,382 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-13 08:20:00+00:00에 예약되었습니다.
+ERROR 2025-08-13 09:35:04,382 scheduler 중지 작업 스케줄링 중 오류: 'Job' object has no attribute 'next_run_time'
+ERROR 2025-08-13 09:35:04,383 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 327, in schedule_reservation_jobs
+    logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+AttributeError: 'Job' object has no attribute 'next_run_time'
+
+INFO 2025-08-13 09:35:04,384 scheduler 1개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-08-13 09:35:04,388 scheduler 시작 요청 후 인스턴스 i-0fd598907992e2172의 상태: stopped
+INFO 2025-08-13 09:35:04,388 scheduler ======================================================
+INFO 2025-08-13 09:35:04,388 scheduler ===== 인스턴스 시작 작업 실행 완료 - 2025-08-13 09:35:04.388716+09:00 =====
+INFO 2025-08-13 09:35:04,388 scheduler ======================================================
+ERROR 2025-08-13 09:35:04,388 scheduler 시작 작업이 등록되지 않았습니다: start_instance_64
+INFO 2025-08-13 09:35:04,389 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-13 08:20:00+00:00에 예약되었습니다.
+ERROR 2025-08-13 09:35:04,389 scheduler 중지 작업 스케줄링 중 오류: 'Job' object has no attribute 'next_run_time'
+ERROR 2025-08-13 09:35:04,389 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 327, in schedule_reservation_jobs
+    logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+AttributeError: 'Job' object has no attribute 'next_run_time'
+
+INFO 2025-08-13 09:35:04,389 scheduler 1개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-08-13 09:35:04,395 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-08-13 09:35:04,397 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-08-13 09:35:04,436 scheduler 초기화 후 스케줄러에 등록된 작업 수: 1
+INFO 2025-08-13 09:35:04,436 scheduler 작업 ID: stop_instance_64, 다음 실행 시간: 2025-08-13 08:20:00+00:00
+INFO 2025-08-13 09:35:04,436 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-08-13 09:35:04,436 apps 스케줄러가 실행 중입니다.
+INFO 2025-08-13 09:35:04,437 apps 등록된 작업 수: 1
+INFO 2025-08-13 09:35:04,437 apps 작업: stop_instance_64, 다음 실행: 2025-08-13 08:20:00+00:00
+INFO 2025-08-13 09:35:04,563 scheduler 초기화 후 스케줄러에 등록된 작업 수: 1
+INFO 2025-08-13 09:35:04,563 scheduler 작업 ID: stop_instance_64, 다음 실행 시간: 2025-08-13 08:20:00+00:00
+INFO 2025-08-13 09:35:04,563 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-08-13 09:35:04,563 apps 스케줄러가 실행 중입니다.
+INFO 2025-08-13 09:35:04,565 apps 등록된 작업 수: 1
+INFO 2025-08-13 09:35:04,565 apps 작업: stop_instance_64, 다음 실행: 2025-08-13 08:20:00+00:00
+INFO 2025-08-13 09:35:05,250 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.', 'data': {'StartingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 0, 'Name': 'pending'}, 'PreviousState': {'Code': 0, 'Name': 'pending'}}], 'ResponseMetadata': {'RequestId': '1dec1364-8ce1-45a6-9a7c-2f9a678565a4', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '1dec1364-8ce1-45a6-9a7c-2f9a678565a4', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '410', 'date': 'Wed, 13 Aug 2025 00:35:05 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 1}}}
+INFO 2025-08-13 09:35:05,250 scheduler 인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 09:35:05,251 scheduler 시작 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 09:35:05,487 scheduler 시작 요청 후 인스턴스 i-0fd598907992e2172의 상태: pending
+INFO 2025-08-13 09:35:05,487 scheduler ======================================================
+INFO 2025-08-13 09:35:05,487 scheduler ===== 인스턴스 시작 작업 실행 완료 - 2025-08-13 09:35:05.487681+09:00 =====
+INFO 2025-08-13 09:35:05,487 scheduler ======================================================
+ERROR 2025-08-13 09:35:05,487 scheduler 시작 작업이 등록되지 않았습니다: start_instance_64
+INFO 2025-08-13 09:35:05,488 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-13 08:20:00+00:00에 예약되었습니다.
+ERROR 2025-08-13 09:35:05,488 scheduler 중지 작업 스케줄링 중 오류: 'Job' object has no attribute 'next_run_time'
+ERROR 2025-08-13 09:35:05,488 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 327, in schedule_reservation_jobs
+    logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+AttributeError: 'Job' object has no attribute 'next_run_time'
+
+INFO 2025-08-13 09:35:05,488 scheduler 1개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-08-13 09:35:05,496 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-08-13 09:35:05,535 scheduler 초기화 후 스케줄러에 등록된 작업 수: 1
+INFO 2025-08-13 09:35:05,535 scheduler 작업 ID: stop_instance_64, 다음 실행 시간: 2025-08-13 08:20:00+00:00
+INFO 2025-08-13 09:35:05,535 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-08-13 09:35:05,535 apps 스케줄러가 실행 중입니다.
+INFO 2025-08-13 09:35:05,537 apps 등록된 작업 수: 1
+INFO 2025-08-13 09:35:05,537 apps 작업: stop_instance_64, 다음 실행: 2025-08-13 08:20:00+00:00
+INFO 2025-08-13 09:35:16,489 reservation_views 전체 예약 수: 37, 해당 인스턴스 예약 수: 37
+INFO 2025-08-13 09:35:16,493 reservation_views 필터링된 예약 수: 27
+INFO 2025-08-13 09:35:16,493 reservation_views 예약 ID 64 시간: 2025-08-13T09:20:00+0900 ~ 2025-08-13T17:20:00+0900
+INFO 2025-08-13 09:35:16,494 reservation_views 예약 ID 63 시간: 2025-08-14T09:19:00+0900 ~ 2025-08-14T13:19:00+0900
+INFO 2025-08-13 09:35:16,494 reservation_views 예약 ID 62 시간: 2025-08-13T09:07:00+0900 ~ 2025-08-13T09:16:00+0900
+INFO 2025-08-13 09:35:16,494 reservation_views 예약 ID 61 시간: 2025-07-25T09:00:00+0900 ~ 2025-07-25T18:00:00+0900
+INFO 2025-08-13 09:35:16,494 reservation_views 예약 ID 60 시간: 2025-07-24T09:03:00+0900 ~ 2025-07-24T18:03:00+0900
+INFO 2025-08-13 09:35:16,494 reservation_views 예약 ID 59 시간: 2025-07-23T10:10:00+0900 ~ 2025-07-23T18:10:00+0900
+INFO 2025-08-13 09:35:16,494 reservation_views 예약 ID 58 시간: 2025-07-22T09:09:00+0900 ~ 2025-07-22T18:09:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 57 시간: 2025-07-21T10:57:00+0900 ~ 2025-07-21T18:20:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 56 시간: 2025-07-19T14:47:00+0900 ~ 2025-07-19T18:47:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 55 시간: 2025-07-18T14:22:00+0900 ~ 2025-07-18T18:22:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 54 시간: 2025-07-18T14:18:00+0900 ~ 2025-07-18T18:18:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 53 시간: 2025-07-18T14:08:00+0900 ~ 2025-07-18T19:08:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 52 시간: 2025-07-18T14:05:00+0900 ~ 2025-07-18T18:05:00+0900
+INFO 2025-08-13 09:35:16,495 reservation_views 예약 ID 51 시간: 2025-07-18T14:02:00+0900 ~ 2025-07-18T19:02:00+0900
+INFO 2025-08-13 09:35:16,496 reservation_views 예약 ID 50 시간: 2025-07-18T13:57:00+0900 ~ 2025-07-18T18:57:00+0900
+INFO 2025-08-13 09:35:16,496 reservation_views 예약 ID 49 시간: 2025-07-19T13:42:00+0900 ~ 2025-07-19T17:42:00+0900
+INFO 2025-08-13 09:35:16,496 reservation_views 예약 ID 48 시간: 2025-07-18T13:38:00+0900 ~ 2025-07-18T18:38:00+0900
+INFO 2025-08-13 09:35:16,496 reservation_views 예약 ID 47 시간: 2025-07-18T13:36:00+0900 ~ 2025-07-18T18:36:00+0900
+INFO 2025-08-13 09:35:16,496 reservation_views 예약 ID 46 시간: 2025-07-18T13:31:00+0900 ~ 2025-07-18T18:31:00+0900
+INFO 2025-08-13 09:35:16,496 reservation_views 예약 ID 45 시간: 2025-07-18T13:26:00+0900 ~ 2025-07-18T18:26:00+0900
+INFO 2025-08-13 09:35:16,497 reservation_views 예약 ID 44 시간: 2025-07-18T13:24:00+0900 ~ 2025-07-18T18:24:00+0900
+INFO 2025-08-13 09:35:16,497 reservation_views 예약 ID 43 시간: 2025-07-17T09:00:00+0900 ~ 2025-07-17T18:00:00+0900
+INFO 2025-08-13 09:35:16,497 reservation_views 예약 ID 42 시간: 2025-07-16T09:00:00+0900 ~ 2025-07-16T18:00:00+0900
+INFO 2025-08-13 09:35:16,497 reservation_views 예약 ID 41 시간: 2025-07-15T09:00:00+0900 ~ 2025-07-15T19:00:00+0900
+INFO 2025-08-13 09:35:16,497 reservation_views 예약 ID 40 시간: 2025-07-14T16:25:00+0900 ~ 2025-07-14T18:30:00+0900
+INFO 2025-08-13 09:35:16,497 reservation_views 예약 ID 39 시간: 2025-07-15T09:00:00+0900 ~ 2025-07-15T18:00:00+0900
+INFO 2025-08-13 09:35:16,498 reservation_views 예약 ID 38 시간: 2025-07-14T10:35:00+0900 ~ 2025-07-14T18:00:00+0900
+INFO 2025-08-13 09:35:57,397 reservation_views 전체 예약 수: 37, 해당 인스턴스 예약 수: 37
+INFO 2025-08-13 09:35:57,400 reservation_views 필터링된 예약 수: 27
+INFO 2025-08-13 09:35:57,400 reservation_views 예약 ID 64 시간: 2025-08-13T09:20:00+0900 ~ 2025-08-13T17:20:00+0900
+INFO 2025-08-13 09:35:57,400 reservation_views 예약 ID 63 시간: 2025-08-14T09:19:00+0900 ~ 2025-08-14T13:19:00+0900
+INFO 2025-08-13 09:35:57,400 reservation_views 예약 ID 62 시간: 2025-08-13T09:07:00+0900 ~ 2025-08-13T09:16:00+0900
+INFO 2025-08-13 09:35:57,401 reservation_views 예약 ID 61 시간: 2025-07-25T09:00:00+0900 ~ 2025-07-25T18:00:00+0900
+INFO 2025-08-13 09:35:57,401 reservation_views 예약 ID 60 시간: 2025-07-24T09:03:00+0900 ~ 2025-07-24T18:03:00+0900
+INFO 2025-08-13 09:35:57,401 reservation_views 예약 ID 59 시간: 2025-07-23T10:10:00+0900 ~ 2025-07-23T18:10:00+0900
+INFO 2025-08-13 09:35:57,401 reservation_views 예약 ID 58 시간: 2025-07-22T09:09:00+0900 ~ 2025-07-22T18:09:00+0900
+INFO 2025-08-13 09:35:57,401 reservation_views 예약 ID 57 시간: 2025-07-21T10:57:00+0900 ~ 2025-07-21T18:20:00+0900
+INFO 2025-08-13 09:35:57,401 reservation_views 예약 ID 56 시간: 2025-07-19T14:47:00+0900 ~ 2025-07-19T18:47:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 55 시간: 2025-07-18T14:22:00+0900 ~ 2025-07-18T18:22:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 54 시간: 2025-07-18T14:18:00+0900 ~ 2025-07-18T18:18:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 53 시간: 2025-07-18T14:08:00+0900 ~ 2025-07-18T19:08:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 52 시간: 2025-07-18T14:05:00+0900 ~ 2025-07-18T18:05:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 51 시간: 2025-07-18T14:02:00+0900 ~ 2025-07-18T19:02:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 50 시간: 2025-07-18T13:57:00+0900 ~ 2025-07-18T18:57:00+0900
+INFO 2025-08-13 09:35:57,402 reservation_views 예약 ID 49 시간: 2025-07-19T13:42:00+0900 ~ 2025-07-19T17:42:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 48 시간: 2025-07-18T13:38:00+0900 ~ 2025-07-18T18:38:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 47 시간: 2025-07-18T13:36:00+0900 ~ 2025-07-18T18:36:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 46 시간: 2025-07-18T13:31:00+0900 ~ 2025-07-18T18:31:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 45 시간: 2025-07-18T13:26:00+0900 ~ 2025-07-18T18:26:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 44 시간: 2025-07-18T13:24:00+0900 ~ 2025-07-18T18:24:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 43 시간: 2025-07-17T09:00:00+0900 ~ 2025-07-17T18:00:00+0900
+INFO 2025-08-13 09:35:57,403 reservation_views 예약 ID 42 시간: 2025-07-16T09:00:00+0900 ~ 2025-07-16T18:00:00+0900
+INFO 2025-08-13 09:35:57,404 reservation_views 예약 ID 41 시간: 2025-07-15T09:00:00+0900 ~ 2025-07-15T19:00:00+0900
+INFO 2025-08-13 09:35:57,404 reservation_views 예약 ID 40 시간: 2025-07-14T16:25:00+0900 ~ 2025-07-14T18:30:00+0900
+INFO 2025-08-13 09:35:57,404 reservation_views 예약 ID 39 시간: 2025-07-15T09:00:00+0900 ~ 2025-07-15T18:00:00+0900
+INFO 2025-08-13 09:35:57,404 reservation_views 예약 ID 38 시간: 2025-07-14T10:35:00+0900 ~ 2025-07-14T18:00:00+0900
+INFO 2025-08-13 09:36:21,050 KAKAO_noti 카카오톡 알림톡 요청 데이터: 수신자=01051323777, 메시지 길이=72
+INFO 2025-08-13 09:36:21,050 KAKAO_noti API 요청 URL: https://sens.apigw.ntruss.com/alimtalk/v2/services/ncp:kkobizmsg:kr:82460916374:dromii_sms_kakao/messages
+INFO 2025-08-13 09:36:21,111 KAKAO_noti 카카오톡 알림톡 전송 성공: {'requestId': 'RBAA-1755045381091-9575-78002648-QgzGWFmy', 'requestTime': '2025-08-13T09:36:21.091', 'statusCode': '202', 'statusName': 'processing', 'messages': [{'messageId': '1b0601af-b484-482b-a8cc-db7ec0bdad71', 'countryCode': '82', 'to': '01051323777', 'content': '[드로미] GPU 서버 예약 발생\n\njuhan님의 예약이 신청되었습니다.\n2025-08-13 17:40의 예약을 승인해 주십시오.', 'requestStatusCode': 'A000', 'requestStatusName': 'success', 'requestStatusDesc': '성공', 'useSmsFailover': False}]}
+INFO 2025-08-13 09:36:21,112 SMS_noti SMS 요청 데이터: 수신자=01051323777, 메시지 길이=48
+INFO 2025-08-13 09:36:21,112 SMS_noti API 요청 URL: https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:82460946810:dromii_sms_kakao/messages
+INFO 2025-08-13 09:36:21,153 SMS_noti SMS 전송 성공: {'requestId': 'RSSA-1755045381141-4625-78002647-ieAzhAHd', 'requestTime': '2025-08-13T09:36:21.141', 'statusCode': '202', 'statusName': 'success'}
+INFO 2025-08-13 09:36:41,858 scheduler 예약 ID 65 스케줄링 시작
+INFO 2025-08-13 09:36:41,859 scheduler 현재 서버 시간(한국): 2025-08-13 09:36:41 KST+0900
+INFO 2025-08-13 09:36:41,859 scheduler 현재 UTC 시간: 2025-08-13 00:36:41 UTC+0000
+INFO 2025-08-13 09:36:41,859 scheduler 예약 시작 시간: 2025-08-13 08:40:00 UTC+0000
+INFO 2025-08-13 09:36:41,859 scheduler 예약 종료 시간: 2025-08-13 08:48:00 UTC+0000
+INFO 2025-08-13 09:36:41,861 scheduler 인스턴스 i-0fd598907992e2172 시작 작업이 2025-08-13 08:40:00+00:00에 예약되었습니다.
+INFO 2025-08-13 09:36:41,865 scheduler 시작 작업 확인: ID=start_instance_65, 다음 실행 시간=2025-08-13 08:40:00+00:00
+INFO 2025-08-13 09:36:41,868 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-13 08:48:00+00:00에 예약되었습니다.
+INFO 2025-08-13 09:36:41,872 scheduler 중지 작업 확인: ID=stop_instance_65, 다음 실행 시간=2025-08-13 08:48:00+00:00
+INFO 2025-08-13 09:36:41,873 KAKAO_noti 카카오톡 알림톡 요청 데이터: 수신자=01051323777, 메시지 길이=76
+INFO 2025-08-13 09:36:41,873 KAKAO_noti API 요청 URL: https://sens.apigw.ntruss.com/alimtalk/v2/services/ncp:kkobizmsg:kr:82460916374:dromii_sms_kakao/messages
+INFO 2025-08-13 09:36:41,946 KAKAO_noti 카카오톡 알림톡 전송 성공: {'requestId': 'RBAA-1755045401916-8782-78002648-kCDFNzkO', 'requestTime': '2025-08-13T09:36:41.916', 'statusCode': '202', 'statusName': 'processing', 'messages': [{'messageId': 'c56758dd-3f3b-4374-9aaf-3b67bcba511a', 'countryCode': '82', 'to': '01051323777', 'content': '[드로미] GPU 서버 예약 알림\n\njuhan님의 예약이 승인되었습니다.\n2025-08-13 08:40에 예약하신 서버사용이 가능합니다.', 'requestStatusCode': 'A000', 'requestStatusName': 'success', 'requestStatusDesc': '성공', 'useSmsFailover': False}]}
+INFO 2025-08-13 09:36:41,946 reservation_views 예약 ID 65 카카오톡 승인 알림 전송 완료: True
+INFO 2025-08-13 09:36:41,947 SMS_noti SMS 요청 데이터: 수신자=01051323777, 메시지 길이=43
+INFO 2025-08-13 09:36:41,947 SMS_noti API 요청 URL: https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:82460946810:dromii_sms_kakao/messages
+INFO 2025-08-13 09:36:41,994 SMS_noti SMS 전송 성공: {'requestId': 'RSSA-1755045401977-4666-78002647-ieAzhAHd', 'requestTime': '2025-08-13T09:36:41.977', 'statusCode': '202', 'statusName': 'success'}
+INFO 2025-08-13 09:36:41,994 reservation_views 예약 ID 65 SMS 승인 알림 전송 완료: True
+INFO 2025-08-13 17:20:00,003 scheduler ======================================================
+INFO 2025-08-13 17:20:00,003 scheduler ======================================================
+INFO 2025-08-13 17:20:00,003 scheduler ======================================================
+INFO 2025-08-13 17:20:00,005 scheduler ===== 인스턴스 중지 작업 실행 시작 - 2025-08-13 17:20:00.004987+09:00 =====
+INFO 2025-08-13 17:20:00,005 scheduler ===== 인스턴스 중지 작업 실행 시작 - 2025-08-13 17:20:00.004993+09:00 =====
+INFO 2025-08-13 17:20:00,005 scheduler ======================================================
+INFO 2025-08-13 17:20:00,005 scheduler ======================================================
+INFO 2025-08-13 17:20:00,005 scheduler ===== 인스턴스 중지 작업 실행 시작 - 2025-08-13 17:20:00.005264+09:00 =====
+INFO 2025-08-13 17:20:00,005 scheduler 예약 64에 따라 인스턴스 i-0fd598907992e2172 중지 작업 실행
+INFO 2025-08-13 17:20:00,005 scheduler 예약 64에 따라 인스턴스 i-0fd598907992e2172 중지 작업 실행
+INFO 2025-08-13 17:20:00,005 scheduler ======================================================
+INFO 2025-08-13 17:20:00,005 scheduler 현재 서버 시간(한국): 2025-08-13 17:20:00 KST+0900
+INFO 2025-08-13 17:20:00,005 scheduler 현재 서버 시간(한국): 2025-08-13 17:20:00 KST+0900
+INFO 2025-08-13 17:20:00,005 scheduler 예약 64에 따라 인스턴스 i-0fd598907992e2172 중지 작업 실행
+INFO 2025-08-13 17:20:00,005 scheduler 현재 UTC 시간: 2025-08-13 08:20:00 UTC+0000
+INFO 2025-08-13 17:20:00,005 scheduler 현재 UTC 시간: 2025-08-13 08:20:00 UTC+0000
+INFO 2025-08-13 17:20:00,005 scheduler 현재 서버 시간(한국): 2025-08-13 17:20:00 KST+0900
+INFO 2025-08-13 17:20:00,006 scheduler 현재 UTC 시간: 2025-08-13 08:20:00 UTC+0000
+INFO 2025-08-13 17:20:00,065 scheduler 예약 정보 - 시작: 2025-08-13 00:20:00+00:00, 종료: 2025-08-13 08:20:00+00:00, 상태: approved
+INFO 2025-08-13 17:20:00,065 scheduler 예약 정보 - 시작: 2025-08-13 00:20:00+00:00, 종료: 2025-08-13 08:20:00+00:00, 상태: approved
+INFO 2025-08-13 17:20:00,065 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 17:20:00,065 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 17:20:00,165 scheduler 예약 정보 - 시작: 2025-08-13 00:20:00+00:00, 종료: 2025-08-13 08:20:00+00:00, 상태: approved
+INFO 2025-08-13 17:20:00,165 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 17:20:00,828 scheduler 중지 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-13 17:20:00,828 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 시작 (시도 1/3)...
+INFO 2025-08-13 17:20:00,869 scheduler 중지 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-13 17:20:00,870 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 시작 (시도 1/3)...
+INFO 2025-08-13 17:20:00,911 scheduler 중지 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-13 17:20:00,912 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 시작 (시도 1/3)...
+INFO 2025-08-13 17:20:01,614 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.', 'data': {'StoppingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 64, 'Name': 'stopping'}, 'PreviousState': {'Code': 16, 'Name': 'running'}}], 'ResponseMetadata': {'RequestId': '26d77e5e-9ea2-43fd-b499-20050a7e3243', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '26d77e5e-9ea2-43fd-b499-20050a7e3243', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Wed, 13 Aug 2025 08:20:01 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 17:20:01,615 scheduler 인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 17:20:01,615 scheduler 중지 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 17:20:01,633 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.', 'data': {'StoppingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 64, 'Name': 'stopping'}, 'PreviousState': {'Code': 64, 'Name': 'stopping'}}], 'ResponseMetadata': {'RequestId': '22683ab1-8f77-402a-8c93-aa52a56fb94e', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '22683ab1-8f77-402a-8c93-aa52a56fb94e', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '412', 'date': 'Wed, 13 Aug 2025 08:20:01 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 17:20:01,633 scheduler 인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 17:20:01,633 scheduler 중지 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 17:20:01,730 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.', 'data': {'StoppingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 64, 'Name': 'stopping'}, 'PreviousState': {'Code': 64, 'Name': 'stopping'}}], 'ResponseMetadata': {'RequestId': '29d56bbe-c0d6-4b15-b9a5-86f733df84cd', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '29d56bbe-c0d6-4b15-b9a5-86f733df84cd', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '412', 'date': 'Wed, 13 Aug 2025 08:20:01 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 17:20:01,730 scheduler 인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 17:20:01,730 scheduler 중지 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 17:20:01,825 scheduler 중지 요청 후 인스턴스 i-0fd598907992e2172의 상태: running
+INFO 2025-08-13 17:20:01,828 scheduler 예약 ID 64 상태를 'completed'로 업데이트했습니다.
+INFO 2025-08-13 17:20:01,828 scheduler ======================================================
+INFO 2025-08-13 17:20:01,828 scheduler ===== 인스턴스 중지 작업 실행 완료 - 2025-08-13 17:20:01.828847+09:00 =====
+INFO 2025-08-13 17:20:01,829 scheduler ======================================================
+INFO 2025-08-13 17:20:01,829 scheduler 작업 실행됨: stop_instance_64, 실행 시간: 2025-08-13 17:20:01 KST+0900
+INFO 2025-08-13 17:20:01,865 scheduler 중지 요청 후 인스턴스 i-0fd598907992e2172의 상태: running
+INFO 2025-08-13 17:20:01,868 scheduler 예약 ID 64 상태를 'completed'로 업데이트했습니다.
+INFO 2025-08-13 17:20:01,868 scheduler ======================================================
+INFO 2025-08-13 17:20:01,868 scheduler ===== 인스턴스 중지 작업 실행 완료 - 2025-08-13 17:20:01.868747+09:00 =====
+INFO 2025-08-13 17:20:01,868 scheduler ======================================================
+INFO 2025-08-13 17:20:01,869 scheduler 작업 실행됨: stop_instance_64, 실행 시간: 2025-08-13 17:20:01 KST+0900
+INFO 2025-08-13 17:20:01,964 scheduler 중지 요청 후 인스턴스 i-0fd598907992e2172의 상태: stopping
+INFO 2025-08-13 17:20:01,967 scheduler 예약 ID 64 상태를 'completed'로 업데이트했습니다.
+INFO 2025-08-13 17:20:01,968 scheduler ======================================================
+INFO 2025-08-13 17:20:01,968 scheduler ===== 인스턴스 중지 작업 실행 완료 - 2025-08-13 17:20:01.968242+09:00 =====
+INFO 2025-08-13 17:20:01,968 scheduler ======================================================
+INFO 2025-08-13 17:20:01,968 scheduler 작업 실행됨: stop_instance_64, 실행 시간: 2025-08-13 17:20:01 KST+0900
+INFO 2025-08-13 17:40:00,004 scheduler ======================================================
+INFO 2025-08-13 17:40:00,004 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-13 17:40:00.004324+09:00 =====
+INFO 2025-08-13 17:40:00,004 scheduler ======================================================
+INFO 2025-08-13 17:40:00,004 scheduler 예약 65에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-13 17:40:00,004 scheduler 현재 서버 시간(한국): 2025-08-13 17:40:00 KST+0900
+INFO 2025-08-13 17:40:00,004 scheduler 현재 UTC 시간: 2025-08-13 08:40:00 UTC+0000
+INFO 2025-08-13 17:40:00,007 scheduler 예약 정보 - 시작: 2025-08-13 08:40:00+00:00, 종료: 2025-08-13 08:48:00+00:00, 상태: approved
+INFO 2025-08-13 17:40:00,007 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 17:40:00,745 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: stopped
+INFO 2025-08-13 17:40:00,745 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 시작 (시도 1/3)...
+INFO 2025-08-13 17:40:01,481 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.', 'data': {'StartingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 0, 'Name': 'pending'}, 'PreviousState': {'Code': 80, 'Name': 'stopped'}}], 'ResponseMetadata': {'RequestId': 'a38ccdea-6ffa-4e71-b2a1-2fbdbdb981d4', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'a38ccdea-6ffa-4e71-b2a1-2fbdbdb981d4', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Wed, 13 Aug 2025 08:40:01 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 17:40:01,481 scheduler 인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 17:40:01,481 scheduler 시작 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 17:40:01,697 scheduler 시작 요청 후 인스턴스 i-0fd598907992e2172의 상태: pending
+INFO 2025-08-13 17:40:01,697 scheduler ======================================================
+INFO 2025-08-13 17:40:01,698 scheduler ===== 인스턴스 시작 작업 실행 완료 - 2025-08-13 17:40:01.698027+09:00 =====
+INFO 2025-08-13 17:40:01,698 scheduler ======================================================
+INFO 2025-08-13 17:40:01,698 scheduler 작업 실행됨: start_instance_65, 실행 시간: 2025-08-13 17:40:01 KST+0900
+INFO 2025-08-13 17:48:00,004 scheduler ======================================================
+INFO 2025-08-13 17:48:00,004 scheduler ===== 인스턴스 중지 작업 실행 시작 - 2025-08-13 17:48:00.004887+09:00 =====
+INFO 2025-08-13 17:48:00,005 scheduler ======================================================
+INFO 2025-08-13 17:48:00,005 scheduler 예약 65에 따라 인스턴스 i-0fd598907992e2172 중지 작업 실행
+INFO 2025-08-13 17:48:00,005 scheduler 현재 서버 시간(한국): 2025-08-13 17:48:00 KST+0900
+INFO 2025-08-13 17:48:00,005 scheduler 현재 UTC 시간: 2025-08-13 08:48:00 UTC+0000
+INFO 2025-08-13 17:48:00,007 scheduler 예약 정보 - 시작: 2025-08-13 08:40:00+00:00, 종료: 2025-08-13 08:48:00+00:00, 상태: approved
+INFO 2025-08-13 17:48:00,008 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-13 17:48:00,781 scheduler 중지 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-13 17:48:00,781 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 시작 (시도 1/3)...
+INFO 2025-08-13 17:48:01,580 scheduler 인스턴스 i-0fd598907992e2172 중지 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.', 'data': {'StoppingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 64, 'Name': 'stopping'}, 'PreviousState': {'Code': 16, 'Name': 'running'}}], 'ResponseMetadata': {'RequestId': 'a6f50098-06fb-4f10-a634-36fa8ef7c021', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'a6f50098-06fb-4f10-a634-36fa8ef7c021', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Wed, 13 Aug 2025 08:48:01 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-13 17:48:01,581 scheduler 인스턴스 i-0fd598907992e2172 중지 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-13 17:48:01,581 scheduler 중지 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-13 17:48:01,806 scheduler 중지 요청 후 인스턴스 i-0fd598907992e2172의 상태: running
+INFO 2025-08-13 17:48:01,809 scheduler 예약 ID 65 상태를 'completed'로 업데이트했습니다.
+INFO 2025-08-13 17:48:01,809 scheduler ======================================================
+INFO 2025-08-13 17:48:01,809 scheduler ===== 인스턴스 중지 작업 실행 완료 - 2025-08-13 17:48:01.809570+09:00 =====
+INFO 2025-08-13 17:48:01,809 scheduler ======================================================
+INFO 2025-08-13 17:48:01,810 scheduler 작업 실행됨: stop_instance_65, 실행 시간: 2025-08-13 17:48:01 KST+0900
+INFO 2025-08-14 10:21:01,800 reservation_views 전체 예약 수: 38, 해당 인스턴스 예약 수: 38
+INFO 2025-08-14 10:21:01,803 reservation_views 필터링된 예약 수: 24
+INFO 2025-08-14 10:21:01,803 reservation_views 예약 ID 65 시간: 2025-08-13T17:40:00+0900 ~ 2025-08-13T17:48:00+0900
+INFO 2025-08-14 10:21:01,804 reservation_views 예약 ID 64 시간: 2025-08-13T09:20:00+0900 ~ 2025-08-13T17:20:00+0900
+INFO 2025-08-14 10:21:01,804 reservation_views 예약 ID 63 시간: 2025-08-14T09:19:00+0900 ~ 2025-08-14T13:19:00+0900
+INFO 2025-08-14 10:21:01,804 reservation_views 예약 ID 62 시간: 2025-08-13T09:07:00+0900 ~ 2025-08-13T09:16:00+0900
+INFO 2025-08-14 10:21:01,804 reservation_views 예약 ID 61 시간: 2025-07-25T09:00:00+0900 ~ 2025-07-25T18:00:00+0900
+INFO 2025-08-14 10:21:01,804 reservation_views 예약 ID 60 시간: 2025-07-24T09:03:00+0900 ~ 2025-07-24T18:03:00+0900
+INFO 2025-08-14 10:21:01,804 reservation_views 예약 ID 59 시간: 2025-07-23T10:10:00+0900 ~ 2025-07-23T18:10:00+0900
+INFO 2025-08-14 10:21:01,805 reservation_views 예약 ID 58 시간: 2025-07-22T09:09:00+0900 ~ 2025-07-22T18:09:00+0900
+INFO 2025-08-14 10:21:01,805 reservation_views 예약 ID 57 시간: 2025-07-21T10:57:00+0900 ~ 2025-07-21T18:20:00+0900
+INFO 2025-08-14 10:21:01,805 reservation_views 예약 ID 56 시간: 2025-07-19T14:47:00+0900 ~ 2025-07-19T18:47:00+0900
+INFO 2025-08-14 10:21:01,805 reservation_views 예약 ID 55 시간: 2025-07-18T14:22:00+0900 ~ 2025-07-18T18:22:00+0900
+INFO 2025-08-14 10:21:01,805 reservation_views 예약 ID 54 시간: 2025-07-18T14:18:00+0900 ~ 2025-07-18T18:18:00+0900
+INFO 2025-08-14 10:21:01,805 reservation_views 예약 ID 53 시간: 2025-07-18T14:08:00+0900 ~ 2025-07-18T19:08:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 52 시간: 2025-07-18T14:05:00+0900 ~ 2025-07-18T18:05:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 51 시간: 2025-07-18T14:02:00+0900 ~ 2025-07-18T19:02:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 50 시간: 2025-07-18T13:57:00+0900 ~ 2025-07-18T18:57:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 49 시간: 2025-07-19T13:42:00+0900 ~ 2025-07-19T17:42:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 48 시간: 2025-07-18T13:38:00+0900 ~ 2025-07-18T18:38:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 47 시간: 2025-07-18T13:36:00+0900 ~ 2025-07-18T18:36:00+0900
+INFO 2025-08-14 10:21:01,806 reservation_views 예약 ID 46 시간: 2025-07-18T13:31:00+0900 ~ 2025-07-18T18:31:00+0900
+INFO 2025-08-14 10:21:01,807 reservation_views 예약 ID 45 시간: 2025-07-18T13:26:00+0900 ~ 2025-07-18T18:26:00+0900
+INFO 2025-08-14 10:21:01,807 reservation_views 예약 ID 44 시간: 2025-07-18T13:24:00+0900 ~ 2025-07-18T18:24:00+0900
+INFO 2025-08-14 10:21:01,807 reservation_views 예약 ID 43 시간: 2025-07-17T09:00:00+0900 ~ 2025-07-17T18:00:00+0900
+INFO 2025-08-14 10:21:01,807 reservation_views 예약 ID 42 시간: 2025-07-16T09:00:00+0900 ~ 2025-07-16T18:00:00+0900
+INFO 2025-08-14 10:21:30,380 KAKAO_noti 카카오톡 알림톡 요청 데이터: 수신자=01051323777, 메시지 길이=72
+INFO 2025-08-14 10:21:30,380 KAKAO_noti API 요청 URL: https://sens.apigw.ntruss.com/alimtalk/v2/services/ncp:kkobizmsg:kr:82460916374:dromii_sms_kakao/messages
+INFO 2025-08-14 10:21:30,431 KAKAO_noti 카카오톡 알림톡 전송 성공: {'requestId': 'RBAA-1755134490418-2804-78002648-QgzGWFmy', 'requestTime': '2025-08-14T10:21:30.418', 'statusCode': '202', 'statusName': 'processing', 'messages': [{'messageId': 'fde930d7-053c-4510-b0ed-b33c207a8d57', 'countryCode': '82', 'to': '01051323777', 'content': '[드로미] GPU 서버 예약 발생\n\njuhan님의 예약이 신청되었습니다.\n2025-08-14 10:21의 예약을 승인해 주십시오.', 'requestStatusCode': 'A000', 'requestStatusName': 'success', 'requestStatusDesc': '성공', 'useSmsFailover': False}]}
+INFO 2025-08-14 10:21:30,432 SMS_noti SMS 요청 데이터: 수신자=01051323777, 메시지 길이=48
+INFO 2025-08-14 10:21:30,432 SMS_noti API 요청 URL: https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:82460946810:dromii_sms_kakao/messages
+INFO 2025-08-14 10:21:30,477 SMS_noti SMS 전송 성공: {'requestId': 'RSSA-1755134490470-7061-78002647-hFrpvUsJ', 'requestTime': '2025-08-14T10:21:30.470', 'statusCode': '202', 'statusName': 'success'}
+INFO 2025-08-14 10:21:41,691 scheduler 예약 ID 66 스케줄링 시작
+INFO 2025-08-14 10:21:41,691 scheduler 현재 서버 시간(한국): 2025-08-14 10:21:41 KST+0900
+INFO 2025-08-14 10:21:41,691 scheduler 현재 UTC 시간: 2025-08-14 01:21:41 UTC+0000
+INFO 2025-08-14 10:21:41,691 scheduler 예약 시작 시간: 2025-08-14 01:21:00 UTC+0000
+INFO 2025-08-14 10:21:41,691 scheduler 예약 종료 시간: 2025-08-14 09:21:00 UTC+0000
+INFO 2025-08-14 10:21:41,691 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-14 10:21:41,691 scheduler ======================================================
+INFO 2025-08-14 10:21:41,691 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-14 10:21:41.691923+09:00 =====
+INFO 2025-08-14 10:21:41,692 scheduler ======================================================
+INFO 2025-08-14 10:21:41,692 scheduler 예약 66에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-14 10:21:41,692 scheduler 현재 서버 시간(한국): 2025-08-14 10:21:41 KST+0900
+INFO 2025-08-14 10:21:41,692 scheduler 현재 UTC 시간: 2025-08-14 01:21:41 UTC+0000
+INFO 2025-08-14 10:21:41,693 scheduler 예약 정보 - 시작: 2025-08-14 01:21:00+00:00, 종료: 2025-08-14 09:21:00+00:00, 상태: approved
+INFO 2025-08-14 10:21:41,693 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-14 10:21:42,397 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: stopped
+INFO 2025-08-14 10:21:42,397 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 시작 (시도 1/3)...
+INFO 2025-08-14 10:21:43,031 scheduler 인스턴스 i-0fd598907992e2172 시작 요청 응답 (시도 1): {'success': True, 'message': '인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.', 'data': {'StartingInstances': [{'InstanceId': 'i-0fd598907992e2172', 'CurrentState': {'Code': 0, 'Name': 'pending'}, 'PreviousState': {'Code': 80, 'Name': 'stopped'}}], 'ResponseMetadata': {'RequestId': 'bb39aa0f-2e9b-4f76-ac1e-edacc6f08ae0', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'bb39aa0f-2e9b-4f76-ac1e-edacc6f08ae0', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Thu, 14 Aug 2025 01:21:42 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}}
+INFO 2025-08-14 10:21:43,031 scheduler 인스턴스 i-0fd598907992e2172 시작 요청이 성공적으로 처리되었습니다.
+INFO 2025-08-14 10:21:43,031 scheduler 시작 요청 후 인스턴스 상태 확인 중...
+INFO 2025-08-14 10:21:43,249 scheduler 시작 요청 후 인스턴스 i-0fd598907992e2172의 상태: stopped
+INFO 2025-08-14 10:21:43,249 scheduler ======================================================
+INFO 2025-08-14 10:21:43,249 scheduler ===== 인스턴스 시작 작업 실행 완료 - 2025-08-14 10:21:43.249607+09:00 =====
+INFO 2025-08-14 10:21:43,249 scheduler ======================================================
+ERROR 2025-08-14 10:21:43,253 scheduler 시작 작업이 등록되지 않았습니다: start_instance_66
+INFO 2025-08-14 10:21:43,257 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-14 09:21:00+00:00에 예약되었습니다.
+INFO 2025-08-14 10:21:43,259 scheduler 중지 작업 확인: ID=stop_instance_66, 다음 실행 시간=2025-08-14 09:21:00+00:00
+INFO 2025-08-14 10:21:43,262 KAKAO_noti 카카오톡 알림톡 요청 데이터: 수신자=01051323777, 메시지 길이=76
+INFO 2025-08-14 10:21:43,262 KAKAO_noti API 요청 URL: https://sens.apigw.ntruss.com/alimtalk/v2/services/ncp:kkobizmsg:kr:82460916374:dromii_sms_kakao/messages
+INFO 2025-08-14 10:21:43,312 KAKAO_noti 카카오톡 알림톡 전송 성공: {'requestId': 'RBAA-1755134503299-2824-78002648-QgzGWFmy', 'requestTime': '2025-08-14T10:21:43.299', 'statusCode': '202', 'statusName': 'processing', 'messages': [{'messageId': '7bc5bfb6-9d43-4b2c-a509-14f83cbbc5bd', 'countryCode': '82', 'to': '01051323777', 'content': '[드로미] GPU 서버 예약 알림\n\njuhan님의 예약이 승인되었습니다.\n2025-08-14 01:21에 예약하신 서버사용이 가능합니다.', 'requestStatusCode': 'A000', 'requestStatusName': 'success', 'requestStatusDesc': '성공', 'useSmsFailover': False}]}
+INFO 2025-08-14 10:21:43,313 reservation_views 예약 ID 66 카카오톡 승인 알림 전송 완료: True
+INFO 2025-08-14 10:21:43,313 SMS_noti SMS 요청 데이터: 수신자=01051323777, 메시지 길이=43
+INFO 2025-08-14 10:21:43,313 SMS_noti API 요청 URL: https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:82460946810:dromii_sms_kakao/messages
+INFO 2025-08-14 10:21:43,360 SMS_noti SMS 전송 성공: {'requestId': 'RSSA-1755134503350-7070-78002647-hFrpvUsJ', 'requestTime': '2025-08-14T10:21:43.350', 'statusCode': '202', 'statusName': 'success'}
+INFO 2025-08-14 10:21:43,361 reservation_views 예약 ID 66 SMS 승인 알림 전송 완료: True
+INFO 2025-08-14 12:58:07,361 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,361 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,367 scheduler 활성 예약 조회 결과: 1개 발견
+INFO 2025-08-14 12:58:07,367 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,368 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,370 scheduler 활성 예약 조회 결과: 1개 발견
+INFO 2025-08-14 12:58:07,370 scheduler 예약 ID 66 스케줄링 시작 (인스턴스: i-0fd598907992e2172)
+INFO 2025-08-14 12:58:07,371 scheduler 예약 ID 66 스케줄링 시작
+INFO 2025-08-14 12:58:07,371 scheduler 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,371 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,371 scheduler 예약 시작 시간: 2025-08-14 01:21:00 UTC+0000
+INFO 2025-08-14 12:58:07,371 scheduler 예약 종료 시간: 2025-08-14 09:21:00 UTC+0000
+INFO 2025-08-14 12:58:07,371 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-14 12:58:07,371 scheduler ======================================================
+INFO 2025-08-14 12:58:07,371 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-14 12:58:07.371390+09:00 =====
+INFO 2025-08-14 12:58:07,371 scheduler ======================================================
+INFO 2025-08-14 12:58:07,371 scheduler 예약 66에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-14 12:58:07,371 scheduler 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,371 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,372 scheduler 예약 정보 - 시작: 2025-08-14 01:21:00+00:00, 종료: 2025-08-14 09:21:00+00:00, 상태: approved
+INFO 2025-08-14 12:58:07,373 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-14 12:58:07,375 scheduler 예약 ID 66 스케줄링 시작 (인스턴스: i-0fd598907992e2172)
+INFO 2025-08-14 12:58:07,375 scheduler 예약 ID 66 스케줄링 시작
+INFO 2025-08-14 12:58:07,375 scheduler 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,376 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,376 scheduler 예약 시작 시간: 2025-08-14 01:21:00 UTC+0000
+INFO 2025-08-14 12:58:07,376 scheduler 예약 종료 시간: 2025-08-14 09:21:00 UTC+0000
+INFO 2025-08-14 12:58:07,376 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-14 12:58:07,376 scheduler ======================================================
+INFO 2025-08-14 12:58:07,376 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-14 12:58:07.376402+09:00 =====
+INFO 2025-08-14 12:58:07,376 scheduler ======================================================
+INFO 2025-08-14 12:58:07,376 scheduler 예약 66에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-14 12:58:07,376 scheduler 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,376 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,378 scheduler 예약 정보 - 시작: 2025-08-14 01:21:00+00:00, 종료: 2025-08-14 09:21:00+00:00, 상태: approved
+INFO 2025-08-14 12:58:07,378 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-14 12:58:07,457 scheduler 스케줄러 초기화 시작 - 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,457 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,460 scheduler 활성 예약 조회 결과: 1개 발견
+INFO 2025-08-14 12:58:07,463 scheduler 예약 ID 66 스케줄링 시작 (인스턴스: i-0fd598907992e2172)
+INFO 2025-08-14 12:58:07,463 scheduler 예약 ID 66 스케줄링 시작
+INFO 2025-08-14 12:58:07,463 scheduler 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,463 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,463 scheduler 예약 시작 시간: 2025-08-14 01:21:00 UTC+0000
+INFO 2025-08-14 12:58:07,463 scheduler 예약 종료 시간: 2025-08-14 09:21:00 UTC+0000
+INFO 2025-08-14 12:58:07,463 scheduler 예약 시작 시간이 현재보다 과거입니다. 인스턴스 i-0fd598907992e2172 시작 작업을 즉시 실행합니다.
+INFO 2025-08-14 12:58:07,463 scheduler ======================================================
+INFO 2025-08-14 12:58:07,464 scheduler ===== 인스턴스 시작 작업 실행 시작 - 2025-08-14 12:58:07.464009+09:00 =====
+INFO 2025-08-14 12:58:07,464 scheduler ======================================================
+INFO 2025-08-14 12:58:07,464 scheduler 예약 66에 따라 인스턴스 i-0fd598907992e2172 시작 작업 실행
+INFO 2025-08-14 12:58:07,464 scheduler 현재 서버 시간(한국): 2025-08-14 12:58:07 KST+0900
+INFO 2025-08-14 12:58:07,464 scheduler 현재 UTC 시간: 2025-08-14 03:58:07 UTC+0000
+INFO 2025-08-14 12:58:07,465 scheduler 예약 정보 - 시작: 2025-08-14 01:21:00+00:00, 종료: 2025-08-14 09:21:00+00:00, 상태: approved
+INFO 2025-08-14 12:58:07,465 scheduler 인스턴스 i-0fd598907992e2172 상태 확인 중...
+INFO 2025-08-14 12:58:08,105 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-14 12:58:08,105 scheduler 인스턴스 i-0fd598907992e2172는 이미 running 상태입니다. 시작 작업을 건너뜁니다.
+ERROR 2025-08-14 12:58:08,105 scheduler 시작 작업이 등록되지 않았습니다: start_instance_66
+INFO 2025-08-14 12:58:08,106 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-14 09:21:00+00:00에 예약되었습니다.
+ERROR 2025-08-14 12:58:08,106 scheduler 중지 작업 스케줄링 중 오류: 'Job' object has no attribute 'next_run_time'
+INFO 2025-08-14 12:58:08,106 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-14 12:58:08,106 scheduler 인스턴스 i-0fd598907992e2172는 이미 running 상태입니다. 시작 작업을 건너뜁니다.
+ERROR 2025-08-14 12:58:08,106 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 327, in schedule_reservation_jobs
+    logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+AttributeError: 'Job' object has no attribute 'next_run_time'
+
+INFO 2025-08-14 12:58:08,106 scheduler 1개의 활성 예약이 스케줄러에 로드되었습니다.
+ERROR 2025-08-14 12:58:08,106 scheduler 시작 작업이 등록되지 않았습니다: start_instance_66
+INFO 2025-08-14 12:58:08,107 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-14 09:21:00+00:00에 예약되었습니다.
+ERROR 2025-08-14 12:58:08,107 scheduler 중지 작업 스케줄링 중 오류: 'Job' object has no attribute 'next_run_time'
+ERROR 2025-08-14 12:58:08,107 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 327, in schedule_reservation_jobs
+    logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+AttributeError: 'Job' object has no attribute 'next_run_time'
+
+INFO 2025-08-14 12:58:08,108 scheduler 1개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-08-14 12:58:08,118 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-08-14 12:58:08,120 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-08-14 12:58:08,171 scheduler 초기화 후 스케줄러에 등록된 작업 수: 1
+INFO 2025-08-14 12:58:08,171 scheduler 초기화 후 스케줄러에 등록된 작업 수: 1
+INFO 2025-08-14 12:58:08,171 scheduler 작업 ID: stop_instance_66, 다음 실행 시간: 2025-08-14 09:21:00+00:00
+INFO 2025-08-14 12:58:08,171 scheduler 작업 ID: stop_instance_66, 다음 실행 시간: 2025-08-14 09:21:00+00:00
+INFO 2025-08-14 12:58:08,171 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-08-14 12:58:08,171 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-08-14 12:58:08,171 apps 스케줄러가 실행 중입니다.
+INFO 2025-08-14 12:58:08,171 apps 스케줄러가 실행 중입니다.
+INFO 2025-08-14 12:58:08,172 apps 등록된 작업 수: 1
+INFO 2025-08-14 12:58:08,172 apps 등록된 작업 수: 1
+INFO 2025-08-14 12:58:08,172 apps 작업: stop_instance_66, 다음 실행: 2025-08-14 09:21:00+00:00
+INFO 2025-08-14 12:58:08,172 apps 작업: stop_instance_66, 다음 실행: 2025-08-14 09:21:00+00:00
+INFO 2025-08-14 12:58:08,226 scheduler 시작 작업 전 인스턴스 i-0fd598907992e2172의 현재 상태: running
+INFO 2025-08-14 12:58:08,226 scheduler 인스턴스 i-0fd598907992e2172는 이미 running 상태입니다. 시작 작업을 건너뜁니다.
+ERROR 2025-08-14 12:58:08,226 scheduler 시작 작업이 등록되지 않았습니다: start_instance_66
+INFO 2025-08-14 12:58:08,227 scheduler 인스턴스 i-0fd598907992e2172 중지 작업이 2025-08-14 09:21:00+00:00에 예약되었습니다.
+ERROR 2025-08-14 12:58:08,227 scheduler 중지 작업 스케줄링 중 오류: 'Job' object has no attribute 'next_run_time'
+ERROR 2025-08-14 12:58:08,227 scheduler 상세 오류: Traceback (most recent call last):
+  File "/app/aws_gpu_monitoring/server_manager/scheduler.py", line 327, in schedule_reservation_jobs
+    logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+AttributeError: 'Job' object has no attribute 'next_run_time'
+
+INFO 2025-08-14 12:58:08,227 scheduler 1개의 활성 예약이 스케줄러에 로드되었습니다.
+INFO 2025-08-14 12:58:08,239 scheduler 스케줄러가 성공적으로 시작되었습니다.
+INFO 2025-08-14 12:58:08,289 scheduler 초기화 후 스케줄러에 등록된 작업 수: 1
+INFO 2025-08-14 12:58:08,289 scheduler 작업 ID: stop_instance_66, 다음 실행 시간: 2025-08-14 09:21:00+00:00
+INFO 2025-08-14 12:58:08,289 apps 예약 스케줄러가 초기화되고 시작되었습니다.
+INFO 2025-08-14 12:58:08,289 apps 스케줄러가 실행 중입니다.
+INFO 2025-08-14 12:58:08,291 apps 등록된 작업 수: 1
+INFO 2025-08-14 12:58:08,291 apps 작업: stop_instance_66, 다음 실행: 2025-08-14 09:21:00+00:00
