@@ -324,7 +324,8 @@ def schedule_reservation_jobs(reservation):
             # 작업이 제대로 등록되었는지 확인
             job = scheduler.get_job(stop_job_id)
             if job:
-                logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+                next_run = getattr(job, 'next_run_time', None)
+                logger.info(f"중지 작업 확인: ID={job.id}, 다음 실행 시간={next_run}")
             else:
                 logger.error(f"중지 작업이 등록되지 않았습니다: {stop_job_id}")
                 
@@ -332,7 +333,8 @@ def schedule_reservation_jobs(reservation):
             if test_stop_job_id:
                 test_job = scheduler.get_job(test_stop_job_id)
                 if test_job:
-                    logger.info(f"테스트 중지 작업 확인: ID={test_job.id}, 다음 실행 시간={test_job.next_run_time}")
+                    test_next = getattr(test_job, 'next_run_time', None)
+                    logger.info(f"테스트 중지 작업 확인: ID={test_job.id}, 다음 실행 시간={test_next}")
                 else:
                     logger.error(f"테스트 중지 작업이 등록되지 않았습니다: {test_stop_job_id}")
         except Exception as e:
