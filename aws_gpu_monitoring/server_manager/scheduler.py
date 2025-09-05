@@ -250,6 +250,30 @@ def schedule_reservation_jobs(reservation):
     logger.info(f"예약 시작 시간: {reservation.start_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     logger.info(f"예약 종료 시간: {reservation.end_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
     
+    # 연장/겹침/인접(끝=시작) 예약 처리: 기존 종료 작업 취소
+    try:
+        from .models import Reservation as _ResvModel
+        overlapping_approved = _ResvModel.objects.filter(
+            instance=reservation.instance,
+            status='approved'
+        ).exclude(id=reservation_id).filter(
+            # 기존 예약이 새 예약 시작과 겹치거나(또는 인접) 있고,
+            end_time__gte=reservation.start_time,
+            # 새 예약 종료 이전(또는 같음)에 끝나는 예약만 대상으로 함
+            end_time__lte=reservation.end_time
+        )
+        for prev in overlapping_approved:
+            prev_stop_job_id = f"stop_instance_{prev.id}"
+            try:
+                job = scheduler.get_job(prev_stop_job_id)
+                if job:
+                    scheduler.remove_job(prev_stop_job_id)
+                    logger.info(f"연장 처리: 기존 예약(ID={prev.id})의 종료 작업을 취소했습니다. (job_id={prev_stop_job_id})")
+            except Exception as _e:
+                logger.error(f"연장 처리: 기존 예약(ID={prev.id}) 종료 작업 취소 중 오류: {_e}")
+    except Exception as merge_e:
+        logger.error(f"연장/겹침 예약 처리 중 오류: {merge_e}")
+    
     # 시작 시간이 현재보다 미래인 경우 스케줄링, 과거인 경우 즉시 실행
     start_job_id = f"start_instance_{reservation_id}"
     try:
@@ -397,6 +421,18 @@ def cancel_reservation_jobs(reservation):
         logger.error(f"예약 {reservation_id}에 대한 종료 작업 취소 실패: {str(e)}")
         import traceback
         logger.error(f"상세 오류: {traceback.format_exc()}")
+    
+    # 테스트 종료 작업 취소 (개발 환경 runserver에서 생성된 경우)
+    test_stop_job_id = f"test_stop_instance_{reservation_id}"
+    try:
+        test_job = scheduler.get_job(test_stop_job_id)
+        if test_job:
+            next_run_time = test_job.next_run_time.strftime('%Y-%m-%d %H:%M:%S') if test_job.next_run_time else "None"
+            logger.info(f"예약 {reservation_id}의 테스트 종료 작업 발견. 다음 실행 시간: {next_run_time}")
+            scheduler.remove_job(test_stop_job_id)
+            logger.info(f"예약 {reservation_id}에 대한 테스트 종료 작업이 성공적으로 취소되었습니다.")
+    except Exception as e:
+        logger.error(f"예약 {reservation_id}에 대한 테스트 종료 작업 취소 실패: {str(e)}")
     
     logger.info(f"예약 ID {reservation_id} 작업 취소 결과: {result}")
     return result
