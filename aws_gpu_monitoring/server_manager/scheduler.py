@@ -298,8 +298,12 @@ def schedule_reservation_jobs(reservation):
         # 작업이 제대로 등록되었는지 확인
         job = scheduler.get_job(start_job_id)
         if job:
-            next_run = getattr(job, 'next_run_time', None)
-            logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간={next_run}")
+            next_run_utc = getattr(job, 'next_run_time', None)
+            try:
+                next_run_kst = timezone.localtime(next_run_utc) if next_run_utc else None
+            except Exception:
+                next_run_kst = None
+            logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간(UTC)={next_run_utc}, (KST)={next_run_kst}")
         else:
             logger.error(f"시작 작업이 등록되지 않았습니다: {start_job_id}")
     except Exception as e:
@@ -428,8 +432,12 @@ def cancel_reservation_jobs(reservation):
     try:
         test_job = scheduler.get_job(test_stop_job_id)
         if test_job:
-            next_run_time = test_job.next_run_time.strftime('%Y-%m-%d %H:%M:%S') if test_job.next_run_time else "None"
-            logger.info(f"예약 {reservation_id}의 테스트 종료 작업 발견. 다음 실행 시간: {next_run_time}")
+            next_run_utc = getattr(test_job, 'next_run_time', None)
+            try:
+                next_run_kst = timezone.localtime(next_run_utc) if next_run_utc else None
+            except Exception:
+                next_run_kst = None
+            logger.info(f"예약 {reservation_id}의 테스트 종료 작업 발견. 다음 실행 시간(UTC): {next_run_utc}, (KST): {next_run_kst}")
             scheduler.remove_job(test_stop_job_id)
             logger.info(f"예약 {reservation_id}에 대한 테스트 종료 작업이 성공적으로 취소되었습니다.")
     except Exception as e:
@@ -500,10 +508,12 @@ def initialize_scheduler():
         jobs_after = scheduler.get_jobs()
         logger.info(f"초기화 후 스케줄러에 등록된 작업 수: {len(jobs_after)}")
         for job in jobs_after:
-            if hasattr(job, 'next_run_time'):
-                logger.info(f"작업 ID: {job.id}, 다음 실행 시간: {job.next_run_time}")
-            else:
-                logger.info(f"작업 ID: {job.id}, 다음 실행 시간: 알 수 없음")
+            next_run_utc = getattr(job, 'next_run_time', None)
+            try:
+                next_run_kst = timezone.localtime(next_run_utc) if next_run_utc else None
+            except Exception:
+                next_run_kst = None
+            logger.info(f"작업 ID: {job.id}, 다음 실행 시간(UTC): {next_run_utc}, (KST): {next_run_kst}")
     except Exception as e:
         logger.error(f"작업 목록 확인 중 오류: {str(e)}")
         import traceback
