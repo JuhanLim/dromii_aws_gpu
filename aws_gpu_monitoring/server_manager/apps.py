@@ -55,16 +55,20 @@ class ServerManagerConfig(AppConfig):
                 # 스케줄러 상태 확인
                 if scheduler.running:
                     logger.info("스케줄러가 실행 중입니다.")
-                    try:
-                        jobs = scheduler.get_jobs()
-                        logger.info(f"등록된 작업 수: {len(jobs)}")
-                        for job in jobs:
-                            if hasattr(job, 'next_run_time'):
-                                logger.info(f"작업: {job.id}, 다음 실행: {job.next_run_time}")
-                            else:
-                                logger.info(f"작업: {job.id}, 다음 실행: 알 수 없음")
-                    except Exception as job_error:
-                        logger.error(f"작업 정보 확인 중 오류: {str(job_error)}")
+                    # try:
+                    #     jobs = scheduler.get_jobs()
+                    #     logger.info(f"등록된 작업 수: {len(jobs)}")
+                    #     # 로그 시간 가독성 향상을 위해 UTC와 KST를 함께 표기
+                    #     from django.utils import timezone
+                    #     for job in jobs:
+                    #         next_run_utc = getattr(job, 'next_run_time', None)
+                    #         try:
+                    #             next_run_kst = timezone.localtime(next_run_utc) if next_run_utc else None
+                    #         except Exception:
+                    #             next_run_kst = None
+                    #         logger.info(f"작업: {job.id}, 다음 실행(UTC): {next_run_utc}, (KST): {next_run_kst}")
+                    # except Exception as job_error:
+                    #     logger.error(f"작업 정보 확인 중 오류: {str(job_error)}")
                 else:
                     logger.error("스케줄러가 초기화되었지만 실행 중이 아닙니다.")
         except Exception as e:
