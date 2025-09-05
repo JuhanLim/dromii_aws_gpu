@@ -298,7 +298,8 @@ def schedule_reservation_jobs(reservation):
         # 작업이 제대로 등록되었는지 확인
         job = scheduler.get_job(start_job_id)
         if job:
-            logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간={job.next_run_time}")
+            next_run = getattr(job, 'next_run_time', None)
+            logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간={next_run}")
         else:
             logger.error(f"시작 작업이 등록되지 않았습니다: {start_job_id}")
     except Exception as e:
