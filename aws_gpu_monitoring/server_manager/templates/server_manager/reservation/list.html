@@ -56,6 +56,22 @@
                                                         </a>
                                                     {% endif %}
                                                 </div>
+                                                {% if reservation.status == 'approved' %}
+                                                <form method="post" action="{% url 'extend_reservation' reservation.id %}" class="mt-2">
+                                                    {% csrf_token %}
+                                                    <div class="input-group input-group-sm" style="max-width: 360px;">
+                                                        <span class="input-group-text">{% trans '종료 연장' %}</span>
+                                                        <input type="datetime-local" name="new_end_time" class="form-control"
+                                                               value="{{ reservation.end_time|date:'Y-m-d\\TH:i' }}"
+                                                               min="{{ reservation.end_time|date:'Y-m-d\\TH:i' }}"
+                                                               aria-label="new end time">
+                                                        <button type="submit" class="btn btn-outline-success">
+                                                            <i class="fas fa-plus"></i> {% trans '연장' %}
+                                                        </button>
+                                                    </div>
+                                                    <div class="form-text">{% trans '최대 12시간까지 연장 가능합니다.' %}</div>
+                                                </form>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}

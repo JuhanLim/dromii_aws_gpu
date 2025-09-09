@@ -78,6 +78,87 @@ def create_reservation(request, instance_id):
         'instance': instance
     })
 
+@login_required
+def extend_reservation(request, reservation_id):
+    """
+    사용자가 자신의 승인된 예약의 종료 시간을 최대 12시간까지 연장
+    - 관리자 승인 없이 직접 처리
+    - 다른 승인된 예약과 겹치지 않도록 검증
+    - 연장 성공 시 스케줄러 재등록
+    """
+    # 소유자만 연장 가능(관리자는 별도 관리자 화면 사용)
+    try:
+        reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+    except Exception:
+        messages.error(request, _('해당 예약을 찾을 수 없거나 권한이 없습니다.'))
+        return redirect('reservation_list')
+
+    if reservation.status != 'approved':
+        messages.error(request, _('승인된 예약만 연장할 수 있습니다.'))
+        return redirect('reservation_list')
+
+    if request.method != 'POST':
+        messages.error(request, _('잘못된 요청입니다.'))
+        return redirect('reservation_list')
+
+    new_end_str = request.POST.get('new_end_time')
+    if not new_end_str:
+        messages.error(request, _('연장할 종료 시간을 입력해 주세요.'))
+        return redirect('reservation_list')
+
+    try:
+        # datetime-local("YYYY-MM-DDTHH:MM") 포맷 파싱 후 현지 타임존 적용
+        new_end_naive = datetime.datetime.strptime(new_end_str, '%Y-%m-%dT%H:%M')
+        tz = timezone.get_current_timezone()
+        new_end_time = timezone.make_aware(new_end_naive, tz)
+    except Exception as e:
+        logger.error(f"예약 연장 시간 파싱 실패: {e}")
+        messages.error(request, _('종료 시간 형식이 올바르지 않습니다.'))
+        return redirect('reservation_list')
+
+    # 검증: 기존 종료보다 뒤여야 함
+    if new_end_time <= reservation.end_time:
+        messages.error(request, _('새 종료 시간은 현재 종료 시간보다 늦어야 합니다.'))
+        return redirect('reservation_list')
+
+    # 검증: 최대 12시간만 연장 허용
+    max_allowed = reservation.end_time + datetime.timedelta(hours=12)
+    if new_end_time > max_allowed:
+        messages.error(request, _('최대 12시간까지만 연장할 수 있습니다.'))
+        return redirect('reservation_list')
+
+    # 검증: 다른 승인된 예약과 겹치지 않음 (동일 인스턴스)
+    # 현재 종료~새 종료 구간과 겹치는 예약 존재 여부 확인 (접점: start == new_end 는 허용)
+    conflict = Reservation.objects.filter(
+        instance=reservation.instance,
+        status='approved'
+    )
+    # Django에서는 id__ne가 없어 exclude 사용
+    conflict = conflict.exclude(id=reservation.id).filter(
+        start_time__lt=new_end_time,
+        end_time__gt=reservation.end_time
+    )
+    if conflict.exists():
+        messages.error(request, _('다른 예약과 시간이 겹쳐 연장할 수 없습니다.'))
+        return redirect('reservation_list')
+
+    # 업데이트 및 재스케줄링
+    old_end = reservation.end_time
+    reservation.end_time = new_end_time
+    reservation.save()
+
+    try:
+        logger.info(f"사용자 {request.user.username}가 예약 ID {reservation.id} 종료 시간 연장: {old_end} -> {new_end_time}")
+        schedule_reservation_jobs(reservation)
+        messages.success(request, _('예약이 성공적으로 연장되었습니다.'))
+    except Exception as e:
+        logger.error(f"예약 연장 스케줄링 중 오류: {e}")
+        import traceback
+        logger.error(f"상세 오류: {traceback.format_exc()}")
+        messages.error(request, _('예약 연장 처리 중 오류가 발생했습니다.'))
+
+    return redirect('reservation_list')
+
 
 @login_required
 def cancel_reservation(request, reservation_id):
