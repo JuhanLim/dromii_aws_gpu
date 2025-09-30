@@ -276,6 +276,8 @@ def schedule_reservation_jobs(reservation):
     
     # 시작 시간이 현재보다 미래인 경우 스케줄링, 과거인 경우 즉시 실행
     start_job_id = f"start_instance_{reservation_id}"
+    start_job_scheduled = False  # 스케줄러에 작업이 등록되었는지 추적
+    
     try:
         if reservation.start_time > now:
             # 미래 시간인 경우 예약
@@ -289,23 +291,26 @@ def schedule_reservation_jobs(reservation):
                 name=f"인스턴스 {instance_id} 시작 (예약 ID: {reservation_id})"
             )
             logger.info(f"인스턴스 {instance_id} 시작 작업이 {reservation.start_time}에 예약되었습니다.")
+            start_job_scheduled = True
         else:
             # 과거 시간인 경우 즉시 실행
             logger.info(f"예약 시작 시간이 현재보다 과거입니다. 인스턴스 {instance_id} 시작 작업을 즉시 실행합니다.")
             start_instance_job(instance_id, reservation_id)
+            logger.info(f"인스턴스 {instance_id} 시작 작업이 즉시 실행되었습니다. 스케줄러 등록은 건너뜁니다.")
             # 스케줄러에 작업 추가는 하지 않음
         
-        # 작업이 제대로 등록되었는지 확인
-        job = scheduler.get_job(start_job_id)
-        if job:
-            next_run_utc = getattr(job, 'next_run_time', None)
-            try:
-                next_run_kst = timezone.localtime(next_run_utc) if next_run_utc else None
-            except Exception:
-                next_run_kst = None
-            logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간(UTC)={next_run_utc}, (KST)={next_run_kst}")
-        else:
-            logger.error(f"시작 작업이 등록되지 않았습니다: {start_job_id}")
+        # 작업이 제대로 등록되었는지 확인 (스케줄러에 등록된 경우만)
+        if start_job_scheduled:
+            job = scheduler.get_job(start_job_id)
+            if job:
+                next_run_utc = getattr(job, 'next_run_time', None)
+                try:
+                    next_run_kst = timezone.localtime(next_run_utc) if next_run_utc else None
+                except Exception:
+                    next_run_kst = None
+                logger.info(f"시작 작업 확인: ID={job.id}, 다음 실행 시간(UTC)={next_run_utc}, (KST)={next_run_kst}")
+            else:
+                logger.error(f"시작 작업이 등록되지 않았습니다: {start_job_id}")
     except Exception as e:
         logger.error(f"시작 작업 스케줄링 중 오류: {str(e)}")
         import traceback

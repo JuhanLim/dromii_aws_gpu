@@ -313,10 +313,9 @@ def instance_availability(request, instance_id):
     """
     instance = get_object_or_404(Instance, instance_id=instance_id)
     
-    # 모든 예약 조회 (필터링 완화)
+    # 현재 시간 기준으로 활성 및 미래 예약만 조회
     now = timezone.now()
-    # 과거 30일부터 미래 30일까지의 예약 조회
-    start_date = now - timezone.timedelta(days=30)
+    # 미래 30일까지의 예약 조회 (현재 진행 중이거나 미래 예약)
     end_date = now + timezone.timedelta(days=30)
     
     # 디버깅을 위해 모든 예약 개수 로깅
@@ -324,16 +323,17 @@ def instance_availability(request, instance_id):
     instance_reservations_count = Reservation.objects.filter(instance=instance).count()
     logger.info(f"전체 예약 수: {all_reservations_count}, 해당 인스턴스 예약 수: {instance_reservations_count}")
     
+    # 종료 시간이 현재 이후이고, 시작 시간이 미래 30일 이내인 예약만 조회
     reservations = Reservation.objects.filter(
         instance=instance,
-        start_time__gte=start_date,
-        end_time__lte=end_date
+        end_time__gt=now,  # 종료 시간이 현재보다 미래 (현재 진행 중이거나 미래 예약)
+        start_time__lte=end_date  # 시작 시간이 조회 종료일 이전
     ).values('id', 'start_time', 'end_time', 'user__username', 'status', 'purpose')
     
     reservation_list = list(reservations)
     
     # 필터링된 예약 수 로깅
-    logger.info(f"필터링된 예약 수: {len(reservation_list)}")
+    logger.info(f"필터링된 예약 수 (현재 진행 중 + 미래 30일): {len(reservation_list)}")
     
     # 예약이 없는 경우 테스트 데이터 추가 (디버깅용)
     if len(reservation_list) == 0:
